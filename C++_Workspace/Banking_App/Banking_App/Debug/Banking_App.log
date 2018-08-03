@@ -1,0 +1,3 @@
+﻿  Banking_App.cpp
+c:\users\mdray\documents\code\c-_workspace\banking_app\banking_app\banking_app.cpp(26): warning C4018: '<': signed/unsigned mismatch
+  Banking_App.vcxproj -> C:\Users\mdray\Documents\Code\C-_Workspace\Banking_App\Debug\Banking_App.exe
