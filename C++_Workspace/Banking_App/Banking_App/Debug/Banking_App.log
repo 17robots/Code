@@ -1,3 +1,4 @@
 ﻿  Banking_App.cpp
-c:\users\mdray\documents\code\c-_workspace\banking_app\banking_app\banking_app.cpp(26): warning C4018: '<': signed/unsigned mismatch
-  Banking_App.vcxproj -> C:\Users\mdray\Documents\Code\C-_Workspace\Banking_App\Debug\Banking_App.exe
+c:\users\mdray\documents\code\c++_workspace\banking_app\banking_app\banking_app.cpp(38): warning C4018: '<': signed/unsigned mismatch
+c:\users\mdray\documents\code\c++_workspace\banking_app\banking_app\banking_app.cpp(67): warning C4101: 'args': unreferenced local variable
+  Banking_App.vcxproj -> C:\Users\mdray\Documents\Code\C++_Workspace\Banking_App\Debug\Banking_App.exe
