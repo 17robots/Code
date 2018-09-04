@@ -1,3 +1,5 @@
-var addon = require('./cash drawer');
+var addon = require('./cash_drawer');
 
-console.log(addon.pow(4,2));
+console.log(addon.Pow(1, 3));
+
+console.log(addon.whoami());
