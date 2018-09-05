@@ -62,6 +62,5 @@ int main() {
     }
 
     std::cout << "\nThere is a " << SIZE - unique_char_arr_size << " letter difference";
-
     return 0;
 }
