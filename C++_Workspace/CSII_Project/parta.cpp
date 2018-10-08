@@ -214,6 +214,4 @@ int main() {
   return 0;
 }
 
-void Station::operator==(Station &B) {
 
-}
