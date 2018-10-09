@@ -1,4 +1,6 @@
-#include <iostream>
+#ifndef MYSTRING_HPP
+#define MYSTRING_HPP
+
 // lets define things
 namespace umm {
   class myString {
@@ -7,7 +9,7 @@ namespace umm {
 	  myString(char const * str); // the string constructor
 	  myString(const myString &obj); // the copy constructor
 	  ~myString(); // deconstructor
-	  myString & operator=(const myString &obj);
+	  myString & operator=(const myString &obj); // operator override
 	  char * getStringArray();
 	private:
 	  // we will need to create a char array that is stored on the heap so that
@@ -17,3 +19,5 @@ namespace umm {
 	  char * maxChar; // the last char of the string + 1
   };
 }
+
+#endif
