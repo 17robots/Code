@@ -5,6 +5,8 @@
 #include <iostream>
 #include <cassert>
 
+using namespace umm;
+
 int main() {
   umm::myString s1;
     // s1[0] = 'a';
