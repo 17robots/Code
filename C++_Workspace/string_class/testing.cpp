@@ -8,8 +8,9 @@
 using namespace umm;
 
 int main() {
-  umm::myString s1;
-    // s1[0] = 'a';
-    // assert(s1[0] == 'a');
+  umm::myString s1 = "hello world"; 
+   s1[0] = 'a';
+   std::cout << s1 << std::endl;
+   assert(s1[0] == 'a');
   return 0;
 }
