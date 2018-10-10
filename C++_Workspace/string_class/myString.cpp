@@ -91,4 +91,14 @@ namespace umm {
   		return stringArray[index];
   	}
   }
+  
+  int umm::myString::find(char charToFind) const {
+      for(int i = 0; i < maxChar - stringArray; ++i) {
+          if(stringArray[i] == charToFind) {
+              return i;
+          }
+      }
+      
+      return -1;
+  }
 }
