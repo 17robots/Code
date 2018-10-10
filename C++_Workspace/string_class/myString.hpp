@@ -17,6 +17,7 @@ namespace umm {
 	  char * getMaxChar() const;
 	  bool empty() const;
 	  friend std::ostream & operator <<(std::ostream& os, const umm::myString &obj);
+	  char &operator[](int index);
 
 	private:
 	  // we will need to create a char array that is stored on the heap so that
