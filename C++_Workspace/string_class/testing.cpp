@@ -11,6 +11,7 @@ int main() {
   umm::myString s1 = "hello world"; 
    s1[0] = 'a';
    std::cout << s1 << std::endl;
-   assert(s1[0] == 'a');
+   
+//   std::cout << s1.find('a') << std::endl;
   return 0;
 }

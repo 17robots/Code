@@ -18,6 +18,7 @@ namespace umm {
 	  bool empty() const;
 	  friend std::ostream & operator <<(std::ostream& os, const umm::myString &obj);
 	  char &operator[](int index);
+	  int find(char charToFind) const;
 
 	private:
 	  // we will need to create a char array that is stored on the heap so that
