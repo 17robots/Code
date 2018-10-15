@@ -80,7 +80,7 @@ namespace umm {
   } 
 
   bool umm::myString::empty() const {
-		return lastChar - stringArray == 0;
+		return maxChar - stringArray == 0;
   }
 
   std::ostream & operator<<(std::ostream &os, const umm::myString &obj) {

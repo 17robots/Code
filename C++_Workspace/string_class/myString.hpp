@@ -4,9 +4,8 @@
 
 // lets define things
 namespace umm {
-  class myString {
-	public:
-	  myString(); // default construtor 
+  struct myString {
+	  myString(); // default construtor
 	  myString(char const * str); // the string constructor
 	  myString(const myString &obj); // the copy constructor
 	  ~myString(); // deconstructor
@@ -35,7 +34,7 @@ namespace umm {
 	  bool operator>= (const char * lhs) const;
 	  myString operator+(const myString& obj);
 	  myString & operator+=(const myString& obj);
-	private:
+
 	  // we will need to create a char array that is stored on the heap so that
 	  // we can allocate more space as necessary.
 	  char * stringArray;
