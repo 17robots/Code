@@ -50,5 +50,9 @@ module.exports = {
             },
         ]
     },
-    plugins: [htmlPlugin] 
+    plugins: [htmlPlugin],
+    devServer: {
+        disableHostCheck: true,
+        host: '0.0.0.0'
+    }
 }

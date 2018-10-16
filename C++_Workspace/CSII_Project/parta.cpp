@@ -68,7 +68,7 @@ bool isFull(int university, Station * Labs[]) {
 			counter++;
 		}
 	}
-	
+
 	return (counter == LABSIZES[university]); // if the lab is full or not
 }
 
@@ -153,7 +153,7 @@ int main() {
 		switch(menuChoice) {
 			case 1: {
 					printUniversities();
-					
+
 					int uniChoice, stationChoice;
 					std::string Fname;
 
@@ -164,14 +164,14 @@ int main() {
 						std::cout << "Please enter a number on the list: ";
 						std::cin >> uniChoice;
 					}
-					
+
 					if(isFull(uniChoice - 1, Labs)) {
 						std::cout << "The Lab is full, please wait until someone signs out." << std::endl;
 						break; // if the lab is full, do not try to continue
 					}
-					
+
 					printLabs(uniChoice - 1, Labs);
-					
+
 					do {
 						std::cout << "Please choose a station (" << UNIVERSITYNAMES[uniChoice - 1] << "): ";
 						std::cin >> stationChoice;
@@ -180,28 +180,33 @@ int main() {
 							stationChoice = -1; // force the loop to repeat
 						}
 					} while(!(stationChoice < LABSIZES[uniChoice - 1] + 1 && stationChoice > 0));
-
+					
+					int minutes;
 					do {
 						std::cout << "Now, how many minutes do you plan to use the computer for?: ";
-					int minutes;
-					std::cin >> minutes;
-					
-					switch(minutes) {
-						case 15:
-							validTime = true;
-							break;
-						case 30:
-							validTime = true;
-							break;
-						case 45:
-							validTime = true;
-							break;
-						case 60:
-							validTime = true;
-							break;
-						default:
-							std::cout << "That is not a valid time. Please enter either 15, 30, 45, or 60 minutes." << std::endl;
-					}
+						std::cin >> minutes;
+						bool validTime = false;
+
+						switch(minutes) {
+							case 15:
+								validTime = true;
+								break;
+							case 30:
+								validTime = true;
+								break;
+							case 45:
+								validTime = true;
+								break;
+							case 60:
+								validTime = true;
+								break;
+							default:
+								std::cout << "That is not a valid time. Please enter either 15, 30, 45, or 60 minutes." << std::endl;
+						}
+						
+						if(!validTime) {
+							minutes = 62;
+						}
 					} while(!(minutes < 61 && minutes > 0));
 
 					std::cout << "And finally, what is your name?: ";
@@ -219,118 +224,118 @@ int main() {
 					do {
 						printLogOutMenu();
 						std::cin >> logOutChoice;
-	
+
 						switch(logOutChoice) {
 							case 1: {
-								int idToSearch, signOutUni, signOutStation;
-								bool found = false;
-								std::string name;
-								std::cout << "Enter the person's user id: ";
-								std::cin >> idToSearch;
-								for(int i = 0; i < NUMLABS; ++i) {
-									for(int j = 0; j < LABSIZES[i]; ++j) {
-										if(Labs[i][j].getId() == idToSearch) {
-											found = true;
-											printUser(i, j, Labs);
-											signOutUni = i;
-											signOutStation = j;
-											
-											name = Labs[i][j].getName(); // we will need this to print out the confirmation message later
+									int idToSearch, signOutUni, signOutStation;
+									bool found = false;
+									std::string name;
+									std::cout << "Enter the person's user id: ";
+									std::cin >> idToSearch;
+									for(int i = 0; i < NUMLABS; ++i) {
+										for(int j = 0; j < LABSIZES[i]; ++j) {
+											if(Labs[i][j].getId() == idToSearch) {
+												found = true;
+												printUser(i, j, Labs);
+												signOutUni = i;
+												signOutStation = j;
+
+												name = Labs[i][j].getName(); // we will need this to print out the confirmation message later
+											}
 										}
 									}
+
+									int menuChoice;
+
+									if(!found) {
+										do {
+											printLogOutFindFailedMenu();
+											std::cin >> menuChoice;
+											switch(menuChoice) {
+												case 1:
+													logOutChoice = -1; // Force the menu to repeat
+													break;
+												case 2:
+													continue; // keep going and quit to the main menu
+													break;
+												default:
+													std::cout << "Please enter a valid option";
+													break;
+											}
+										} while(!(menuChoice > 0 && menuChoice < 3));
+									} else {
+										do {
+											printOutFindSuccessMenu();
+											std::cin >> menuChoice;
+
+											switch(menuChoice) {
+												case 1:
+													Labs[signOutUni][signOutStation] = Station();
+													std::cout << "Successfully Logged out " << name << " from " << UNIVERSITYNAMES[signOutUni] << "'s Station " << signOutStation + 1 << "." << std::endl;
+													break;
+												case 2:
+													logOutChoice = -1;
+													break;
+												case 3:
+													continue;
+													break;
+												default:
+													std::cout << "Please enter a valid option";
+													break;
+											}
+										} while (!(menuChoice > 0 && menuChoice));
+									}
+
+									break;
 								}
-								
-								int menuChoice;
-								
-								if(!found) {
-									do {
-										printLogOutFindFailedMenu();
-										std::cin >> menuChoice;
-										switch(menuChoice) {
-											case 1:
-												logOutChoice = -1; // Force the menu to repeat
-												break;
-											case 2:
-												continue; // keep going and quit to the main menu
-												break;
-											default:
-												std::cout << "Please enter a valid option";
-												break;
-										}
-									} while(!(menuChoice > 0 && menuChoice < 3));
-								} else {
-									do {
-										printOutFindSuccessMenu();
-										std::cin >> menuChoice;
-										
-										switch(menuChoice) {
-											case 1:
-												Labs[signOutUni][signOutStation] = Station();
-												std::cout << "Successfully Logged out " << name << " from " << UNIVERSITYNAMES[signOutUni] << "'s Station " << signOutStation + 1 << "." << std::endl;
-												break;
-											case 2:
-												logOutChoice = -1;
-												break;
-											case 3:
-												continue;
-												break;
-											default:
-												std::cout << "Please enter a valid option";
-												break;
-										}
-									} while (!(menuChoice > 0 && menuChoice));
-								}
-								
-								break;
-							}
-	
+
 							case 2: {
-								for(int i = 0; i < NUMLABS; ++i) {
-									std::cout << i + 1 << ". " << UNIVERSITYNAMES[i] << std::endl;
-								}
-	
-								int uniChoice, stationChoice; // the user's choices for the university and station (not as indexes)
-								std::string Fname;
-	
-								std::cout << "Which Uninversity are you logging out of?: ";
-								std::cin >> uniChoice;
-	
-								while(!(uniChoice < NUMLABS + 1 && uniChoice > 0)) { // using while because i do not want cases for every lab
-									std::cout << "Please enter a number on the list: ";
-									std::cin >> uniChoice;
-								}
-	
-								printLabs(uniChoice - 1, Labs);
-								
-								do {
-									std::cout << "Please choose a station (" << UNIVERSITYNAMES[uniChoice - 1] << "): ";
-									std::cin >> stationChoice;
-									if(Labs[uniChoice - 1][stationChoice - 1].getId() == -1) { // if the computer is not in use
-										std::cout << "That station is not in use" << std::endl;
-										stationChoice = -1; // force the loop to repeat
+									for(int i = 0; i < NUMLABS; ++i) {
+										std::cout << i + 1 << ". " << UNIVERSITYNAMES[i] << std::endl;
 									}
-								} while(!(stationChoice < LABSIZES[uniChoice - 1] && stationChoice > 0));
-	
-								// log the user out
-								std::string name = Labs[uniChoice - 1][stationChoice - 1].getName();
-								Labs[uniChoice - 1][stationChoice - 1] = Station();
-								std::cout << "Successfully Logged out " << name << " from " << UNIVERSITYNAMES[uniChoice - 1] << "'s Station " << stationChoice << "." << std::endl;
-								break;
-							}
-							
+
+									int uniChoice, stationChoice; // the user's choices for the university and station (not as indexes)
+									std::string Fname;
+
+									std::cout << "Which Uninversity are you logging out of?: ";
+									std::cin >> uniChoice;
+
+									while(!(uniChoice < NUMLABS + 1 && uniChoice > 0)) { // using while because i do not want cases for every lab
+										std::cout << "Please enter a number on the list: ";
+										std::cin >> uniChoice;
+									}
+
+									printLabs(uniChoice - 1, Labs);
+
+									do {
+										std::cout << "Please choose a station (" << UNIVERSITYNAMES[uniChoice - 1] << "): ";
+										std::cin >> stationChoice;
+										if(Labs[uniChoice - 1][stationChoice - 1].getId() == -1) { // if the computer is not in use
+											std::cout << "That station is not in use" << std::endl;
+											stationChoice = -1; // force the loop to repeat
+										}
+									} while(!(stationChoice < LABSIZES[uniChoice - 1] && stationChoice > 0));
+
+									// log the user out
+									std::string name = Labs[uniChoice - 1][stationChoice - 1].getName();
+									Labs[uniChoice - 1][stationChoice - 1] = Station();
+									std::cout << "Successfully Logged out " << name << " from " << UNIVERSITYNAMES[uniChoice - 1] << "'s Station " << stationChoice << "." << std::endl;
+									break;
+								}
+
 							case 3: {
-								continue; //leaving the menu as is effectively quitting
-								break;
-							}
-							
+									continue; //leaving the menu as is effectively quitting
+									break;
+								}
+
 							default: {
-								std::cout << "Please pick a valid menu option" << std::endl;
-								break;
-							}
+									 std::cout << "Please pick a valid menu option" << std::endl;
+									 break;
+								 }
 						}
 					} while(!(logOutChoice > 0 && logOutChoice < 4));
-				break;
-					
+					break;
+
 				}
 			case 3: 
 				for(int i = 0; i < NUMLABS; ++i) {
@@ -357,31 +362,16 @@ int main() {
 					}
 					break;
 				}
-			case 5:
-				break;
-<<<<<<< HEAD
-			  }
-	  case 5:
-			  break;
-	  default:
-			  std::cout << "That was not a valid option please try again" << std::endl;
-			  std::cin >> menuChoice;
-			  break;
-	}
-  } while(menuChoice != 5);
-
-  return 0;
-}
-
-
-=======
-			default:
+			case 5: {
+					break;
+				}
+			default: {
 				std::cout << "That was not a valid option please try again" << std::endl;
 				std::cin >> menuChoice;
 				break;
+			}
 		}
 	} while(menuChoice != 5);
 
 	return 0;
 }
->>>>>>> 17b11bac7c8aaeef4583408b4e159a7a10c04eeb
