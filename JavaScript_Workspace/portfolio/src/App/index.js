@@ -3,8 +3,10 @@ import Input from '../Input'
 
 export default class App extends Component {
   render() {
-	return <div>
-			  <Input/>
-			</div>
+	return (
+	    <div>
+	        <Input/>
+	    </div>
+	)
   }
 }

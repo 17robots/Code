@@ -1,31 +1,31 @@
-import React, { Component }  from 'react'
+import React, { Component } from 'react'
 
 export default class Input extends Component {
-  constructor(props) {
-	super(props);
-	this.state = {
-	  post: this.props.data,
-	  command: "",
-	  result: "",
-	  commandHistory: [],
-	  user: "test > "
-	}
-  }
-
-  render() { 
-	return (
-	<div>
-		<form onSubmit={ reload() }>
-			<input type="text" placeholder="Hello World" />
-			
-		</form>
-	</div>
-	)
-  }
-  
-  reload(e) {
-  	alert("reload was called")
-  }
-
+    constructor(props) {
+        super(props)
+        this.state = {
+            test: "Hello World",
+            result: []
+        }
+    }
+    render() {
+        return (
+            <div>
+                <h1> { this.state.test } </h1>
+                <form onSubmit={this.update.bind(this)}>
+                    <input type="text" id="changeMe" />
+                </form>
+            </div>
+        )
+    }
+    
+    update(e) {
+        this.setState({
+            test: document.getElementById('changeMe').value
+        })
+        
+        document.getElementById('changeMe').value = ""
+        
+        e.preventDefault()
+    }
 }
-
