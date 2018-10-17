@@ -16,12 +16,6 @@
 
 using namespace umm;
 
-
-// Output
-std::ostream& operator<<(std::ostream&, myString const&);
-
-// Encapsulate all of the String tests.
-
 // Encapsulate all of the String tests.
 struct Test_string
 {
@@ -102,7 +96,8 @@ struct Test_string
     myString const s1 = "abcdef";
     myString s2 = s1.substr(0, 3);
     myString s3 = s1.substr(3, 6); // changed from 3, 3 to 3, 6 because it would never have been equal so the assert would have always failed
-    assert (s2 == "abc");
+	std::cout << "s2:" << s2 << std::endl;
+	assert (s2 == "abc");
     assert (s3 == "def");
   }
 
