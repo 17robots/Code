@@ -96,7 +96,6 @@ struct Test_string
     myString const s1 = "abcdef";
     myString s2 = s1.substr(0, 3);
     myString s3 = s1.substr(3, 6); // changed from 3, 3 to 3, 6 because it would never have been equal so the assert would have always failed
-	std::cout << "s2:" << s2 << std::endl;
 	assert (s2 == "abc");
     assert (s3 == "def");
   }
