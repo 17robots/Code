@@ -4,6 +4,7 @@ const path = require('path')
 const htmlPlugin = new HtmlWebPackPlugin({
     template: './src/index.html',
     filename: './index.html'
+    
 })
 
 module.exports = {
@@ -54,5 +55,6 @@ module.exports = {
     devServer: {
         disableHostCheck: true,
         host: '0.0.0.0'
-    }
+    },
+    devtool: 'source-map'
 }

@@ -160,7 +160,7 @@ int main() {
 					std::cout << "Which Uninversity are you logging into?: ";
 					std::cin >> uniChoice;
 
-					while(!(uniChoice < NUMLABS + 1 && uniChoice > 0)) {
+					while(std::cin.fail() || !(uniChoice < NUMLABS + 1 && uniChoice > 0)) {
 						std::cout << "Please enter a number on the list: ";
 						std::cin >> uniChoice;
 					}
@@ -179,7 +179,7 @@ int main() {
 							std::cout << "That station is in use" << std::endl;
 							stationChoice = -1; // force the loop to repeat
 						}
-					} while(!(stationChoice < LABSIZES[uniChoice - 1] + 1 && stationChoice > 0));
+					} while(std::cin.fail() || !(stationChoice < LABSIZES[uniChoice - 1] + 1 && stationChoice > 0));
 					
 					int minutes;
 					do {
@@ -207,7 +207,7 @@ int main() {
 						if(!validTime) {
 							minutes = 62;
 						}
-					} while(!(minutes < 61 && minutes > 0));
+					} while(std::cin.fail() || !(minutes < 61 && minutes > 0));
 
 					std::cout << "And finally, what is your name?: ";
 
@@ -262,7 +262,7 @@ int main() {
 													std::cout << "Please enter a valid option";
 													break;
 											}
-										} while(!(menuChoice > 0 && menuChoice < 3));
+										} while(std::cin.fail() || !(menuChoice > 0 && menuChoice < 3));
 									} else {
 										do {
 											printOutFindSuccessMenu();
@@ -283,7 +283,7 @@ int main() {
 													std::cout << "Please enter a valid option";
 													break;
 											}
-										} while (!(menuChoice > 0 && menuChoice));
+										} while (std::cin.fail() || !(menuChoice > 0 && menuChoice));
 									}
 
 									break;
@@ -333,7 +333,7 @@ int main() {
 									 break;
 								 }
 						}
-					} while(!(logOutChoice > 0 && logOutChoice < 4));
+					} while(std::cin.fail() || !(logOutChoice > 0 && logOutChoice < 4));
 					break;
 
 				}
@@ -371,7 +371,7 @@ int main() {
 				break;
 			}
 		}
-	} while(menuChoice != 5);
+	} while(std::cin.fail() || menuChoice != 5);
 
 	return 0;
 }
