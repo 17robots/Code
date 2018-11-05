@@ -1,13 +1,13 @@
 /*
-   COPYRIGHT (C) 2018 Student Name (UANET ID ) All rights reserved.
+   COPYRIGHT (C) 2018 Matthew Dray (UANET ID ) All rights reserved.
    CS assignment
    Author.  Student Name
-            zippy@zips.uakron.edu
-   Version. 1.01 09.09.2017
+            med116@zips.uakron.edu
+   Version. 1.01 11.09.2018
    Purpose: string vector class test suite
 */
 
-//#include "myStringVector.hpp"
+#include "myStringVector.hpp"
 #include <string>
 #include <algorithm>
 #include <iostream>

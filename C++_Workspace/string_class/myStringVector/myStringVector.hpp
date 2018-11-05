@@ -23,7 +23,28 @@ namespace {
         bool operator > (myStringVector const &obj) const;
         bool operator <= (myStringVector const &obj) const;
         bool operator >= (myStringVector const &obj) const;
+        std::string operator [] (int index) const;
         ~myStringVector();
+        
+        static class iterator : std::iterator {
+            public:
+                explicit iterator(std::string Value = "") : value(Value) {};
+                reference operator*() const;
+                iterator& operator++();
+                bool operator ==(iterator &other) const;
+                bool operator !=(iterator &other) const;
+        };
+        
+        static class const_iterator : std::iterator {
+            public:
+                explicit const_iterator(std::string Value = "") : value(Value) {};
+                reference operator*() const;
+                iterator& operator++();
+                bool operator ==(iterator &other) const;
+                bool operator !=(iterator &other) const;
+        };
+        iterator begin();
+        iterator end();
       private:
       std::string * strArr;
       std::string * lastElem;
