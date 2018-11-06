@@ -7,6 +7,7 @@ namespace {
     class myStringVector {
       public:
         myStringVector();
+        myStringVector::myStringVector(std::initialized_list<std::string>);
         myStringVector(const myStringVector &obj);
         bool empty() const;
         std::size_t length() const;

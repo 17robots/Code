@@ -1,7 +1,13 @@
 #include "myStringVector.hpp"
 
 namespace {
-    myStringVector::myStringVector() : strArr{ } {
+    myStringVector::mySstringVector() {
+        strArr = nullptr;
+        lastElem = nullptr;
+        maxElem = nullptr;
+    }
+    
+    myStringVector::myStringVector(std::initialized_list<std::string>) {
         
     }
     
