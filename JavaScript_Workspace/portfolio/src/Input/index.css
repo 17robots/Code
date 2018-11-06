@@ -21,4 +21,9 @@
     font-size: inherit;
     font-weight: bold;
     font-family: serif;
+	border: 0;
+}
+
+.input[type=text]::focus {
+  border: 0;
 }

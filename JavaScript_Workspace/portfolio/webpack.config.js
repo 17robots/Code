@@ -52,9 +52,9 @@ module.exports = {
         ]
     },
     plugins: [htmlPlugin],
-    devServer: {
+    /*devServer: {
         disableHostCheck: true,
         host: '0.0.0.0'
-    },
+    },*/
     devtool: 'source-map'
 }
