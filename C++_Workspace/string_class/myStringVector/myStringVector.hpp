@@ -1,14 +1,17 @@
 #ifndef MYSTRINGVECTOR_HPP
 #define MYSTRINGVECTOR_HPP
 #include <iostream>
+#include <algorithm>
 #include <string>
+#include <initializer_list>
 
-namespace {
+namespace umm2 {
     class myStringVector {
       public:
         myStringVector();
-        myStringVector::myStringVector(std::initialized_list<std::string>);
+        myStringVector(std::initializer_list<std::string>);
         myStringVector(const myStringVector &obj);
+        myStringVector & operator=(const myStringVector &obj);
         bool empty() const;
         std::size_t length() const;
         std::size_t capacity() const;
@@ -26,26 +29,10 @@ namespace {
         bool operator >= (myStringVector const &obj) const;
         std::string operator [] (int index) const;
         ~myStringVector();
-        
-        static class iterator : std::iterator {
-            public:
-                explicit iterator(std::string Value = "") : value(Value) {};
-                reference operator*() const;
-                iterator& operator++();
-                bool operator ==(iterator &other) const;
-                bool operator !=(iterator &other) const;
-        };
-        
-        static class const_iterator : std::iterator {
-            public:
-                explicit const_iterator(std::string Value = "") : value(Value) {};
-                reference operator*() const;
-                iterator& operator++();
-                bool operator ==(iterator &other) const;
-                bool operator !=(iterator &other) const;
-        };
-        iterator begin();
-        iterator end();
+        static std::iterator<std::random_access_iterator_tag, std::string, std::string, const std::string *, std::string> iterator;
+        static std::iterator<std::random_access_iterator_tag, std::string, std::string, const std::string *, std::string> const_iterator;
+        std::iterator<std::random_access_iterator_tag, std::string, std::string, const std::string *, std::string> begin();
+        std::iterator<std::random_access_iterator_tag, std::string, std::string, const std::string *, std::string> end();
       private:
       std::string * strArr;
       std::string * lastElem;
