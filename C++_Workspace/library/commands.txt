@@ -1,8 +1,0 @@
-Register User
-Delete User
-Checkout Books
-Return Books 
-Search Books
-Update Book Status (checked out, not checked out)
-Add Books
-Remove Books

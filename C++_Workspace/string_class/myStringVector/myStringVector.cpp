@@ -18,9 +18,11 @@ namespace umm2 {
     }
     
     myStringVector::myStringVector(const myStringVector &obj) {
-        strArr = obj.data();
-        lastElem = obj.last();
-        maxElem = obj.max();
+        strArr = new std::string;
+        std::cout << "calling copy constructor" << std::endl;
+        // strArr = obj.data();
+        // lastElem = obj.last();
+        // maxElem = obj.max();
     }
     
     myStringVector & myStringVector::operator=(const myStringVector &obj) {
@@ -117,10 +119,10 @@ namespace umm2 {
     }
     
     myStringVector::~myStringVector() {
-        delete[] strArr;
-        strArr = nullptr;
-        maxElem = nullptr;
-        lastElem = nullptr;
+        delete [] strArr;
+        maxElem = NULL;
+        lastElem = NULL;
+        strArr = NULL;
     }
     
     std::iterator<std::random_access_iterator_tag, std::string, std::string, const std::string *, std::string> myStringVector::begin() {

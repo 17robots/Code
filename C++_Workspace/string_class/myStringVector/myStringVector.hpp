@@ -34,9 +34,9 @@ namespace umm2 {
         std::iterator<std::random_access_iterator_tag, std::string, std::string, const std::string *, std::string> begin();
         std::iterator<std::random_access_iterator_tag, std::string, std::string, const std::string *, std::string> end();
       private:
-      std::string * strArr;
-      std::string * lastElem;
-      std::string * maxElem;
+        std::string * strArr;
+        std::string * lastElem;
+        std::string * maxElem;
     };
 }
 
