@@ -1,4 +1,5 @@
 #include "list.hpp"
+#include <iostream>
 
 List::List() {
     head = nullptr;
@@ -14,7 +15,9 @@ List::~List() {
 }
 
 void List::appNode(Station station) {
-    Node * newNode, currentNode, previousNode;
+    Node * newNode; 
+    Node * currentNode;
+    Node * previousNode;
     previousNode = nullptr;
     
     newNode = new Node;
@@ -34,7 +37,8 @@ void List::appNode(Station station) {
 }
 
 void List::delNode() { // really only calling this when we deallocate all of the lists
-    Node* currentNode, previousNode;
+    Node * currentNode; 
+    Node * previousNode;
     
     if(head == nullptr) {
         currentNode = head;
@@ -53,9 +57,9 @@ void List::delNode() { // really only calling this when we deallocate all of the
 }
 
 void List::showList() const {
-    Node* currentNode;
+    Node * currentNode;
     if(!head) {
-        std::cout << "there is no data here" << std::endl;
+        std::cout << "There is no data here" << std::endl;
     } else {
         currentNode = head;
         while(!currentNode->next) {

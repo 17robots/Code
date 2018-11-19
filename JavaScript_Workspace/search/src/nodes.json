@@ -1,0 +1,53 @@
+{
+    "docs": {
+        "h": [
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/[name_of_file]"
+            }
+        ],
+        "sww": [
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/[name_of_file]"
+            }
+        ],
+        "sm": [
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/[name_of_file]"
+            }
+        ],
+        "spm": [
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/[name_of_file]"
+            }
+        ],
+        "sw": [
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/[name_of_file]"
+            }
+        ],
+        "sws": [
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/[name_of_file]"
+            }
+        ],
+        "tw": [
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/[name_of_file]"
+            }
+        ]   
+    }
+}

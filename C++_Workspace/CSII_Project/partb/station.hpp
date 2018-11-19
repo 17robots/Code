@@ -1,6 +1,8 @@
 #ifndef STATION_HPP
 #define STATION_HPP
 
+#include <string>
+
 class Station {
 	private:
 		int id;
@@ -24,5 +26,7 @@ class Station {
 
 		Station(Station const &copy);
 };
+
+std::ostream & operator <<(std::ostream & buffer, Station &obj);
 
 #endif

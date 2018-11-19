@@ -8,7 +8,7 @@ class List {
   struct Node {
       struct Node* next;
       Station data;
-  }
+  };
   Node * head;
   public:
   List(); // default constructor

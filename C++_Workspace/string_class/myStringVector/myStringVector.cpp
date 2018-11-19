@@ -1,3 +1,6 @@
+// Matthew Dray
+// string vector implementations
+
 #include "myStringVector.hpp"
 
 namespace umm2 {
@@ -18,11 +21,10 @@ namespace umm2 {
     }
     
     myStringVector::myStringVector(const myStringVector &obj) {
-        strArr = new std::string;
         std::cout << "calling copy constructor" << std::endl;
-        // strArr = obj.data();
-        // lastElem = obj.last();
-        // maxElem = obj.max();
+        strArr = obj.data();
+        lastElem = obj.last();
+        maxElem = obj.max();
     }
     
     myStringVector & myStringVector::operator=(const myStringVector &obj) {
@@ -46,11 +48,11 @@ namespace umm2 {
     }
     
     bool myStringVector::empty() const {
-        return strArr == nullptr;
+        return this->length() == 0;
     }
     
     std::size_t myStringVector::length() const {
-        return lastElem == strArr ? 0 : lastElem - strArr;
+        return (((lastElem == strArr && !strArr) || (strArr[0] == "" && lastElem == strArr)) ? 0 : lastElem - strArr + 1);
     }
     
     std::size_t myStringVector::capacity() const {
@@ -69,16 +71,48 @@ namespace umm2 {
         return maxElem;
     }
     
-    void myStringVector::reserve(int) {
+    void myStringVector::reserve(int reservedSize) {
+        std::string * newArr = new std::string[this->length() + reservedSize];
+        for(int i = 0; i < this->length(); ++i) {
+            newArr[i] = strArr[i];
+        }
         
+        int length = this->length();
+        int capacity = this->capacity();
+        delete [] strArr;
+        strArr = newArr;
+        lastElem = strArr + length;
+        maxElem = strArr + capacity + reservedSize;
     }
     
-    void myStringVector::resize(int) {
+    void myStringVector::resize(int finalSize) {
+        std::string * newArr = new std::string[finalSize];
+        int capacity = this->capacity();
         
+        for(int i = 0; i < finalSize; ++i) {
+            if(i >= this->length() || !strArr) {
+                newArr[i] = "";
+            } else {
+                newArr[i] = strArr[i];
+            }
+        }
+        
+        delete [] strArr;
+        strArr = newArr;
+        lastElem = strArr + finalSize - 1;
+        if(capacity < finalSize) {
+            maxElem = lastElem + 1;
+        } else {
+            maxElem = strArr + capacity;
+        }
     }
     
     void myStringVector::clear() {
-        
+        int capacity = this->capacity();
+        delete [] strArr;
+        strArr = new std::string[capacity];
+        lastElem = strArr;
+        maxElem = strArr + capacity;
     }
     
     bool myStringVector::operator==(myStringVector const &obj) const {
@@ -94,28 +128,116 @@ namespace umm2 {
         return true;
     }
     
+    void myStringVector::push_back(std::string value) {
+        
+        std::string * newArr = new std::string[this->length() + 1];
+        for(int i = 0; i < this->length(); ++i) {
+            newArr[i] = strArr[i];
+        }
+        
+        newArr[this->length()] = value;
+        int length = this->length();
+        int capacity = this->capacity();
+        delete [] strArr;
+        strArr = newArr;
+        lastElem = strArr + length;
+        maxElem = strArr + capacity;
+    }
+    
+    void myStringVector::pop_back() {
+        if(this->empty()) {
+            std::cout << "The vector is empty" << std::endl;
+        } else {
+            std::string * newArr = new std::string[this->length() - 2];
+            
+            for(int i = 0; i < this->length() - 2; ++i) {
+                newArr[i] = strArr[i];
+            }
+            int length = this->length() - 2; // this accounts for the length function returning 1 more than the index and the lack of last one
+            int capacity = this->capacity();
+            delete [] strArr;
+            strArr = newArr;
+            lastElem = strArr + length;
+            maxElem = strArr + capacity;   
+        }
+        
+    }
+    
     bool myStringVector::operator!=(myStringVector const &obj) const {
         return !(*(this) == obj);
     }
     
     bool myStringVector::operator < (myStringVector const &obj) const {
-        
+        if(this->length() > obj.length()) {
+            return false;
+        } else if(this->length() < obj.length()) {
+            return true;
+        } else {
+            for(int i = 0; i < this->length(); ++i) {
+                if(strArr[i] >= obj.data()[i]) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
     }
     
     bool myStringVector::operator > (myStringVector const &obj) const {
-        
+        if(this->length() < obj.length()) {
+            return false;
+        } else if(this->length() > obj.length()) {
+            return true;
+        } else {
+            for(int i = 0; i < this->length(); ++i) {
+                if(strArr[i] <= obj.data()[i]) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
     }
     
     bool myStringVector::operator <= (myStringVector const &obj) const {
-        
+        if(this->length() > obj.length()) {
+            return false;
+        } else if(this->length() < obj.length()) {
+            return true;
+        } else {
+            for(int i = 0; i < this->length(); ++i) {
+                if(strArr[i] > obj.data()[i]) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
     }
     
     bool myStringVector::operator >= (myStringVector const &obj) const {
-        
+        if(this->length() < obj.length()) {
+            return false;
+        } else if(this->length() > obj.length()) {
+            return true;
+        } else {
+            for(int i = 0; i < this->length(); ++i) {
+                if(strArr[i] < obj.data()[i]) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
     }
     
-    std::string myStringVector::operator [] (int index) const {
-        
+    std::string & myStringVector::operator [] (int index) const {
+        if(index >= this->length() || index < 0) {
+            std::cout << "The index is out of bounds. Returning last character instead" << std::endl;
+            return strArr[lastElem - strArr];
+        } else {
+            return strArr[index];
+        }
     }
     
     myStringVector::~myStringVector() {
@@ -125,16 +247,28 @@ namespace umm2 {
         strArr = NULL;
     }
     
-    std::iterator<std::random_access_iterator_tag, std::string, std::string, const std::string *, std::string> myStringVector::begin() {
-        /*if(strArr != nullptr) {
-            return std::iterator<std::random_access_iterator_tag, std::string, std::string, const std::string *, std::string>(strArr[0]);
-        }*/
+    myStringVector::iterator myStringVector::begin() {
+        iterator citer;
+        citer.lit = strArr;
+        return citer;
     }
     
-    std::iterator<std::random_access_iterator_tag, std::string, std::string, const std::string *, std::string> myStringVector::end() {
-        /*if(strArr != nullptr) {
-            return return std::iterator<std::random_access_iterator_tag, std::string, std::string, const std::string *, std::string>(lastElem);
-        }*/
+    myStringVector::iterator myStringVector::end() {
+        iterator citer;
+        citer.lit = lastElem;
+        return citer;
+    }
+    
+    myStringVector::const_iterator myStringVector::begin() const {
+        const_iterator citer;
+        citer.lit = strArr;
+        return citer;
+    }
+    
+    myStringVector::const_iterator myStringVector::end() const {
+        const_iterator citer;
+        citer.lit = lastElem;
+        return citer;
     }
     
 }

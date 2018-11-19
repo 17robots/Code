@@ -38,3 +38,8 @@ Station::Station(Station const &copy) {
 	name = copy.getName();
 	useTimeInMinutes = copy.getUseTime();
 }
+
+std::ostream & operator <<(std::ostream & buffer, Station &obj) {
+	buffer << obj.getId() << " " << obj.getName() << " " << obj.getUseTime() << std::endl;
+	return buffer;
+}
