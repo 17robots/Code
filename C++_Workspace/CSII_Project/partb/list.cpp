@@ -3,57 +3,61 @@
 
 List::List() {
     head = nullptr;
+    last = nullptr;
 }
 
 List::~List() {
-    while(head->next != nullptr) {
-        this->delNode();
+    if(head == nullptr) {
+        
+    } else {
+        while(head->next) {
+            this->delNode();
+        }   
     }
-    
-    delete head;
-    head = nullptr;
 }
 
 void List::appNode(Station station) {
-    Node * newNode; 
-    Node * currentNode;
-    Node * previousNode;
+    Node* newNode; 
+    Node* currentNode;
+    Node* previousNode;
     previousNode = nullptr;
     
     newNode = new Node;
+    
     newNode->data = station;
-    if(!head) {
-        head = newNode;
-    } else {
+    
+    // std::cout << newNode << std::endl;
+    
+    if(head) {
+        std::cout << "PreviousNode   CurrentNode" << std::endl;
         currentNode = head;
-        while(currentNode != nullptr) {
+        while(currentNode) {
+            std::cout << previousNode << " " << currentNode << std::endl;
             previousNode = currentNode;
+            if(currentNode)
             currentNode = currentNode->next;
         }
-        
         previousNode->next = newNode;
         newNode->next = nullptr;
+    } else {
+        head = newNode;
     }
 }
 
 void List::delNode() { // really only calling this when we deallocate all of the lists
-    Node * currentNode; 
-    Node * previousNode;
+    Node* currentNode;
+    Node* previousNode;
     
-    if(head == nullptr) {
+    if(head) {
         currentNode = head;
-    } else {
-        currentNode = head;
-        while(currentNode->next != nullptr) {
+        while(currentNode) {
             previousNode = currentNode;
+            if(currentNode)
             currentNode = currentNode->next;
         }
-        
-        delete currentNode;
-        currentNode = nullptr;
+        delete previousNode->next;
         previousNode->next = nullptr;
     }
-    
 }
 
 void List::showList() const {
@@ -61,10 +65,41 @@ void List::showList() const {
     if(!head) {
         std::cout << "There is no data here" << std::endl;
     } else {
-        currentNode = head;
-        while(!currentNode->next) {
-            std::cout << currentNode->data << std::endl;
-            currentNode = currentNode->next;
+        if(head->next) {
+            currentNode = head;
+            while(currentNode) {
+                std::cout << currentNode->data;
+                currentNode = currentNode->next;
+            }
+        } else {
+            std::cout << "There is no data here" << std::endl;
         }
+    }
+}
+
+Station List::loop(int index) const {
+    Node* currentNode = head;
+    Node* previousNode = nullptr;
+    int counter = 0;
+    if(index > 0) {
+        for(int i = 0; i < index; ++i) {
+            if(currentNode) {
+                std::cout << "Made it here" << std::endl;
+                previousNode = currentNode;
+                currentNode = currentNode->next;
+                counter++;
+            } else {
+                std::cout << "Didn't make it here" << std::endl;
+            }
+        }
+        std::cout << "counter: " << counter << " index: " << index << std::endl;
+         if(counter == index) {
+            return previousNode->data;
+        } else {
+            return Station(999, "", 999, 999);
+        }
+    } else {
+        std::cout << "Fail 1" << std::endl;
+        return Station(999, "", 999, 999);
     }
 }

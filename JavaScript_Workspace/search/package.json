@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "antd": "^3.10.7",
+    "fs": "0.0.1-security",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-router-dom": "^4.3.1"

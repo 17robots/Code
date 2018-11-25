@@ -4,8 +4,44 @@
             {
                 "name": "",
                 "number": "",
-                "link": "./db/[name_of_file]"
+                "link": "./db/HWHelp/Hardware_Help/Cash_Drawers/APG_24V_Cash_Drawer/APG_24V_Cash_Drawer_Specifications_and_Troubleshooting.htm"
+            },
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/HWHelp/Hardware_Help/Cash_Drawers/APG_110V_Cash_Drawer/APG_110V_Cash_Drawer_Installation_Specs_and_Troubleshooting.htm"
+            },
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/HWHelp/Hardware_Help/Cash_Drawers/General_Information/boot_mice_configuration_for_scanners_and_serial_cash_drawers.htm"
+            },
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/HWHelp/Hardware_Help/Cash_Drawers/General_Information/How_to_Tell_Cash_Drawers_Apart.htm"
+            },
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/HWHelp/Hardware_Help/Circuit_Boards/General_Information/Connectors_for_CW_to_TW_Connection.htm"
+            },
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/HWHelp/Hardware_Help/Circuit_Boards/General_Information/Controller_Interface_with_an_External_Roller_Up_Circuit.htm"
+            },
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/HWHelp/Hardware_Help/Circuit_Boards/General_Information/Discussion_of_RS232_Versus_RS422.htm"
+            },
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/HWHelp/Hardware_Help/Circuit_Boards/General_Information/How_RS-485_communications_work.htm"
             }
+            
         ],
         "sww": [
             {
@@ -48,6 +84,13 @@
                 "number": "",
                 "link": "./db/[name_of_file]"
             }
-        ]   
+        ],
+        "images": [
+            {
+                "name": "",
+                "number": "",
+                "link": "./db/[name_of_file]"
+            }
+        ]
     }
 }

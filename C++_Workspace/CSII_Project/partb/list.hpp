@@ -5,17 +5,27 @@
 
 class List {
   private:
-  struct Node {
-      struct Node* next;
-      Station data;
-  };
-  Node * head;
+    struct Node {
+        Node* next;
+        Station data;
+        Node() {
+          next = nullptr;
+          data = Station();
+        };
+        Node(Node* newNext, Station newData) {
+          next = newNext;
+          data = newData;
+        }
+    };
+    Node* head;
+    Node* last;
   public:
-  List(); // default constructor
-  ~List(); // destructor 
-  void appNode(Station station); // push something onto the list 
-  void delNode(); // pop the last thing off the list
-  void showList() const; // print the list
+    List(); // default constructor
+    ~List(); // destructor 
+    void appNode(Station station); // push something onto the list 
+    void delNode(); // pop the last thing off the list
+    void showList() const; // print the list
+    Station loop(int index) const; // grabs data at list
 };
 
 #endif
