@@ -8,14 +8,6 @@ class List {
     struct Node {
         Node* next;
         Station data;
-        Node() {
-          next = nullptr;
-          data = Station();
-        };
-        Node(Node* newNext, Station newData) {
-          next = newNext;
-          data = newData;
-        }
     };
     Node* head;
     Node* last;

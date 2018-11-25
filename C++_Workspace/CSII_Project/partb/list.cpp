@@ -17,28 +17,15 @@ List::~List() {
 }
 
 void List::appNode(Station station) {
-    Node* newNode; 
-    Node* currentNode;
-    Node* previousNode;
-    previousNode = nullptr;
-    
+    Node* newNode;  
     newNode = new Node;
-    
     newNode->data = station;
-    
-    // std::cout << newNode << std::endl;
+    newNode->next = nullptr;
     
     if(head) {
-        std::cout << "PreviousNode   CurrentNode" << std::endl;
-        currentNode = head;
-        while(currentNode) {
-            std::cout << previousNode << " " << currentNode << std::endl;
-            previousNode = currentNode;
-            if(currentNode)
-            currentNode = currentNode->next;
-        }
-        previousNode->next = newNode;
-        newNode->next = nullptr;
+	Node* currentNode = head;
+     	while(currentNode->next) currentNode = currentNode->next;
+	//currentNode->next = newNode;
     } else {
         head = newNode;
     }
