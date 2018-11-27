@@ -54,6 +54,6 @@ Station::Station(Station const &copy) {
 }
 
 std::ostream & operator <<(std::ostream & buffer, Station &obj) {
-	buffer << obj.getLabNumber() << ". " << obj.getId() << " " << obj.getName() << " " << obj.getUseTime() << std::endl;
+	buffer << obj.getId() << " " << obj.getName() << " " << obj.getUseTime() << std::endl;
 	return buffer;
 }

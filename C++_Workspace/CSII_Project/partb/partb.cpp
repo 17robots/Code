@@ -14,8 +14,11 @@ const std::string UNIVERSITYNAMES[NUMLABS] = {"The University of Michigan", "The
 
 // printing function headers
 void printMenu();
-void printUniversities();
 void printLabs();
+void printSignInPrompt();
+void printSignOutPromptMain();
+void printSignOutPromptId();
+void printSignOutPromptLab();
 
 
 // helper function headers
@@ -23,10 +26,12 @@ void log(std::string message);
 void initialze(List (&list)[NUMLABS]);
 int generateId();
 int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map);
-void recoverUser(int userId, int labChoice);
-void signInUser(int labChoice, Station newUser, std::map<int, Station> &map);
-void signOutUser(int userId);
-void signOutUser(int labChoice, int stationChoice);
+void recoverUser(int userId, std::map<int, Station> &map);
+void signInUser(int labChoice, List (&list)[NUMLABS], Station &newUser, std::map<int, Station> &map);
+void signOutUser(int userId, List (&list)[NUMLABS], std::map<int, Station> &map);
+void signOutUser(int labChoice, int stationChoice, List (&list)[NUMLABS]);
+Station search(int userId, std::map<int, Station> &map);
+bool isFull(int labChoice, List &list);
 
 int main() {
     // variable creation
@@ -45,6 +50,7 @@ int main() {
     
     do {
         responseCode = runProgram(labs, users);
+	std::cout << "Response Code: " << responseCode << std::endl;
     } while(responseCode != 6);
     return 0;
 }
@@ -54,17 +60,14 @@ void initialze(List (&list)[NUMLABS]) {
     std::cout << "COMPUTER LAB MANAGEMENT SOFTWARE" << std::endl;
     printLabs();
     
-    // load up the list
-    // for(int i = 0; i < NUMLABS; ++i) {
-    //     for(int j = 0; j < LABSIZES[i]; ++j) {
-    //         list[i].appNode(Station(j + 1));
-    //     }
-    // }
-    
-    list[0].appNode(Station(1));
-    list[0].appNode(Station(2));
-    list[0].appNode(Station(3));
-    
+    //  load up the list
+     for(int i = 0; i < NUMLABS; ++i) {
+         for(int j = 0; j < LABSIZES[i]; ++j) {
+             list[i].appNode(Station(j + 1));
+         }
+     }
+
+    std::cout << "Initialized" << std::endl; 
 }
 
 // print functions
@@ -125,8 +128,7 @@ int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map) {
     } else {
         switch(menuChoice) {
             case 1: // sign in user
-                std::cout << list[0].loop(2).getLabNumber() << std::endl;
-                std::cout << "Sign In" << std::endl;
+                
                 break;
             case 2: // sign out user
                 std::cout << "Sign Out" << std::endl;
@@ -150,4 +152,28 @@ int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map) {
         }
         return menuChoice;
     }
+}
+
+void recoverUser(int userId, std::map<int, Station> &map) {
+    std::cout << "Recover User" << std::endl;
+}
+
+void signInUser(int labChoice, List (&list)[NUMLABS], Station &newUser, std::map<int, Station> &map) {
+    std::cout << "Log In User" << std::endl;
+}
+
+void signOutUser(int userId, List (&list)[NUMLABS], std::map<int, Station> &map) {
+    std::cout << "Log Out User" << std::endl;
+}
+
+void signOutUser(int labChoice, int stationChoice, List (&list)[NUMLABS]) {
+    std::cout << "Log Out User 2" << std::endl; 
+}
+Station search(int userId, std::map<int, Station> &map) {
+    std::cout << "Search User" << std::endl;
+    return Station(999, " ", 999);
+}
+
+bool isFull(int labChoice, List &list) {
+    return list.loop(LABSIZES[labChoice - 1] - 1).getId() != -999;
 }

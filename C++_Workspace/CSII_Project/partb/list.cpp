@@ -18,16 +18,22 @@ List::~List() {
 
 void List::appNode(Station station) {
     Node* newNode;  
+    Node* currentNode;
+    Node* previousNode;
     newNode = new Node;
     newNode->data = station;
     newNode->next = nullptr;
     
     if(head) {
-	Node* currentNode = head;
-     	while(currentNode->next) currentNode = currentNode->next;
-	//currentNode->next = newNode;
+        currentNode = head;
+        while(currentNode) {
+            previousNode = currentNode;
+            if(currentNode)
+            currentNode = currentNode->next;
+        }
+        previousNode->next = newNode; 
     } else {
-        head = newNode;
+	head = newNode;
     }
 }
 
