@@ -171,7 +171,7 @@ void signOutUser(int labChoice, int stationChoice, List (&list)[NUMLABS]) {
 }
 Station search(int userId, std::map<int, Station> &map) {
     std::cout << "Search User" << std::endl;
-    return Station(999, " ", 999);
+    return Station(999, " ", 999, 999);
 }
 
 bool isFull(int labChoice, List &list) {

@@ -45,7 +45,6 @@ void List::delNode() { // really only calling this when we deallocate all of the
         currentNode = head;
         while(currentNode) {
             previousNode = currentNode;
-            if(currentNode)
             currentNode = currentNode->next;
         }
         delete previousNode->next;
