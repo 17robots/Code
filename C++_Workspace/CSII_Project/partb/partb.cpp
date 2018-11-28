@@ -36,7 +36,7 @@ bool isFull(int labChoice, List &list);
 int main() {
     // variable creation
     List labs[NUMLABS];
-    
+    int currentLab;
     // the map for searching
     std::map<int, Station> users;
     
@@ -44,28 +44,30 @@ int main() {
     srand(((unsigned) time(NULL)));
     
     // initial display of everything and assignment
-    initialze(labs);
+    initialze(labs, currentLab);
     
     int responseCode;
     
     do {
-        responseCode = runProgram(labs, users);
-	std::cout << "Response Code: " << responseCode << std::endl;
-    } while(responseCode != 6);
+        responseCode = runProgram(labs, users);	
+    } while(responseCode != 6);	
     return 0;
 }
 
-void initialze(List (&list)[NUMLABS]) {
+void initialze(List (&list)[NUMLABS], int& currentLab) {
     // print the main display menus including all of the labs and universities
     std::cout << "COMPUTER LAB MANAGEMENT SOFTWARE" << std::endl;
     printLabs();
-    
-    //  load up the list
-     for(int i = 0; i < NUMLABS; ++i) {
-         for(int j = 0; j < LABSIZES[i]; ++j) {
-             list[i].appNode(Station(j + 1));
-         }
-     }
+    std::cout << "Please select a lab to manage: ";
+    int labChoice;
+		std::cin >> labChoice;
+
+    while(std::cin.fail() || labChoice < 1 || labChoice > NUMLABS) {
+			std::cout << "Please choose a valid lab: ";
+			std::cin >> labChoice;
+    }
+
+		currentLab = labChoice;
 
     std::cout << "Initialized" << std::endl; 
 }
@@ -75,9 +77,10 @@ void printMenu() {
     std::cout << "Options" << std::endl;
     std::cout << "1. Sign In A User" << std::endl;
     std::cout << "2. Sign Out A User" << std::endl;
-    std::cout << "3. Print Labs" << std::endl;
+    std::cout << "3. Print Station" << std::endl;
     std::cout << "4. Search User" << std::endl;
     std::cout << "5. Recover User" << std::endl;
+		std::cout << "6. Change Lab" << std::endl;
     std::cout << "6. Quit" << std::endl;
 }
 
@@ -116,8 +119,22 @@ int generateId() {
     return rand() % 99999 + 1;
 }
 
-int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map) {
+void changeLab(int& lab) {
+	std::cout << "Changing Labs" << std::endl;
+	printLabs();
+	std::cout << "Choose a new lab to manage." << std::endl;
+	int newLab;
+	std::cin >> newLab;
+	while(std::cin.fail() || newLab < 1 || newLab > NUMLABS) {
+					std::cout << "Please choose a valid lab: ";
+					std::cin >> newLab;
+	}
+	lab = newLab;
+}
+
+int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map, &currentLab) {
     int menuChoice;
+		std::cout << "Current University: " << UNIVERSITYNAMES[currentLab - 1] << std::endl;
     printMenu();
     std::cout << "Menu Option: ";
     std::cin >> menuChoice;
@@ -127,16 +144,38 @@ int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map) {
         return 7; // return a value to make the menu repeat
     } else {
         switch(menuChoice) {
-            case 1: // sign in user
-                
+            case 1: // sign in user	
+								std::cout << "Signing User into " << UNIVERSITYNAMES[currentLab - 1] << std::endl;
+								std::cout << "Enter the person's name: ";
+								std::string name;
+								std::getline(std::cin, name);
+								std::cout << "Please enter the expected use time for the user: ";
+							 	int useTime;	
+								do {
+									std::cin >> useTime;
+									switch(useTime) {
+										case 15:
+												break;
+										case 30:
+												break;
+										case 45:
+												break;
+										case 60:
+												break;
+										default:
+												useTime = 10000; // force the loop to repeat
+												std::cout << "Please enter a valid use time in increments of 15 up to an hour." << std::endl;
+									}
+								} while(std::cin.fail() || useTime < 15 && useTime > 60);
+								int id = generateId();	
+								signInUser(currentLab, list, Station(generateId(), name, useTime, currentLab);
+								log("Logged " + id + " into ");
                 break;
             case 2: // sign out user
                 std::cout << "Sign Out" << std::endl;
                 break;
             case 3: // print labs
-                for(int i = 0; i < NUMLABS; ++i) {
-                    list[i].showList();
-                }
+                list[currentLab - 1].showList();
                 break;
             case 4: // search user
                 std::cout << "Search" << std::endl;
@@ -145,8 +184,10 @@ int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map) {
                 std::cout << "Recover" << std::endl;
                 break;
             case 6: // quit
-                std::cout << "Quitting" << std::endl;
+                changeLab(currentLab);
                 break;
+						case 7:
+								std::cout << "Quitting" << std::endl;
             default: 
                 std::cout << "That is not a valid menu option" << std::endl;
         }
