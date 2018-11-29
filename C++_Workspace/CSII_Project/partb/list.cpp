@@ -54,8 +54,6 @@ void List::delNode(int index) { // really only calling this when we deallocate a
 				previousNode = currentNode;
 				currentNode = currentNode->next;
 				counter++;
-			} else {
-				std::cout << "Didn't make it here" << std::endl;
 			}
 		}
 		if(counter == index) {
@@ -107,10 +105,25 @@ void List::delNode(int index) { // really only calling this when we deallocate a
 			if(counter == index) {
 				return previousNode->data;
 			} else {
-				return Station(999, "", 999, 999);
+				return Station(-1, "", -1, -1);
 			}
 		} else {
-			std::cout << "Fail 1" << std::endl;
-			return Station(999, "", 999, 999);
+			return Station(-1, "", -1, -1);
 		}
+	}
+
+	int List::size() {
+		Node* currentNode = head;
+		Node* previousNode = nullptr;
+		int counter = 0;
+		if(index >= 0) {
+			for(int i = 0; i < index; ++i) {
+				if(currentNode) {
+					std::cout << "Made it here" << std::endl;
+					previousNode = currentNode;
+					currentNode = currentNode->next;
+					counter++;
+				}
+			}
+			return counter;
 	}

@@ -15,10 +15,11 @@ const std::string UNIVERSITYNAMES[NUMLABS] = {"The University of Michigan", "The
 // printing function headers
 void printMenu();
 void printLabs();
-void printSignInPrompt();
-void printSignOutPromptMain();
-void printSignOutPromptId();
-void printSignOutPromptLab();
+Station printSignInPrompt();
+int printSignOutPromptId();
+int printSignOutPromptLab();
+int printSignOutMenu();
+int printSearchPrompt();
 
 
 // helper function headers
@@ -39,18 +40,18 @@ int main() {
     int currentLab;
     // the map for searching
     std::map<int, Station> users;
-    
+
     // seed the random number generator
     srand(((unsigned) time(NULL)));
-    
-    // initial display of everything and assignment
+
+    // choose the current lab
     initialze(labs, currentLab);
-    
+
     int responseCode;
-    
+
     do {
-        responseCode = runProgram(labs, users);	
-    } while(responseCode != 6);	
+        responseCode = runProgram(labs, users);
+    } while(responseCode != 6);
     return 0;
 }
 
@@ -69,7 +70,7 @@ void initialze(List (&list)[NUMLABS], int& currentLab) {
 
 		currentLab = labChoice;
 
-    std::cout << "Initialized" << std::endl; 
+    std::cout << "Initialized" << std::endl;
 }
 
 // print functions
@@ -87,8 +88,89 @@ void printMenu() {
 void printLabs() {
     for(int i = 0; i < NUMLABS; ++i) {
         std::cout <<i + 1 << ". " << UNIVERSITYNAMES[i] << std::endl;
-        std::cout << "Avaliable Labs: " << LABSIZES[i] << std::endl; 
+        std::cout << "Avaliable Labs: " << LABSIZES[i] << std::endl;
     }
+}
+
+int printSignOutMenu() {
+  std::cout << "Sign Out" << std::endl;
+  std::cout << "1. By Id" << std::endl;
+  std::cout << "2. By Manual Selection" << std::endl;
+  int choice;
+  std::cin >> choice;
+  while(std::cin.fail() || choice < 1 || choice > 2) {
+    std::cout << "Please enter a valid choice: ";
+    std::cin >> choice;
+  }
+  return choice;
+}
+
+int printSignOutPromptLab(List &list, int currentLab) {
+  std::cout << "Current Lab: " << UNIVERSITYNAMES[currentLab - 1] << std::endl;
+  list.showList();
+  int choice;
+  std::cin >> choice;
+  while(std::cin.fail() || choice > LABSIZES[currentLab - 1] || choice < 1) {
+    std::cout << "Please enter a valid choice: ";
+    std::cin >> choice;
+  }
+  return choice;
+}
+
+int printSignOutPromptId() {
+  std::cout << "Enter the id of the user you want to sign out: " << std::endl;
+  int id;
+  std::cin >> id;
+  while(std::cin.fail()) {
+    std::cout << "Enter a valid number: ";
+    std::cin >> id;
+  }
+
+  return id;
+}
+
+void printSignOutPromptLab(int currentLab) {
+  std::cout << "Signing out from " << UNIVERSITYNAMES[currentLab - 1] << std::endl;
+
+}
+
+int printSearchPrompt() {
+  std::cout << "Search" << std::endl;
+  std::cout << "Enter the Id To Search: ";
+  int idToSearch;
+  std::cin >> idToSearch;
+  while(std::cin.fail()) {
+    std::cout << "Please enter a valid number: ";
+    cin >> idToSearch;
+  }
+  return idToSearch;
+}
+
+Station printSignInPrompt(int currentLab) {
+  std::cout << "Signing User into " << UNIVERSITYNAMES[currentLab - 1] << std::endl;
+  std::cout << "Enter the person's name: ";
+  std::string name;
+  std::getline(std::cin, name);
+  std::cout << "Please enter the expected use time for the user: ";
+  int useTime;
+  do {
+    std::cin >> useTime;
+    switch(useTime) {
+      case 15:
+          break;
+      case 30:
+          break;
+      case 45:
+          break;
+      case 60:
+          break;
+      default:
+          useTime = 10000; // force the loop to repeat
+          std::cout << "Please enter a valid use time in increments of 15 up to an hour." << std::endl;
+    }
+  } while(std::cin.fail() || useTime < 15 && useTime > 60);
+  int id = generateId();
+  return Station(generateId(), name, useTime, currentLab);
 }
 
 // helper functions
@@ -99,7 +181,7 @@ void log(std::string message) {
     char buffer [20];
     strftime (buffer,20,"%Y-%m-%d.",now);
     std::string str(buffer);
-    
+
     std::ofstream myfile;
     myfile.open (str + "log", std::ios_base::ate);
     if(myfile.is_open()) {
@@ -107,9 +189,9 @@ void log(std::string message) {
     } else {
         std::cout << "Failed to open file" << std::endl;
     }
-    
+
     strftime (buffer,80,"%d-%m-%Y %H-%M-%S",now);
-    
+
     myfile << buffer << ": "<< message << std::endl;
     std::cout << "logged" << std::endl;
     myfile.close();
@@ -138,61 +220,57 @@ int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map, &currentLab) 
     printMenu();
     std::cout << "Menu Option: ";
     std::cin >> menuChoice;
-    
+
     if(std::cin.fail()) {
         std::cout << "That is not a choice. Please enter an integer between 1 and 6." << std::endl;
         return 7; // return a value to make the menu repeat
     } else {
         switch(menuChoice) {
-            case 1: // sign in user	
-								std::cout << "Signing User into " << UNIVERSITYNAMES[currentLab - 1] << std::endl;
-								std::cout << "Enter the person's name: ";
-								std::string name;
-								std::getline(std::cin, name);
-								std::cout << "Please enter the expected use time for the user: ";
-							 	int useTime;	
-								do {
-									std::cin >> useTime;
-									switch(useTime) {
-										case 15:
-												break;
-										case 30:
-												break;
-										case 45:
-												break;
-										case 60:
-												break;
-										default:
-												useTime = 10000; // force the loop to repeat
-												std::cout << "Please enter a valid use time in increments of 15 up to an hour." << std::endl;
-									}
-								} while(std::cin.fail() || useTime < 15 && useTime > 60);
-								int id = generateId();	
-								signInUser(currentLab, list, Station(generateId(), name, useTime, currentLab);
-								log("Logged " + id + " into ");
+            case 1: // sign in user
+								signInUser(currentLab, list, printSignInPrompt(currentLab), map);
+								log("Logged " + id + " into " UNIVERSITYNAMES[currentLab - 1]);
                 break;
             case 2: // sign out user
-                std::cout << "Sign Out" << std::endl;
+                switch(printSignOutMenu()) {
+                  case 1:
+                    signOutUser(printSignOutPromptId(), list, map);
+                    break;
+                  case 2:
+                    signOutUser(currentLab, printSignOutPromptLab(), list);
+                    break;
+                }
                 break;
             case 3: // print labs
+                std::cout << "Current Lab: " << UNIVERSITYNAMES[currentLab - 1] << std::endl;
                 list[currentLab - 1].showList();
                 break;
             case 4: // search user
-                std::cout << "Search" << std::endl;
+                int idToSearch = printSearchPrompt();
+                if(search(idToSearch, map).getId() == -1) { // the user is not found
+                  std::cout << "That user is not logged in" << std::endl;
+                } else {
+                  std::cout << "User Found:" << std::endl;
+                  std::cout << search(idToSearch, map) << std::endl;
+                }
                 break;
             case 5: // recover user
                 std::cout << "Recover" << std::endl;
+
                 break;
-            case 6: // quit
+            case 6: // change lab
                 changeLab(currentLab);
                 break;
-						case 7:
+						case 7: // quit
 								std::cout << "Quitting" << std::endl;
-            default: 
+            default:
                 std::cout << "That is not a valid menu option" << std::endl;
         }
         return menuChoice;
     }
+}
+
+bool isFull(int labChoice, List &list) {
+  return list.size() == LABSIZES[labChoice - 1];
 }
 
 void recoverUser(int userId, std::map<int, Station> &map) {
@@ -208,13 +286,9 @@ void signOutUser(int userId, List (&list)[NUMLABS], std::map<int, Station> &map)
 }
 
 void signOutUser(int labChoice, int stationChoice, List (&list)[NUMLABS]) {
-    std::cout << "Log Out User 2" << std::endl; 
+    std::cout << "Log Out User 2" << std::endl;
 }
 Station search(int userId, std::map<int, Station> &map) {
     std::cout << "Search User" << std::endl;
-    return Station(999, " ", 999, 999);
-}
-
-bool isFull(int labChoice, List &list) {
-    return list.loop(LABSIZES[labChoice - 1] - 1).getId() != -999;
+    return Station(-1, " ", -1, -1);
 }
