@@ -64,10 +64,10 @@ void List::delNode(int index) { // really only calling this when we deallocate a
 			delete currentNode;
 			currentNode = nullptr;
 		} else {
-			std::cout << "Index too big" << std::endl;
+			std::cout << "Index too big." << std::endl;
 		}
 	} else {
-		std::cout << "Index too small" << std::endl;
+		std::cout << "Index too small." << std::endl;
 	}
 }
 
