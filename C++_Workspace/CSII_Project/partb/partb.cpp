@@ -20,12 +20,15 @@ int printSignOutPromptId();
 int printSignOutPromptLab();
 int printSignOutMenu();
 int printSearchPrompt();
+int printRecoverMenuId();
+int printRecoverMenuLab();
 
 
 // helper function headers
 void log(std::string message);
 void initialze(List (&list)[NUMLABS]);
 int generateId();
+Station searchLog();
 int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map);
 void recoverUser(int userId, std::map<int, Station> &map);
 void signInUser(int labChoice, List (&list)[NUMLABS], Station &newUser, std::map<int, Station> &map);
@@ -51,7 +54,7 @@ int main() {
 
     do {
         responseCode = runProgram(labs, users);
-    } while(responseCode != 6);
+    } while(responseCode != 7);
     return 0;
 }
 
@@ -129,9 +132,14 @@ int printSignOutPromptId() {
   return id;
 }
 
-void printSignOutPromptLab(int currentLab) {
+void printSignOutPromptLab(int currentLab, Lab &lab {
   std::cout << "Signing out from " << UNIVERSITYNAMES[currentLab - 1] << std::endl;
+  lab.showList();
+  std::cout << "Please choose which station to sign the person out of: ";
+  int stationToDelete;
+  while(std::cin.fail() || ) {
 
+  }
 }
 
 int printSearchPrompt() {
@@ -171,6 +179,30 @@ Station printSignInPrompt(int currentLab) {
   } while(std::cin.fail() || useTime < 15 && useTime > 60);
   int id = generateId();
   return Station(generateId(), name, useTime, currentLab);
+}
+
+int printRecoverMenuId() {
+  std::cout << "Attempting to restore user. Please enter the id of the user you want to restore: ";
+  int idToRestore;
+  std::cin >> idToRestore;
+  while(std::cin.fail()) {
+    std::cout << "Please enter a number and try again: ";
+    std::cin >> idToSearch;
+  }
+  return idToRestore;
+}
+
+int printRecoverMenuLab(Station foundUser, List (&list)[NUMLABS]) {
+  std::cout << "User found in the logs: "
+  std::cout << foundUser << std::endl;
+  std::cout << std::endl;
+  std::cout << "Which lab would you like to recover him to: ";
+  int recoverLab;
+  std::cin >> recoverLab;
+  while(std::cin.fail() || recoverLab > NUMLABS || recoverLab < 1) {
+    std::cout << "Please choose a valid option: ";
+    std::cin >> recoverLab;
+  }
 }
 
 // helper functions
@@ -214,6 +246,50 @@ void changeLab(int& lab) {
 	lab = newLab;
 }
 
+Station searchLog(int idToSearch) {
+  // these are what we need to recover from the file
+  std::string name = "";
+  int useTime = id = -1;
+
+  // open the file
+  time_t t = time(0);   // get time now
+ struct tm * now = localtime( & t );
+ char buffer [20];
+ strftime (buffer,20,"%Y-%m-%d.",now);
+ std::string str(buffer);
+
+ std::ofstream myfile;
+ myfile.open (str + "log", std::ios_base::ate);
+ if(myfile.is_open()) {
+     std::cout<<"Success"<<std::endl;
+ } else {
+     std::cout << "Failed to open file" << std::endl;
+ }
+
+ // now search the file
+ bool found = false;
+ while(inFile.good()) {
+   if(!found) { // if not found, keep searching
+     std::getline(inFile,line);
+     pos=line.find(std::string(idToSearch));
+     if(pos!=string::npos) {
+       found = true; // we found the person, move to load up person into a new Station object based on logging when the user signs out
+     }
+   } else {
+     std::getline(inFile,line);
+    // go through and check which things to fill for each part because each part is going to require different parsing
+    if(name == "") { //start with the name
+      name = line.substr(6);
+    } else if(useTime == -1) {
+      useTime = std::stoi(line.substr(10));
+    } else if(id == -1) {
+      id = idToSearch;
+    }
+   }
+  }
+  return Station(id, name, useTime, -1);
+}
+
 int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map, &currentLab) {
     int menuChoice;
 		std::cout << "Current University: " << UNIVERSITYNAMES[currentLab - 1] << std::endl;
@@ -223,7 +299,7 @@ int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map, &currentLab) 
 
     if(std::cin.fail()) {
         std::cout << "That is not a choice. Please enter an integer between 1 and 6." << std::endl;
-        return 7; // return a value to make the menu repeat
+        return 8; // return a value to make the menu repeat
     } else {
         switch(menuChoice) {
             case 1: // sign in user
@@ -233,7 +309,7 @@ int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map, &currentLab) 
             case 2: // sign out user
                 switch(printSignOutMenu()) {
                   case 1:
-                    signOutUser(printSignOutPromptId(), list, map);
+                    signOutUser(printSignOutPromptId(), list[currentLab - 1], map);
                     break;
                   case 2:
                     signOutUser(currentLab, printSignOutPromptLab(), list);
@@ -254,8 +330,7 @@ int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map, &currentLab) 
                 }
                 break;
             case 5: // recover user
-                std::cout << "Recover" << std::endl;
-
+                recoverUser(printRecoverMenuId(), list, map);
                 break;
             case 6: // change lab
                 changeLab(currentLab);
@@ -273,20 +348,40 @@ bool isFull(int labChoice, List &list) {
   return list.size() == LABSIZES[labChoice - 1];
 }
 
-void recoverUser(int userId, std::map<int, Station> &map) {
+void recoverUser(int userId, List (&labs)[NUMLABS], std::map<int, Station> &map) {
     std::cout << "Recover User" << std::endl;
+    Station foundStation = searchLog();
+    if(foundStation.getId() == -1) { //if the user was not found
+      std::cout << "The user was not found in these logs. Please make sure the user was not signed in a previous log or that the id was typed correctly." << std::endl;
+    } else {
+      int labToSignIn = printRecoverMenuLab(foundStation);
+      signInUser(labToSignIn, labs, foundStation, map);
+    }
 }
 
 void signInUser(int labChoice, List (&list)[NUMLABS], Station &newUser, std::map<int, Station> &map) {
-    std::cout << "Log In User" << std::endl;
+    list[labChoice - 1].appNode(newUser); // add the user in
+    map.emplace(newUser.getId(), newUser);
+    if(newUser.getLabNumber() == -1) { // if this user is being signed in through recovery
+      map[newUser.getId()].setLabNumber(labChoice); // update the lab
+    }
 }
 
-void signOutUser(int userId, List (&list)[NUMLABS], std::map<int, Station> &map) {
+void signOutUser(int userId, List &list, std::map<int, Station> &map) {
     std::cout << "Log Out User" << std::endl;
+    std::map<int, Station>::iterator person = map.find(userId); // find the user in the map
+    if(person != map.end()) {
+      // delete the map entry
+      map.erase(userId);
+      // delete the user from the list
+      list.
+    } else {
+      std::cout << "That person is not signed in. Please make sure that the id was typed correctly." << std::endl;
+    }
 }
 
 void signOutUser(int labChoice, int stationChoice, List (&list)[NUMLABS]) {
-    std::cout << "Log Out User 2" << std::endl;
+
 }
 Station search(int userId, std::map<int, Station> &map) {
     std::cout << "Search User" << std::endl;

@@ -127,3 +127,15 @@ void List::delNode(int index) { // really only calling this when we deallocate a
 			}
 			return counter;
 	}
+
+	int List::find(int id) const {
+		Node* currentNode = head;
+		int counter = 0;
+		while(currentNode->next) {
+			if(currentNode->data.getId() == id) {
+				return counter;
+			}
+			++counter;
+		}
+		return -1;
+	}
