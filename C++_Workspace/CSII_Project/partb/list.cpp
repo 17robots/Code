@@ -6,7 +6,7 @@ List::List() {
 	last = nullptr;
 }
 
-List::~List() {	
+List::~List() {
 	if(head != nullptr) {
 		if(head->next != nullptr) {
 				while(head != nullptr) {
@@ -24,7 +24,7 @@ List::~List() {
 }
 
 void List::appNode(Station station) {
-	Node* newNode;  
+	Node* newNode;
 	Node* currentNode;
 	Node* previousNode;
 	newNode = new Node;
@@ -38,14 +38,37 @@ void List::appNode(Station station) {
 			if(currentNode)
 				currentNode = currentNode->next;
 		}
-		previousNode->next = newNode; 
+		previousNode->next = newNode;
 	} else {
 		head = newNode;
 	}
 }
 
-void List::delNode() { // really only calling this when we deallocate all of the lists
-	
+void List::delNode(int index) { // really only calling this when we deallocate all of the lists
+	Node* currentNode = head;
+	Node* previousNode = nullptr;
+	int counter = 0;
+	if(index >= 0) {
+		for(int i = 0; i < index; ++i) {
+			if(currentNode->next) {
+				previousNode = currentNode;
+				currentNode = currentNode->next;
+				counter++;
+			} else {
+				std::cout << "Didn't make it here" << std::endl;
+			}
+		}
+		if(counter == index) {
+			// delete the data
+			previousNode->next = currentNode->next;
+			delete currentNode;
+			currentNode = nullptr;
+		} else {
+			std::cout << "Index too big" << std::endl;
+		}
+	} else {
+		std::cout << "Index too small" << std::endl;
+	}
 }
 
 	void List::showList() const {
@@ -69,7 +92,7 @@ void List::delNode() { // really only calling this when we deallocate all of the
 		Node* currentNode = head;
 		Node* previousNode = nullptr;
 		int counter = 0;
-		if(index > 0) {
+		if(index >= 0) {
 			for(int i = 0; i < index; ++i) {
 				if(currentNode) {
 					std::cout << "Made it here" << std::endl;
