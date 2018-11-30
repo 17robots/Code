@@ -367,21 +367,26 @@ void signInUser(int labChoice, List (&list)[NUMLABS], Station &newUser, std::map
     }
 }
 
-void signOutUser(int userId, List &list, std::map<int, Station> &map) {
+void signOutUser(int userId, List (&list)[NUMLABS], std::map<int, Station> &map) {
     std::cout << "Log Out User" << std::endl;
     std::map<int, Station>::iterator person = map.find(userId); // find the user in the map
     if(person != map.end()) {
       // delete the map entry
       map.erase(userId);
       // delete the user from the list
-      list.
+      for(int i = 0; i < NUMLABS; ++i) {
+        int result = list[i].find(userId);
+        if(result != -1) {
+          list[i].delNode(result);
+        }
+      }
     } else {
       std::cout << "That person is not signed in. Please make sure that the id was typed correctly." << std::endl;
     }
 }
 
 void signOutUser(int labChoice, int stationChoice, List (&list)[NUMLABS]) {
-
+  
 }
 Station search(int userId, std::map<int, Station> &map) {
     std::cout << "Search User" << std::endl;
