@@ -365,6 +365,9 @@ void signInUser(int labChoice, List (&list)[NUMLABS], Station &newUser, std::map
     if(newUser.getLabNumber() == -1) { // if this user is being signed in through recovery
       map[newUser.getId()].setLabNumber(labChoice); // update the lab
     }
+    log("Signed in " + std::string(newUser.getId()));
+    log("Name: " + newUser.getName());
+    log("Use Time: " + std::string(newUser.getUseTime()));
 }
 
 void signOutUser(int userId, List &list, std::map<int, Station> &map) {
@@ -381,7 +384,7 @@ void signOutUser(int userId, List &list, std::map<int, Station> &map) {
 }
 
 void signOutUser(int labChoice, int stationChoice, List (&list)[NUMLABS]) {
-
+  list[labChoice - 1].delNode(stationChoice - 1);
 }
 Station search(int userId, std::map<int, Station> &map) {
     std::cout << "Search User" << std::endl;
