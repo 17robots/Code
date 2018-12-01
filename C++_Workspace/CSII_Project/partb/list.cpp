@@ -75,10 +75,13 @@ void List::delNode(int index) { // really only calling this when we deallocate a
 			std::cout << "There is no data here" << std::endl;
 		} else {
 			if(head->next) {
+				int counter = 1;
 				currentNode = head;
 				while(currentNode) {
+					std::cout << counter << ". ";
 					std::cout << currentNode->data;
 					currentNode = currentNode->next;
+					++counter;
 				}
 			} else {
 				std::cout << "There is no data here" << std::endl;
