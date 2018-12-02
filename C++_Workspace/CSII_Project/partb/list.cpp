@@ -2,8 +2,8 @@
 #include <iostream>
 
 List::List() {
-	head = nullptr;
-	last = nullptr;
+	head = new Node;
+	head->next = nullptr;
 }
 
 List::~List() {
@@ -23,42 +23,68 @@ List::~List() {
 	}
 }
 
-void List::appNode(Station station) {
-	Node* newNode;
-	Node* currentNode;
-	Node* previousNode;
-	newNode = new Node;
-	newNode->data = station;
-	newNode->next = nullptr;
+void List::appNode(Station &station) {
+	// Node* newNode;
+	// Node* currentNode;
+	// Node* previousNode;
+	// newNode = new Node;
+	// newNode->data = station;
+	// newNode->next = nullptr;
 
-	if(head) {
-		currentNode = head;
-		while(currentNode) {
-			previousNode = currentNode;
-			if(currentNode)
-				currentNode = currentNode->next;
-		}
-		previousNode->next = newNode;
-	} else {
-		head = newNode;
-	}
+	// if(head) {
+	// 	currentNode = head;
+	// 	int counter = 0;
+	// 	while(currentNode) {
+	// 		if(currentNode->next == nullptr) {
+	// 			std::cout << "null" << std::endl;
+	// 		} else {
+	// 			std::cout << currentNode->next << std::endl;
+	// 		}
+	// 		previousNode = currentNode;
+	// 		currentNode = currentNode->next;
+	// 	}
+	// 	previousNode->next = newNode;
+	// } else {
+	// 	head = newNode;
+	// }
+	Node* temp = new Node;
+    temp->data = station;
+    std::cout << "temp data: " << temp->data << std::endl;
+    temp->next = nullptr;
+
+    if(!head->next) { // empty list becomes the new node
+    	
+        head->next = temp;
+        return;
+    } else { // find last and link the new node
+        Node* last = head;
+        while(last->next) last=last->next;
+        last->next = temp;
+        std::cout << last->next << std::endl;
+    }
 }
 
-void List::delNode(int index) { // really only calling this when we deallocate all of the lists
+void List::delNode(int index) {
 	Node* currentNode = head;
 	Node* previousNode = nullptr;
 	int counter = 0;
 	if(index >= 0) {
 		for(int i = 0; i < index; ++i) {
-			if(currentNode->next) {
+			if(currentNode) {
 				previousNode = currentNode;
 				currentNode = currentNode->next;
 				counter++;
 			}
 		}
+		std::cout << "Counter: " << counter << std::endl;
+		std::cout << "Index: " << index << std::endl;
 		if(counter == index) {
 			// delete the data
-			previousNode->next = currentNode->next;
+			if(currentNode->next != nullptr) {
+				previousNode->next = currentNode->next;
+			} else {
+				previousNode->next = nullptr;
+			}
 			delete currentNode;
 			currentNode = nullptr;
 		} else {
@@ -76,7 +102,7 @@ void List::delNode(int index) { // really only calling this when we deallocate a
 		} else {
 			if(head->next) {
 				int counter = 1;
-				currentNode = head;
+				currentNode = head->next;
 				while(currentNode) {
 					std::cout << counter << ". ";
 					std::cout << currentNode->data;
@@ -84,7 +110,7 @@ void List::delNode(int index) { // really only calling this when we deallocate a
 					++counter;
 				}
 			} else {
-				std::cout << "There is no data here" << std::endl;
+				std::cout << head->data;
 			}
 		}
 	}
@@ -108,37 +134,44 @@ void List::delNode(int index) { // really only calling this when we deallocate a
 			if(counter == index) {
 				return previousNode->data;
 			} else {
-				return Station(-1, "", -1, -1);
+				return Station(-1, "", -1);
 			}
 		} else {
-			return Station(-1, "", -1, -1);
+			return Station(-1, "", -1);
 		}
 	}
 
-	int List::size() {
+	int List::size() const {
 		Node* currentNode = head;
 		Node* previousNode = nullptr;
 		int counter = 0;
-		if(index >= 0) {
-			for(int i = 0; i < index; ++i) {
-				if(currentNode) {
-					std::cout << "Made it here" << std::endl;
-					previousNode = currentNode;
-					currentNode = currentNode->next;
-					counter++;
-				}
+		while(currentNode) {
+			if(currentNode) {
+				// std::cout << "Made it here" << std::endl;
+				previousNode = currentNode;
+				currentNode = currentNode->next;
+				counter++;
 			}
-			return counter;
+		}
+		return counter;
 	}
 
 	int List::find(int id) const {
-		Node* currentNode = head;
-		int counter = 0;
-		while(currentNode->next) {
-			if(currentNode->data.getId() == id) {
-				return counter;
+		Node * currentNode;
+		if(!head) {
+			std::cout << "There is no data here" << std::endl;
+		} else {
+			if(head->next) {
+				int counter = 1;
+				currentNode = head->next;
+				while(currentNode) {
+					if(currentNode->data.getId() == id) {
+						return counter;
+					}
+					currentNode = currentNode->next;
+					++counter;
+				}
 			}
-			++counter;
 		}
 		return -1;
 	}
