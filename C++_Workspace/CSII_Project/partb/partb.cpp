@@ -14,29 +14,88 @@ const int LABSIZES[NUMLABS] = {19, 15, 24, 33, 61, 17, 55, 37};
 const std::string UNIVERSITYNAMES[NUMLABS] = {"The University of Michigan", "The University of Pittsburgh", "Stanford University", "Arizona State University", "North Texas State University", "The University of Alabama, Huntsville", "Princeton University", "Duquesne University"};
 
 // printing function headers
+
+//pre: none
+//post: prints the basic menu
 void printMenu();
+
+//pre: none
+//post:prints the labs at the beginning
 void printLabs();
+
+//pre:none
+//post: returns the station that will be appended to a lab
 Station printSignInPrompt();
+
+//pre: none
+//post: returns the id of the person to be signed out
 int printSignOutPromptId();
+
+//pre: list and currentLab are properly initialized
+//post: returns station that the user chose to sign out the user on
 int printSignOutPromptLab(List (&list)[NUMLABS], int& currentLab);
+
+//pre: none
+//post: returns the coice for either sign out by id or station
 int printSignOutMenu();
+
+//pre: none
+//post: returns the id of the user to search
 int printSearchPrompt();
+
+//pre: none
+//post: returns the id of the user to restore
 int printRecoverMenuId();
+
+//pre: foundUser and list are properly initialized 
+//post: returns the lab choice that the user is to be recovered into 
 int printRecoverMenuLab(Station foundUser, List (&list)[NUMLABS]);
 
 
 // helper function headers
+
+//pre: message is properly initialized
+//post: puts out a message to a txt file for the given day
 void log(std::string message);
+
+//pre: list and currentLab are properly initialized
+//post: sets the lab that the user is currently working with and does basic printing 
 void initialze(List (&list)[NUMLABS], int& currentLab);
+
+//pre: none
+//post: returns a random number between 00001 and 99999 for the id of the user
 int generateId();
-Station searchLog();
+
+//pre: list, map, and currentLab are all properly initialized
+//post: returns a code to main that allows the program to keep going or terminate
 int runProgram(List (&list)[NUMLABS], std::map<int, Station> &map, int &currentLab);
+
+//pre: idToSearch is inisialized properly
+//post: returns a Station that is either pulled from the logs or default for recovering based on the given id
 Station searchLog(int idToSearch);
+
+//pre: userId, labs, and map are properly initialized
+//post: puts the found user from the logs in the chosen lab
 void recoverUser(int userId, List (&labs)[NUMLABS], std::map<int, Station> &map);
+
+//pre: labChoice, list, newUser, and map are all properly initialized
+//post: signs in a user into the chosen lab
 void signInUser(int labChoice, List (&list)[NUMLABS], Station &newUser, std::map<int, Station> &map);
+
+//pre: userId, list and map are all properly initizlized
+//post: signs out a user based on id from all labs
 void signOutUser(int userId, List (&list)[NUMLABS], std::map<int, Station> &map);
+
+//pre: labChoice, stationChoice, list and map are all properly initialized
+//post: signs out a user based on the lab and station specified
 void signOutUser(int labChoice, int stationChoice, List (&list)[NUMLABS], std::map<int, Station> &map);
+
+//pre: userId and map are properly initialized
+//post: returns a station found in map or a default one
 Station search(int userId, std::map<int, Station> &map);
+
+//pre: labChoice and list are properly initialized
+//post: returns whether or not the lab is full
 bool isFull(int labChoice, List &list);
 
 int main() {
@@ -391,24 +450,21 @@ bool isFull(int labChoice, List &list) {
 
 void recoverUser(int userId, List (&labs)[NUMLABS], std::map<int, Station> &map) {
     Station foundStation = searchLog(userId);
-    std::cout << "FoundStation: " << foundStation << std::endl;
+    std::cout << "FoundStation: " << &foundStation << std::endl;
     if(foundStation.getId() == -1) { //if the user was not found
       std::cout << "The user was not found in these logs. Please make sure the user was not signed in a previous log or that the id was typed correctly." << std::endl;
     } else {
       int labToSignIn = printRecoverMenuLab(foundStation, labs);
-      std::cout << labs << std::endl;
-      labs[labToSignIn - 1].appNode(foundStation); // add the user in
-      std::cout << "Appended" << std::endl;
-      map.emplace(foundStation.getId(), foundStation);
-      std::cout << "Placing In Map" << std::endl;
-      log("Signed in " + std::to_string(foundStation.getId()));
-      log("Name: " + foundStation.getName());
-      log("Use Time: " + std::to_string(foundStation.getUseTime()));
+      signInUser(labToSignIn - 1, labs, foundStation, map);
     }
 }
 
 void signInUser(int labChoice, List (&list)[NUMLABS], Station &newUser, std::map<int, Station> &map) {
     std::cout << list << std::endl;
+    if(isFull(labChoice, list[labChoice - 1])) {
+      std::cout << "The lab is full, please switch to a different one and try again" << std::endl;
+      return;
+    }
     list[labChoice - 1].appNode(newUser); // add the user in
     std::cout << "Appended" << std::endl;
     map.emplace(newUser.getId(), newUser);
@@ -423,15 +479,13 @@ void signOutUser(int userId, List (&list)[NUMLABS], std::map<int, Station> &map)
     if(person != map.end()) {
       // delete the map entry
       map.erase(userId);
-      std::cout << "Deleted from the map" << std::endl;
+      
       // delete the user from the list
       for(int i = 0; i < NUMLABS; ++i) {
         int result = list[i].find(userId);
-        std::cout << "Found result: " << result << std::endl;
         if(result != -1) {
+          log("Signed out " + list[i].loop(list[i].find(userId)).getName());
           list[i].delNode(result);
-        } else {
-          std::cout << "That person was not found" << std::endl;
         }
       }
     } else {
@@ -440,8 +494,9 @@ void signOutUser(int userId, List (&list)[NUMLABS], std::map<int, Station> &map)
 }
 
 void signOutUser(int labChoice, int stationChoice, List (&list)[NUMLABS], std::map<int, Station> &map) {
+  log("Signed out " + list[labChoice - 1].loop(stationChoice + 1).getName());
   list[labChoice - 1].delNode(stationChoice);
-  map.erase(list[labChoice - 1].loop(stationChoice).getId());
+  map.erase(list[labChoice - 1].loop(stationChoice + 1).getId());
 }
 
 Station search(int userId, std::map<int, Station> &map) {
