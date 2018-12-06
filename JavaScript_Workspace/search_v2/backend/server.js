@@ -34,15 +34,9 @@ function textSearch(searchString) {
     var results = []
     Object.keys(nodes).forEach(function(key) {
         Object.keys(nodes[key]).forEach(function(obj) {
-            fileReader.readFile(obj.link, 'utf8', (err, data) => {
-                if(err) {
-                    console.log(err)
-                }
-                if(comb(data, searchString) > 0) {
-                    results.push(obj)
-                }  
-            })
-            console.log("Hello World")
+            if(comb(spider(obj.link, searchString) > 0)) {
+                results.push(obj)
+            }
         })
     });
     
@@ -57,3 +51,16 @@ const app = express()
 const API_PORT = 3001
 const router = express.Router()
 
+app.get("/search", (req, res) => {
+    let searchString = req.param('searchstring')
+    let view = rew.param('type')
+    if(type === "text") {
+        res.send(textSearch(searchString))
+    } else {
+        res.send(picSearch(searchString))
+    }
+})
+
+app.use("/api", router)
+
+app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`))

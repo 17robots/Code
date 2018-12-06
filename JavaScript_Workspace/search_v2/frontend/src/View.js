@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import styles from './index.css'
 import Picture_View from '../Picture_View'
 import Text_View from '../Text_View'
-import Indexer from '../../indexer.js'
 
 
 export default class View extends Component {
@@ -17,9 +16,9 @@ export default class View extends Component {
     render() {
         let View
         if(this.state.currentView.toLowerCase() == "text") {
-            View = <Text_View results={Indexer.textSearch(this.state.searchString)} />
+            View = <Text_View results={} />
         } else {
-            View = <Picture_View results={Indexer.picSearch(this.state.searchString)} />
+            View = <Picture_View results={} />
         }
         
         return (
