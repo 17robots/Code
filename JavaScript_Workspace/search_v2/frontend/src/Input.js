@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import styles from './index.css'
 
 
 export default class Input extends Component {
@@ -12,7 +11,7 @@ export default class Input extends Component {
     
     render() {
         return (
-            <div className={styles.input}>
+            <div>
                 <form onSubmit={this.searchBar.bind(this)}>
                     <input type="text" autoComplete="off" id="searchBar" tabIndex="1" autoCapitalize="off" autoCorrect="off" />
                     <input type="submit" tabIndex="2" value="S" />

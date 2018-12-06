@@ -1,6 +1,5 @@
 // text result
 import React, { Component } from 'react'
-import styles from './index.css'
 
 export default class Text_Result extends Component {
     constructor(props) {
@@ -14,7 +13,7 @@ export default class Text_Result extends Component {
     
     render() {
         return (
-            <div className={styles.text_result}>
+            <div>
                 <a href={this.state.link}>{this.state.name}    {this.state.number}</a>
             </div>
         )

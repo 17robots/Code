@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import Input from './Input.js'
+import View from './View.js'
 
 class App extends Component {
   state = {
@@ -14,8 +15,8 @@ class App extends Component {
     .then(res => this.setState({ searchData: res.data, searched: true }))
   }
 
-  switchView = view => {
-
+  switchView = newView => {
+    this.setState({ view: newView})
   }
 
   render() {

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import styles from './index.css'
-import Picture_View from '../Picture_View'
-import Text_View from '../Text_View'
+import Picture_View from './Picture_View.js'
+import Text_View from './Text_View.js'
 
 
-export default class View extends Component {
+class View extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -39,6 +38,7 @@ export default class View extends Component {
     }
     
     switchView(value) {
+        this.props.view(value)
         this.setState({currentView: value})
     }
     
@@ -46,3 +46,5 @@ export default class View extends Component {
         this.setState({searchString: newSearch})
     }
 }
+
+export default View

@@ -1,9 +1,8 @@
-// textt view
+// text view
 import React, { Component } from 'react'
-import styles from './index.css'
-import Text_Result from '../Text_Result'
+import Text_Result from './Text_Result.js'
 
-export default class Text_View extends Component {
+class Text_View extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -14,7 +13,7 @@ export default class Text_View extends Component {
     render() {
         this.state.resultList.map(function(obj) {
             return (
-                <div className={styles.text_view}>
+                <div>
                     <Text_Result name={obj.name} link={obj.link} number={obj.number} />
                     <hr />
                 </div>
@@ -22,3 +21,5 @@ export default class Text_View extends Component {
         })
     }
 }
+
+export default Text_View
