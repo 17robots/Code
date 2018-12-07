@@ -29,7 +29,7 @@ class App extends Component {
     } else {
         return (
             <div>
-                <View searchString={this.state.results} view={this.switchView.bind(this)} />
+                <View searchDatas={this.state.results} view={this.switchView.bind(this)} />
             </div>
         )
     }

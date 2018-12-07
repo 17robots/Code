@@ -8,29 +8,29 @@ class View extends Component {
         super(props)
         this.state = {
             currentView: "text",
-            searchString: this.props.searchString
+            searchString: this.props.searchData
         }
     }
     
     render() {
         let View
         if(this.state.currentView.toLowerCase() == "text") {
-            View = <Text_View results={} />
+            View = <Text_View results={this.props.searchString} />
         } else {
-            View = <Picture_View results={} />
+            View = <Picture_View results={this.state.searchString} />
         }
         
         return (
-            <div className={styles.view}>
-                <div className={styles.heading}>
+            <div>
+                <div>
                     <input type="text" autoComplete="off" tabIndex="1" autoCapitalize="off" defaultValue={this.state.searchString} autoCorrect="off" />
                     <input type="submit" tabindex="2" value="S" />
-                    <div className={styles.switchView}>
+                    <div>
                         <h3 onClick={this.switchView("text")}>Text</h3>
                         <h3 onClick={this.switchView("picture")}>Images</h3>
                     </div>
                 </div>
-                <div className={styles.results}>
+                <div>
                     {View}
                 </div>
             </div>
