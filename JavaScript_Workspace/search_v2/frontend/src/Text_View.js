@@ -11,14 +11,16 @@ class Text_View extends Component {
     }
     
     render() {
-        this.state.resultList.map(function(obj) {
-            return (
-                <div>
-                    <Text_Result name={obj.name} link={obj.link} number={obj.number} />
-                    <hr />
-                </div>
-            )
-        })
+        return (
+            this.state.resultList.map(function(obj) {
+                return (
+                    <div>
+                        <Text_Result name={obj.name} link={obj.link} number={obj.number} />
+                        <hr />
+                    </div>
+                )
+            })
+        )
     }
 }
 

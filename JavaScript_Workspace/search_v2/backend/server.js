@@ -36,6 +36,7 @@ function textSearch(searchString) {
         Object.keys(nodes[key]).forEach(function(obj) {
             if(comb(spider(obj.link, searchString) > 0)) {
                 results.push(obj)
+                console.log(obj)
             }
         })
     });
@@ -53,11 +54,13 @@ const router = express.Router()
 
 app.get("/search", (req, res) => {
     let searchString = req.param('searchstring')
-    let view = rew.param('type')
+    let view = req.param('type')
+
+    console.log("search string: " + searchString)
     if(type === "text") {
-        res.send(textSearch(searchString))
+        return res.json({success: true, data: textSearch(searchString)})
     } else {
-        res.send(picSearch(searchString))
+        return res.json({success: true, data: picSearch(searchString)})
     }
 })
 
