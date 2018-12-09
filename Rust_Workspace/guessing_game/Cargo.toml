@@ -1,6 +1,7 @@
 [package]
-name = "hello_cargo"
+name = "guessing_game"
 version = "0.1.0"
 authors = ["17robots <mdray@ameritech.net>"]
 
 [dependencies]
+rand = "0.6.1"
