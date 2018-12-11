@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Picture_View from './Picture_View.js'
-import Text_View from './Text_View.js'
+import Picture_View from './PictureView.js'
+import Text_View from './TextView.js'
 
 
 class View extends Component {

@@ -1,7 +1,7 @@
 // text result
 import React, { Component } from 'react'
 
-export default class Text_Result extends Component {
+export default class TextResult extends Component {
     constructor(props) {
         super(props)
         this.state = {

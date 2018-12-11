@@ -10,9 +10,10 @@ class App extends Component {
   }
 
   search = search_data => {
-    fetch(`/api/search?searchstring=${search_data}&view=${this.state.view}`)
-    .then(data => data.json())
-    .then(res => this.setState({ searchData: res.data, searched: true }))
+    // fetch(`/api/search?searchstring=${search_data}&view=${this.state.view}`)
+    fetch('/search')
+    // .then(res => this.setState({ searchData: res.data, searched: true }))
+    .then(res => alert(res.data))
   }
 
   switchView = newView => {

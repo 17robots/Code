@@ -52,18 +52,19 @@ const app = express()
 const API_PORT = 3001
 const router = express.Router()
 
-app.get("/search", (req, res) => {
-    let searchString = req.param('searchstring')
-    let view = req.param('type')
+app.get('/search', (req, res) => {
+    let searchString = req.query.searchstring
+    let view = req.query.view
 
-    console.log("search string: " + searchString)
-    if(type === "text") {
-        return res.json({success: true, data: textSearch(searchString)})
+    alert("search string: " + searchString)
+    if(view === "text") {
+        // res.json({success: true, data: textSearch(searchString)})
+        res.json({ success: true, data: "Hello World"})
     } else {
-        return res.json({success: true, data: picSearch(searchString)})
+        res.json({success: true, data: picSearch(searchString)})
     }
 })
 
-app.use("/api", router)
+app.use(router)
 
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`))
