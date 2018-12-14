@@ -50,22 +50,10 @@ function picSearch(searchString) {
 
 const app = express()
 const API_PORT = 3001
-const router = express.Router()
 
-app.get('/search', (req, res) => {
-    let searchString = req.query.searchstring
-    let view = req.query.view
-
-    alert("search string: " + searchString)
-    if(view === "text") {
-        // res.json({success: true, data: textSearch(searchString)})
-        // return res.json({ data: "Hello World"})
-        res.send("Hello World")
-    } else {
-        // return res.json({ data: "Other Hello World"})
-        res.send("Hello World")
-    }
-})
+app.get('/search', function (req, res) {
+    res.send('hello world')
+  })
 
 app.use(router)
 

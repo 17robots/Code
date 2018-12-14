@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import Input from './Input.js'
 import View from './View.js'
+
 
 class App extends Component {
   state = {
@@ -10,11 +12,7 @@ class App extends Component {
   }
 
   search = search_data => {
-    // fetch(`/api/search?searchstring=${search_data}&view=${this.state.view}`)
-    fetch(`/search`)
-    // .then(res => res.json())
-    // .then(res => this.setState({ searchData: res.data, searched: true }))
-    .then(data => console.log(data))
+    axios.get('search').then()
   }
 
   switchView = newView => {
