@@ -59,9 +59,11 @@ app.get('/search', (req, res) => {
     alert("search string: " + searchString)
     if(view === "text") {
         // res.json({success: true, data: textSearch(searchString)})
-        res.json({ success: true, data: "Hello World"})
+        // return res.json({ data: "Hello World"})
+        res.send("Hello World")
     } else {
-        res.json({success: true, data: picSearch(searchString)})
+        // return res.json({ data: "Other Hello World"})
+        res.send("Hello World")
     }
 })
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Picture_View from './PictureView.js'
-import Text_View from './TextView.js'
+import PictureView from './PictureView.js'
+import TextView from './TextView.js'
 
 
 class View extends Component {
@@ -14,10 +14,10 @@ class View extends Component {
     
     render() {
         let View
-        if(this.state.currentView.toLowerCase() == "text") {
-            View = <Text_View results={this.props.searchString} />
+        if(this.state.currentView.toLowerCase() === "text") {
+            View = <TextView results={this.props.searchString} />
         } else {
-            View = <Picture_View results={this.state.searchString} />
+            View = <PictureView results={this.state.searchString} />
         }
         
         return (
