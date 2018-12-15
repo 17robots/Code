@@ -12,7 +12,7 @@ class App extends Component {
   }
 
   search = search_data => {
-    axios.get('search').then()
+    axios.get('/api/search').then(result => console.log(result.data))
   }
 
   switchView = newView => {
@@ -29,7 +29,7 @@ class App extends Component {
     } else {
         return (
             <div>
-                <View searchDatas={this.state.results} view={this.switchView.bind(this)} />
+                <View searchData={this.state.results} view={this.switchView.bind(this)} />
             </div>
         )
     }

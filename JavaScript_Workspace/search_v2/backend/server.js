@@ -51,10 +51,8 @@ function picSearch(searchString) {
 const app = express()
 const API_PORT = 3001
 
-app.get('/search', function (req, res) {
+app.get('/api/search', function (req, res) {
     res.send('hello world')
   })
-
-app.use(router)
 
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`))
