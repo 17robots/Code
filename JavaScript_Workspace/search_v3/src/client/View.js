@@ -1,4 +1,5 @@
 /* eslint linebreak-style: ["error", "windows"] */
+
 import React, { Component } from 'react';
 import PictureView from './PictureView';
 import TextView from './TextView';
@@ -13,9 +14,8 @@ class View extends Component {
     }
   }
 
-  switchView(value) {
-    const { view } = this.props;
-    view(value);
+  changeView(value) {
+    this.props.switchView(value)
     this.setState({ currentView: value });
   }
 
@@ -26,31 +26,31 @@ class View extends Component {
   render() {
     let returnedView = null;
     if (this.state.currentView.toLowerCase() === 'text') {
-      const searchString = this.props;
-      returnedView = <TextView results={this.props.searchString} />;
+      returnedView = <TextView results={this.state.searchString} />;
     } else {
       returnedView = <PictureView results={this.state.searchString} />;
     }
         
-    return (
-      <div>
-        <div>
-          <input type="text" autoComplete="off" autoCapitalize="off" defaultValue={this.state.searchString} autoCorrect="off" />
-          <input type="submit" value="S" />
-          <div>
-            <button type="button" onClick={this.switchView('text')}>
-              <h3>Text</h3>
-            </button>
-            <button type="button" onClick={this.switchView('picture')}>
-              <h3>Images</h3>
-            </button>
-          </div>
-        </div>
-        <div>
-          { returnedView }
-        </div>
-      </div>
-    );
+    // return (
+    //   <div>
+    //     <div>
+    //       <input type="text" autoComplete="off" autoCapitalize="off" defaultValue={this.state.searchString} autoCorrect="off" />
+    //       <input type="submit" value="S" />
+    //       <div>
+    //         <button type="button" onClick={this.changeView('text')}>
+    //           <h3>Text</h3>
+    //         </button>
+    //         <button type="button" onClick={this.changeView('picture')}>
+    //           <h3>Images</h3>
+    //         </button>
+    //       </div>
+    //     </div>
+    //     <div>
+    //       { returnedView }
+    //     </div>
+    //   </div>
+    // );
+    return <div>Hello World</div>
   }
 }
 

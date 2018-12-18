@@ -3,11 +3,12 @@
 import React, { Component } from 'react';
 import Input from './Input';
 import View from './View';
+import { throws } from 'assert';
 
 
 class App extends Component {
   state = {
-    searchData: null,
+    searchData: [],
     view: "text",
     searched: false
   };
@@ -24,22 +25,19 @@ class App extends Component {
   }
 
   render() {
-    const { searched } = this.state;
-    if (!searched) {
+    if (this.state.searched) {
       return (
         <div>
           <Input sendData={this.search()} />
         </div>
       );
+    } else {
+      return (
+        <div>
+          <View searchData={this.state.searchData} switchView={this.switchView.bind(this)} />
+        </div>
+      );
     }
-
-    const { searchData } = this.state;
-
-    return (
-      <div>
-        <View searchData={searchData} view={this.switchView()} />
-      </div>
-    );
   }
 }
 
