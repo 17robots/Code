@@ -1,15 +1,27 @@
 /* eslint linebreak-style: ["error", "windows"] */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class Result extends React.Component {
+class Result extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props,
-      number: this.props,
-      link: this.props
+      name: '',
+      number: '',
+      link: ''
     };
+  }
+
+  componentDidMount() {
+    const { name } = this.props;
+    const { number } = this.props;
+    const { link } = this.props;
+    this.setState({
+      name,
+      number,
+      link
+    });
   }
 
   render() {
@@ -27,3 +39,11 @@ export default class Result extends React.Component {
     );
   }
 }
+
+Result.propTypes = {
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired
+};
+
+export default Result;
