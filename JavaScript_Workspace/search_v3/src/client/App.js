@@ -1,43 +1,34 @@
 /* eslint linebreak-style: ["error", "windows"] */
 
-import React, { Component } from 'react';
+import React from 'react';
 import Input from './Input';
-import View from './View';
-import { throws } from 'assert';
+import ResultList from './ResultList';
 
-
-class App extends Component {
-  state = {
-    searchData: [],
-    view: "text",
-    searched: false
-  };
-
-  search(searchString) {
-    fetch('/api/search').then(res => res.json()).then(user => this.setState({
-      searchData: user.searchResults,
-      searched: true
-    }));
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      results: [],
+      // searched: false
+    };
   }
 
-  switchView(newView) {
-    this.setState({ view: newView });
+  search = () => {
+    fetch('/api/getMessage')
+      .then(res => res.json())
+      .then(args => this.setState({
+        // searched: true,
+        results: args.message
+      }));
   }
 
   render() {
-    if (this.state.searched) {
-      return (
-        <div>
-          <Input sendData={this.search()} />
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <View searchData={this.state.searchData} switchView={this.switchView.bind(this)} />
-        </div>
-      );
+    const { searched } = this.state;
+    if (!searched) {
+      return <Input searchFunc={this.search} />;
     }
+    const { results } = this.state;
+    return <ResultList result={results} />;
   }
 }
 
