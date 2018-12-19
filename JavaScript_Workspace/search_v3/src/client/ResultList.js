@@ -25,13 +25,22 @@ class ResultList extends React.Component {
     const { result } = this.state;
     return (
       <div>
-        <div className={style.miniInput}>
-          <form onSubmit={this.search}>
-            <input type="text" autoComplete="off" id="searchBar" autoCapitalize="off" autoCorrect="off" />
-            <input type="submit" value="S" />
-          </form>
-        </div>
         <div>
+          <div>
+            <div>
+              <div className={style.miniInput}>
+                <form onSubmit={this.search}>
+                  <input type="text" autoComplete="off" id="searchBar" autoCapitalize="off" autoCorrect="off" />
+                  <input type="submit" value="S" />
+                </form>
+              </div>
+            </div>
+            <div>
+              <h1>Placeholder</h1>
+            </div>
+          </div>
+        </div>
+        <div className={style.resultList}>
           {result.map(obj => <Result name={obj.name} number={obj.number} link={obj.link} />)}
         </div>
       </div>

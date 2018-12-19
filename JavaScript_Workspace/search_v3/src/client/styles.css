@@ -67,15 +67,6 @@
     outline: none;
 }
 
-.result a {
-    text-decoration: none;
-    color: black;
-}
-
-.result a:visited {
-    color: inherit;
-}
-
 .miniInput {
     margin: 0;
     width: 50%;
@@ -85,7 +76,7 @@
 }
 
 .miniInput form {
-    font-size: 1.2em;
+    font-size: 1em;
     padding-right: 3.5em;
     border-radius: 3px;
     display: block;
@@ -143,4 +134,17 @@
     margin: auto;
     z-index: 2;
     outline: none;
+}
+
+.result a {
+    text-decoration: none;
+    color: black;
+}
+
+.result a:visited {
+    color: inherit;
+}
+
+.resultList {
+    padding-top: 1%;
 }
