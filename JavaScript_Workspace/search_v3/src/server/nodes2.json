@@ -3,21 +3,21 @@
         {
             "name": "Test",
             "number": "1",
-            "link": "./test.txt"
+            "link": "./src/server/db2/test.txt"
         }
     ],
     "test2": [
         {
             "name": "Test 2",
             "number": "2",
-            "link": "./test2.txt"
+            "link": "./src/server/db2/test2.txt"
         }
     ],
     "test3": [
         {
             "name": "Test 3",
             "number": "3",
-            "link": "./test3.txt"
+            "link": "./src/server/db2/test3.txt"
         }
     ]
 }

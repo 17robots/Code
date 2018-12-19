@@ -39,18 +39,14 @@ function comb(searchText, valueToSearch) {
 
 function textSearch(searchString) {
   const results = [];
-  // Object.keys(nodes).forEach((key) => {
-  //   console.log('Key');
-  //   console.log(key);
-  //   Object.keys(nodes.test).forEach((obj) => {
-  //   //   if (comb(spider(obj.link, searchString) > 0)) {
-  //   //     results.push(obj);
-  //   //     console.log(obj);
-  //   //   }
-      
-  //   // });
-  // });
-
+  Object.keys(nodes).forEach((key) => {
+    for(var i = 0; i < nodes[key].length; ++i) {
+      // if (comb(spider(nodes[key][i].link), searchString) > 0) {
+      //   results.push(obj);
+      //   console.log(obj);
+      // }
+    }
+  });
   return results;
 }
 
@@ -61,9 +57,12 @@ function textSearch(searchString) {
 const app = express();
 
 app.use(express.static('dist'));
-console.log(nodes.test2);
-// console.log(textSearch('cats'));
+
+const item = spider('./src/server/db2/test.txt');
+
 app.get('/api/getMessage', (req, res) => res.send({
   message: textSearch(req.query.search)
 }));
 app.listen(8080, () => console.log('listening on port 8080'));
+
+console.log(item);
