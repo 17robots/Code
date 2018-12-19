@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Input from './Input';
-import Result from './Result';
+import ResultList from './ResultList';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,27 +11,27 @@ class App extends React.Component {
       results: [],
       searched: false
     };
+    this.search = this.search.bind(this);
+    // this.clear = this.clear.bind(this);
   }
 
   search = (searchString) => {
     fetch(`/api/getMessage?search=${searchString}`)
       .then(res => res.json())
-      .then(args => this.setState({
-        searched: true,
-        results: args.message
-      }));
+      .then((args) => {
+        this.setState({ searched: false, results: [] });
+        this.setState({ searched: true, results: args.message });
+      });
   }
 
   render() {
+    console.log('rendered');
     const { searched } = this.state;
     if (!searched) {
       return <Input searchFunc={this.search} />;
     }
     const { results } = this.state;
-    return results.map((obj) => {
-      console.log('Object Name');
-      console.log(obj.name);
-      return <Result name={obj.name} number={obj.number} link={obj.link} />});
+    return <ResultList searchFunc={this.search} result={results} />;
   }
 }
 

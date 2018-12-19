@@ -1,5 +1,0 @@
-cats
-dogs
-fish
-pigs
-cows

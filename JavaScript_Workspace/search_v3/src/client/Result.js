@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './styles.css';
 
 class Result extends React.Component {
   constructor(props) {
@@ -27,13 +28,13 @@ class Result extends React.Component {
   render() {
     const { name, number, link } = this.state;
     return (
-      <div>
-        <h1>
+      <div className={styles.result}>
+        <h2>
           <a href={link}>
             <span>{name}</span>
             <span>{number}</span>
           </a>
-        </h1>
+        </h2>
         <hr />
       </div>
     );

@@ -26,13 +26,6 @@ function getIndicesOf(searchStr, str, caseSensitive) {
   return indices;
 }
 
-function spider(filepath) {
-  fs.readFile(filepath, 'utf8', (err, data) => {
-    if (err) throw err;
-    return data;
-  });
-}
-
 function comb(searchText, valueToSearch) {
   return Object.keys(getIndicesOf(valueToSearch, searchText, true)).length;
 }
@@ -40,11 +33,11 @@ function comb(searchText, valueToSearch) {
 function textSearch(searchString) {
   const results = [];
   Object.keys(nodes).forEach((key) => {
-    for(var i = 0; i < nodes[key].length; ++i) {
-      // if (comb(spider(nodes[key][i].link), searchString) > 0) {
-      //   results.push(obj);
-      //   console.log(obj);
-      // }
+    for (let i = 0; i < nodes[key].length; i += 1) {
+      const data = fs.readFileSync(nodes[key][i].link).toString();
+      if (comb(data, searchString) > 0) {
+        results.push(nodes[key][i]);
+      }
     }
   });
   return results;
@@ -58,11 +51,7 @@ const app = express();
 
 app.use(express.static('dist'));
 
-const item = spider('./src/server/db2/test.txt');
-
 app.get('/api/getMessage', (req, res) => res.send({
   message: textSearch(req.query.search)
 }));
 app.listen(8080, () => console.log('listening on port 8080'));
-
-console.log(item);
