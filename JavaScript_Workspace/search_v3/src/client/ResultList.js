@@ -9,8 +9,10 @@ class ResultList extends React.Component {
   constructor(props) {
     super(props);
     const { result } = this.props;
+    const { searchData } = this.props;
     this.state = {
-      result
+      result,
+      searchData
     };
     this.search = this.search.bind(this);
   }
@@ -22,7 +24,14 @@ class ResultList extends React.Component {
   }
 
   render() {
+    let results;
     const { result } = this.state;
+    const { searchData } = this.state;
+    if(result.length === 0) {
+      results = <h3>No Results Found. Please refine your search and try again.</h3>
+    } else {
+      results = result.map(obj => <Result name={obj.name} number={obj.number} link={obj.link} />)
+    }
     return (
       <div>
         <div>
@@ -30,7 +39,7 @@ class ResultList extends React.Component {
             <div>
               <div className={style.miniInput}>
                 <form onSubmit={this.search}>
-                  <input type="text" autoComplete="off" id="searchBar" autoCapitalize="off" autoCorrect="off" />
+                  <input type="text" defaultValue={searchData} contentEditable="true" autoComplete="off" id="searchBar" autoCapitalize="off" autoCorrect="off" />
                   <input type="submit" value="S" />
                 </form>
               </div>
@@ -41,7 +50,7 @@ class ResultList extends React.Component {
           </div>
         </div>
         <div className={style.resultList}>
-          {result.map(obj => <Result name={obj.name} number={obj.number} link={obj.link} />)}
+          {results}
         </div>
       </div>
     );
@@ -50,7 +59,8 @@ class ResultList extends React.Component {
 
 ResultList.propTypes = {
   result: PropTypes.arrayOf(PropTypes.object).isRequired,
-  searchFunc: PropTypes.func.isRequired
+  searchFunc: PropTypes.func.isRequired,
+  searchData: PropTypes.string.isRequired
 };
 
 export default ResultList;

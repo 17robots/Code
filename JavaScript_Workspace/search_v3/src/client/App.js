@@ -9,29 +9,29 @@ class App extends React.Component {
     super(props);
     this.state = {
       results: [],
-      searched: false
+      searched: false,
+      searchData: ''
     };
     this.search = this.search.bind(this);
-    // this.clear = this.clear.bind(this);
   }
 
   search = (searchString) => {
     fetch(`/api/getMessage?search=${searchString}`)
       .then(res => res.json())
       .then((args) => {
-        this.setState({ searched: false, results: [] });
-        this.setState({ searched: true, results: args.message });
+        this.setState({ searched: false, results: [], searchData: searchString });
+        this.setState({ searched: true, results: args.message, searchData: searchString });
       });
   }
 
   render() {
-    console.log('rendered');
     const { searched } = this.state;
     if (!searched) {
       return <Input searchFunc={this.search} />;
     }
     const { results } = this.state;
-    return <ResultList searchFunc={this.search} result={results} />;
+    const { searchData } = this.state;
+    return <ResultList searchData={searchData} searchFunc={this.search} result={results} />;
   }
 }
 
