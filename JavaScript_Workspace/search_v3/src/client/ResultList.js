@@ -27,16 +27,16 @@ class ResultList extends React.Component {
     let results;
     const { result } = this.state;
     const { searchData } = this.state;
-    if(result.length === 0) {
-      results = <h3>No Results Found. Please refine your search and try again.</h3>
+    if (result.length === 0) {
+      results = <h3>No Results Found. Please refine your search and try again.</h3>;
     } else {
-      results = result.map(obj => <Result name={obj.name} number={obj.number} link={obj.link} />)
+      results = result.map(obj => <Result name={obj.name} number={obj.number} link={obj.link} />);
     }
     return (
       <div>
-        <div>
-          <div>
-            <div>
+        <div className={style.headWrapper}>
+          <div className={style.head}>
+            <div className={style.searchWrap}>
               <div className={style.miniInput}>
                 <form onSubmit={this.search}>
                   <input type="text" defaultValue={searchData} contentEditable="true" autoComplete="off" id="searchBar" autoCapitalize="off" autoCorrect="off" />
@@ -44,8 +44,13 @@ class ResultList extends React.Component {
                 </form>
               </div>
             </div>
-            <div>
-              <h1>Placeholder</h1>
+            <div className={style.filterBar}>
+              <div className={style.filterMenu}>
+                <ul className={style.filterList}>
+                  <li className={style.filterItem}>Text</li>
+                  <li className={style.filterItem}>Images</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

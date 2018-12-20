@@ -67,48 +67,102 @@
     outline: none;
 }
 
-.miniInput {
+.headWrapper {
+    background-color: #fafafa;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.15);
+    padding-top: 16px;
+    position: relative;
+    z-index: 15;
     margin: 0;
-    width: 50%;
-    border: 0;
-    vertical-align: baseline;
-    color: #333;
+    padding: 0;
+    font: inherit;
 }
 
-.miniInput form {
-    font-size: 1em;
-    padding-right: 3.5em;
-    border-radius: 3px;
+.headWrapper:after {
+    content: "";
+    width: 100%;
     display: block;
+    margin-top: -2px;
+    height: 1px;
+}
+
+.head {
+    padding-left: 0;
+    padding-right: 0;
+    width: 98.5%;
     position: relative;
-    height: 2.8em;
-    border: 1px solid rgba(0,0,0,0.15);
-    box-shadow: 0 2px 3px rgba(0,0,0,0.06);
-    padding-left: .75em;
+    padding: 0 7px;
+    max-width: 1200px;
+    margin-left: 0;
+    margin-right: auto;
+    min-height: 58px;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+.searchWrap {
+    position: relative;
+    margin-bottom: 3px;
+    margin-top: 1px;
+    max-width: 590px;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+.miniInput {
+    position: relative;
+    left: 5px;
+    color: #333;
     margin: 0;
     padding: 0;
 }
 
-.miniInput input[type=text] {
+.miniInput form {
+    background-color: #fff;
+    height: 44px;
+    padding-left: 11px;
+    padding-right: 3.5em;
+    border-radius: 3px;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 2px 3px rgba(0,0,0,0.06);
     font-size: 1em;
+    margin: 0;
+    padding: 0;
+    display: block;
+    margin-top: 5px;
+}
+
+.miniInput input[type=text] {
+    height: 44px;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    font-size: 1.1em;
     font-weight: normal;
+    color: #333;
     display: block;
     width: 100%;
     background: none;
     outline: none;
-    border: none;
-    padding-left: .75em;
-    height: 2.54545em;
+    padding: 0;
     z-index: 1;
     position: relative;
     top: -1px;
+    cursor: text;
+    margin: 0;
+    font: 400 13.333px Arial;
+    border: none;
+    padding-left: 5px;
 }
 
 .miniInput input[type=submit] {
+    font-size: 18px;
     border-radius: 0 2px 2px 0;
     min-width: 26px;
     color: #999;
-    font-size: 1.25em;
     padding: 0 .64em;
     height: auto;
     min-height: 1.8em;
@@ -119,7 +173,16 @@
     background-color: transparent;
     background-position: 50% 50%;
     background-repeat: no-repeat;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -webkit-appearance: none;
     box-sizing: content-box;
+    speak: none;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    text-decoration: none !important;
+    -webkit-tap-highlight-color: none;
     width: 1em;
     display: block;
     cursor: pointer;
@@ -134,17 +197,32 @@
     margin: auto;
     z-index: 2;
     outline: none;
+    align-items: flex-start;
+    user-select: none;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-indent: 0px;
+    text-shadow: none;
+    font: 400 13.333px Arial;
+    writing-mode: horizontal-tb !important;
+    -webkit-writing-mode: horizontal-tb !important;
 }
 
-.result a {
-    text-decoration: none;
-    color: black;
+.filterBar {
+    
 }
 
-.result a:visited {
-    color: inherit;
+.filterMenu {
+
 }
 
-.resultList {
-    padding-top: 1%;
+.filterList {
+
+}
+
+.filterItem {
+
 }
