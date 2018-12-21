@@ -10,11 +10,10 @@ class ResultList extends React.Component {
     super(props);
     const { result } = this.props;
     const { searchData } = this.props;
-    const { view } = this.props;
     this.state = {
       result,
       searchData,
-      view
+      view: 'text'
     };
 
     this.search = this.search.bind(this);
@@ -29,10 +28,8 @@ class ResultList extends React.Component {
     searchFunc(document.getElementById('searchBar').value);
   }
 
-  switchView(newView) {
-    // const { toggleView } = this.props;
-    // toggleView(newView);
-    // this.setState({ view: newView });
+  switchView(string) {
+    this.setState({ view: string });
   }
 
   switchToText() {
@@ -48,11 +45,18 @@ class ResultList extends React.Component {
     const { result } = this.state;
     const { searchData } = this.state;
     const { view } = this.state;
+    let endResults = [];
 
     if (result.length === 0) {
       results = <h3>No Results Found. Please refine your search and try again.</h3>;
     } else {
-      results = result.map((obj, key) => <Result key={key} name={obj.name} number={obj.number} link={obj.link} />);
+      if (view === 'text') {
+        const [final] = result;
+        endResults = final;
+      } else {
+        endResults = result[1];
+      }
+      results = endResults.map((obj, key) => <Result key={key} name={obj.name} number={obj.number} link={obj.link} />);
     }
 
     let activeView;
@@ -110,8 +114,6 @@ ResultList.propTypes = {
   result: PropTypes.arrayOf(PropTypes.object).isRequired,
   searchFunc: PropTypes.func.isRequired,
   searchData: PropTypes.string.isRequired,
-  view: PropTypes.string.isRequired,
-  toggleView: PropTypes.func.isRequired
 };
 
 export default ResultList;

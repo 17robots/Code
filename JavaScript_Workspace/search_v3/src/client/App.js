@@ -11,7 +11,6 @@ class App extends React.Component {
       results: [],
       searched: false,
       searchData: '',
-      view: 'text'
     };
     this.search = this.search.bind(this);
     this.changeView = this.changeView.bind(this);
@@ -19,7 +18,7 @@ class App extends React.Component {
 
   search = (searchString) => {
     const { view } = this.state;
-    fetch(`/api/getMessage?search=${searchString}&view=${view}`)
+    fetch(`/api/getMessage?search=${searchString}`)
       .then(res => res.json())
       .then((args) => {
         this.setState({
@@ -37,27 +36,6 @@ class App extends React.Component {
       });
   }
 
-  changeView(newView) {
-    const { results } = this.state;
-    const { searchData } = this.state;
-
-    this.setState({
-      searched: false,
-      results,
-      searchData,
-      view: ''
-    }, () => {
-      this.setState({
-        searched: true,
-        results,
-        searchData,
-        view: newView
-      });
-    });
-
-    this.search(searchData); // research the text for the opposite view
-  }
-
   render() {
     const { searched } = this.state;
     if (!searched) {
@@ -65,13 +43,11 @@ class App extends React.Component {
     }
     const { results } = this.state;
     const { searchData } = this.state;
-    const { view } = this.state;
     return (
       <ResultList
         result={results}
         searchFunc={this.search}
         searchData={searchData}
-        view={view}
         toggleView={this.changeView}
       />
     );

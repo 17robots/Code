@@ -53,14 +53,11 @@ const app = express();
 app.use(express.static('dist'));
 
 app.get('/api/getMessage', (req, res) => {
-  if (req.query.view === 'text') {
-    res.send({
-      message: textSearch(req.query.search)
-    });
-  } else {
-    res.send({
-      message: picSearch(req.query.search)
-    });
-  }
+  const results = [];
+  results.push(textSearch(req.query.search));
+  results.push(picSearch(req.query.search));
+  res.send({
+    message: results
+  });
 });
 app.listen(8080, () => console.log('listening on port 8080'));
