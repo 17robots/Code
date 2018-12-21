@@ -259,3 +259,18 @@
     text-transform: capitalize;
     padding-right: 1.5em;
 }
+
+.filterItem button {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+
+button.active {
+    color: red;
+    border-bottom: 1px solid red;
+}

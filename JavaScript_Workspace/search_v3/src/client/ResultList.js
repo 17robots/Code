@@ -2,7 +2,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Result from './Result';
 import style from './styles.css';
 
@@ -18,6 +17,8 @@ class ResultList extends React.Component {
       view
     };
     this.search = this.search.bind(this);
+    this.switchToText = this.switchToText.bind(this);
+    this.switchToPic = this.switchToPic.bind(this);
   }
 
   search(e) {
@@ -26,11 +27,22 @@ class ResultList extends React.Component {
     searchFunc(document.getElementById('searchBar').value);
   }
 
+  switchToText() {
+    const { switchView } = this.props;
+    switchView('text');
+  }
+
+  switchToPic() {
+    const { switchView } = this.props;
+    switchView('picture');
+  }
+
   render() {
     let results;
     const { result } = this.state;
     const { searchData } = this.state;
     const { view } = this.state;
+    console.log(view);
     if (result.length === 0) {
       results = <h3>No Results Found. Please refine your search and try again.</h3>;
     } else {
@@ -41,15 +53,23 @@ class ResultList extends React.Component {
     if (view === 'text') {
       activeView = (
         <ul className={style.filterList}>
-          <li className={classNames(style.filterItem, style.active)}>Text</li>
-          <li className={style.filterItem}>Images</li>
+          <li className={style.filterItem}>
+            <button onClick={this.switchToText} className={style.active} type="button">Text</button>
+          </li>
+          <li className={style.filterItem}>
+            <button onClick={this.switchToPic} type="button">Images</button>
+          </li>
         </ul>
       );
     } else {
       activeView = (
         <ul className={style.filterList}>
-          <li className={style.filterItem}>Text</li>
-          <li className={classNames(style.filterItem, style.active)}>Images</li>
+          <li className={style.filterItem}>
+            <button onClick={this.switchToText} type="button">Text</button>
+          </li>
+          <li className={style.filterItem}>
+            <button onClick={this.switchToPic} className={style.active} type="button">Images</button>
+          </li>
         </ul>
       );
     }
@@ -84,7 +104,8 @@ ResultList.propTypes = {
   result: PropTypes.arrayOf(PropTypes.object).isRequired,
   searchFunc: PropTypes.func.isRequired,
   searchData: PropTypes.string.isRequired,
-  view: PropTypes.string.isRequired
+  view: PropTypes.string.isRequired,
+  switchView: PropTypes.func.isRequired
 };
 
 export default ResultList;
