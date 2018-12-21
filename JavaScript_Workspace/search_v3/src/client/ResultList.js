@@ -16,6 +16,7 @@ class ResultList extends React.Component {
       searchData,
       view
     };
+
     this.search = this.search.bind(this);
     this.switchToText = this.switchToText.bind(this);
     this.switchToPic = this.switchToPic.bind(this);
@@ -29,8 +30,9 @@ class ResultList extends React.Component {
   }
 
   switchView(newView) {
-    const { toggleView } = this.props;
-    this.setState({ view: newView }, () => toggleView(newView));
+    // const { toggleView } = this.props;
+    // toggleView(newView);
+    // this.setState({ view: newView });
   }
 
   switchToText() {
@@ -50,7 +52,7 @@ class ResultList extends React.Component {
     if (result.length === 0) {
       results = <h3>No Results Found. Please refine your search and try again.</h3>;
     } else {
-      results = result.map(obj => <Result name={obj.name} number={obj.number} link={obj.link} />);
+      results = result.map((obj, key) => <Result key={key} name={obj.name} number={obj.number} link={obj.link} />);
     }
 
     let activeView;
