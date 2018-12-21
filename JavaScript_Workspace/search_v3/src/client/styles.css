@@ -219,6 +219,7 @@
     max-width: 590px;
     margin: 0;
     padding: 0;
+    padding-bottom: 1em;
 }
 
 .filterMenu {
@@ -256,4 +257,5 @@
     text-align: -webkit-match-parent;
     white-space: nowrap;
     text-transform: capitalize;
+    padding-right: 1.5em;
 }

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import Result from './Result';
 import style from './styles.css';
 
@@ -10,9 +11,11 @@ class ResultList extends React.Component {
     super(props);
     const { result } = this.props;
     const { searchData } = this.props;
+    const { view } = this.props;
     this.state = {
       result,
-      searchData
+      searchData,
+      view
     };
     this.search = this.search.bind(this);
   }
@@ -27,10 +30,28 @@ class ResultList extends React.Component {
     let results;
     const { result } = this.state;
     const { searchData } = this.state;
+    const { view } = this.state;
     if (result.length === 0) {
       results = <h3>No Results Found. Please refine your search and try again.</h3>;
     } else {
       results = result.map(obj => <Result name={obj.name} number={obj.number} link={obj.link} />);
+    }
+
+    let activeView;
+    if (view === 'text') {
+      activeView = (
+        <ul className={style.filterList}>
+          <li className={classNames(style.filterItem, style.active)}>Text</li>
+          <li className={style.filterItem}>Images</li>
+        </ul>
+      );
+    } else {
+      activeView = (
+        <ul className={style.filterList}>
+          <li className={style.filterItem}>Text</li>
+          <li className={classNames(style.filterItem, style.active)}>Images</li>
+        </ul>
+      );
     }
     return (
       <div>
@@ -46,10 +67,7 @@ class ResultList extends React.Component {
             </div>
             <div className={style.filterBar}>
               <div className={style.filterMenu}>
-                <ul className={style.filterList}>
-                  <li className={style.filterItem}>Text</li>
-                  <li className={style.filterItem}>Images</li>
-                </ul>
+                {activeView}
               </div>
             </div>
           </div>
@@ -65,7 +83,8 @@ class ResultList extends React.Component {
 ResultList.propTypes = {
   result: PropTypes.arrayOf(PropTypes.object).isRequired,
   searchFunc: PropTypes.func.isRequired,
-  searchData: PropTypes.string.isRequired
+  searchData: PropTypes.string.isRequired,
+  view: PropTypes.string.isRequired
 };
 
 export default ResultList;

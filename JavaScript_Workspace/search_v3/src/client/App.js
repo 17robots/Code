@@ -10,9 +10,11 @@ class App extends React.Component {
     this.state = {
       results: [],
       searched: false,
-      searchData: ''
+      searchData: '',
+      view: 'text'
     };
     this.search = this.search.bind(this);
+    this.changeView = this.changeView.bind(this);
   }
 
   search = (searchString) => {
@@ -24,6 +26,10 @@ class App extends React.Component {
       });
   }
 
+  changeView(newView) {
+    this.setState({ view: newView });
+  }
+
   render() {
     const { searched } = this.state;
     if (!searched) {
@@ -31,7 +37,16 @@ class App extends React.Component {
     }
     const { results } = this.state;
     const { searchData } = this.state;
-    return <ResultList searchData={searchData} searchFunc={this.search} result={results} />;
+    const { view } = this.state;
+    return (
+      <ResultList
+        view={view}
+        changeView={this.changeView}
+        searchData={searchData}
+        searchFunc={this.search}
+        result={results}
+      />
+    );
   }
 }
 
