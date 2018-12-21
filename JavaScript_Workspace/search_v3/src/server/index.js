@@ -43,15 +43,24 @@ function textSearch(searchString) {
   return results;
 }
 
-// function picSearch(searchString) {
-
-// }
+function picSearch(searchString) {
+  console.log(searchString);
+  return [];
+}
 
 const app = express();
 
 app.use(express.static('dist'));
 
-app.get('/api/getMessage', (req, res) => res.send({
-  message: textSearch(req.query.search)
-}));
+app.get('/api/getMessage', (req, res) => {
+  if (req.query.view === 'text') {
+    res.send({
+      message: textSearch(req.query.search)
+    });
+  } else {
+    res.send({
+      message: picSearch(req.query.search)
+    });
+  }
+});
 app.listen(8080, () => console.log('listening on port 8080'));

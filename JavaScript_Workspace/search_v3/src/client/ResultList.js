@@ -19,6 +19,7 @@ class ResultList extends React.Component {
     this.search = this.search.bind(this);
     this.switchToText = this.switchToText.bind(this);
     this.switchToPic = this.switchToPic.bind(this);
+    this.switchView = this.switchView.bind(this);
   }
 
   search(e) {
@@ -27,14 +28,17 @@ class ResultList extends React.Component {
     searchFunc(document.getElementById('searchBar').value);
   }
 
+  switchView(newView) {
+    const { toggleView } = this.props;
+    this.setState({ view: newView }, () => toggleView(newView));
+  }
+
   switchToText() {
-    const { switchView } = this.props;
-    switchView('text');
+    this.switchView('text');
   }
 
   switchToPic() {
-    const { switchView } = this.props;
-    switchView('picture');
+    this.switchView('picture');
   }
 
   render() {
@@ -42,7 +46,7 @@ class ResultList extends React.Component {
     const { result } = this.state;
     const { searchData } = this.state;
     const { view } = this.state;
-    console.log(view);
+
     if (result.length === 0) {
       results = <h3>No Results Found. Please refine your search and try again.</h3>;
     } else {
@@ -105,7 +109,7 @@ ResultList.propTypes = {
   searchFunc: PropTypes.func.isRequired,
   searchData: PropTypes.string.isRequired,
   view: PropTypes.string.isRequired,
-  switchView: PropTypes.func.isRequired
+  toggleView: PropTypes.func.isRequired
 };
 
 export default ResultList;
