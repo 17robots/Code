@@ -45,7 +45,11 @@ function textSearch(searchString) {
 
 function picSearch(searchString) {
   console.log(searchString);
-  return [];
+  return [{
+    name: 'Test Image',
+    number: '37',
+    link: 'no link'
+  }];
 }
 
 const app = express();

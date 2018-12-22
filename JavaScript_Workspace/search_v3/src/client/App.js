@@ -13,7 +13,6 @@ class App extends React.Component {
       searchData: '',
     };
     this.search = this.search.bind(this);
-    this.changeView = this.changeView.bind(this);
   }
 
   search = (searchString) => {

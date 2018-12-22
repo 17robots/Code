@@ -47,14 +47,39 @@ class ResultList extends React.Component {
     const { searchData } = this.state;
     const { view } = this.state;
 
-    if (result.length === 0) {
-      results = <h3>No Results Found. Please refine your search and try again.</h3>;
-    } else {
-      if (view === 'text') {
-        results = result[0].map((obj, key) => <TextResult key={key} name={obj.name} number={obj.number} link={obj.link} />);
-      } else {
-        results = result[1].map((obj, key) => <PictureResult key={key} name={obj.name} number={obj.number} link={obj.link} />);
-      }
+    switch (view) {
+      case 'text':
+        if (result[0].length === 0) {
+          results = <h3>No Text Results Found</h3>;
+        } else {
+          results = result[0].map((obj) => {
+            return (
+              <TextResult
+                name={obj.name}
+                number={obj.number}
+                link={obj.link}
+                key={obj.number}
+              />
+            );
+          });
+        }
+        break;
+      default:
+        if (result[0].length === 0) {
+          results = <h3>No Picture Results Found</h3>;
+        } else {
+          results = result[1].map((obj) => {
+            return (
+              <PictureResult
+                name={obj.name}
+                number={obj.number}
+                link={obj.link}
+                key={obj.number}
+              />
+            );
+          });
+        }
+        break;
     }
 
     let activeView;
@@ -109,7 +134,7 @@ class ResultList extends React.Component {
 }
 
 ResultList.propTypes = {
-  result: PropTypes.arrayOf(PropTypes.object).isRequired,
+  result: PropTypes.arrayOf(PropTypes.array).isRequired,
   searchFunc: PropTypes.func.isRequired,
   searchData: PropTypes.string.isRequired,
 };

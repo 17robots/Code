@@ -26,9 +26,12 @@ class PictureResult extends React.Component {
   }
 
   render() {
+    const { name, number, link } = this.state;
     return (
-      <div>
-        <h1>Pictures</h1>
+      <div className={style.picture}>
+        <h1>{name}</h1>
+        <h1>{number}</h1>
+        <h1>{link}</h1>
       </div>
     );
   }
