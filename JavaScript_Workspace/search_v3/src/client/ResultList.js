@@ -2,7 +2,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Result from './Result';
+import PictureResult from './PictureResult';
+import TextResult from './TextResult';
 import style from './styles.css';
 
 class ResultList extends React.Component {
@@ -45,18 +46,15 @@ class ResultList extends React.Component {
     const { result } = this.state;
     const { searchData } = this.state;
     const { view } = this.state;
-    let endResults = [];
 
     if (result.length === 0) {
       results = <h3>No Results Found. Please refine your search and try again.</h3>;
     } else {
       if (view === 'text') {
-        const [final] = result;
-        endResults = final;
+        results = result[0].map((obj, key) => <TextResult key={key} name={obj.name} number={obj.number} link={obj.link} />);
       } else {
-        endResults = result[1];
+        results = result[1].map((obj, key) => <PictureResult key={key} name={obj.name} number={obj.number} link={obj.link} />);
       }
-      results = endResults.map((obj, key) => <Result key={key} name={obj.name} number={obj.number} link={obj.link} />);
     }
 
     let activeView;

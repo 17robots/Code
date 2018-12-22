@@ -2,9 +2,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './styles.css';
+import style from './styles.css';
 
-class Result extends React.Component {
+class PictureResult extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,25 +26,18 @@ class Result extends React.Component {
   }
 
   render() {
-    const { name, number, link } = this.state;
     return (
-      <div className={styles.result}>
-        <h2>
-          <a href={link}>
-            <span>{name}</span>
-            <span>{number}</span>
-          </a>
-        </h2>
-        <hr />
+      <div>
+        <h1>Pictures</h1>
       </div>
     );
   }
 }
 
-Result.propTypes = {
+PictureResult.propTypes = {
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired
 };
 
-export default Result;
+export default PictureResult;
