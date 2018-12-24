@@ -2,7 +2,7 @@ import * as React from 'react'
 import { InputProps } from './interface'
 import './styles/input.css'
 
-export default class Input extends React.Component<InputProps, {}> {
+export default class Input extends React.Component<InputProps, any> {
   constructor(props: InputProps) {
     super(props);
     this.search = this.search.bind(this)
@@ -14,7 +14,7 @@ export default class Input extends React.Component<InputProps, {}> {
     searchFunc((document.getElementById("searchBar") as HTMLInputElement).value);
   }
 
-  render() {
+  public render() {
     return (
       <div>
         <form onSubmit={this.search}>

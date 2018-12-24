@@ -1,8 +1,15 @@
 import * as React from 'react'
 import Input from './Input'
 
-export default class App extends React.Component<{}> {
-  constructor(props) {
+type Props = {}
+
+type State = {
+  searched: boolean,
+  searchData: string
+}
+
+export default class App extends React.Component<Props, State> {
+  constructor(props: any) {
     super(props)
     this.state = {
       searched: false,
@@ -11,15 +18,16 @@ export default class App extends React.Component<{}> {
     this.search = this.search.bind(this)
   }
 
-  search(string) {
+  search(string: string) {
     this.setState({ searched: true, searchData: string })
   }
 
-  render() {
-    if (true) {
+  public render() {
+    const { searched, searchData } = this.state
+    if (searched) {
       return (
         <div>
-          We searched
+          We searched {searchData}
         </div>
       )
     } else {
