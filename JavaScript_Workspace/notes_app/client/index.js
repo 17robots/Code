@@ -4,11 +4,8 @@ import { Provider } from 'react-redux'
 import { App } from './components'
 import store from '../redux/store'
 
-window.store = store
-window.addNote = addNote
-
 ReactDOM.render(
-    <Provider>
+    <Provider store={store}>
         <App />
     </Provider>,
     document.getElementById('root'))

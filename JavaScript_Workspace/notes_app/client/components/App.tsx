@@ -4,7 +4,7 @@ import NoteList from './NoteList'
 type Props = {}
 type State = {}
 
-export default class App extends React.Component<State, Props> {
+export default class App extends React.Component<Props, State> {
     constructor(props: any) {
         super(props)
     }
