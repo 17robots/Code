@@ -19,7 +19,7 @@ class ConnectedNoteList extends React.Component<{notes: []}, {}> {
 }
 
 const mapStateToProps = (state: any) => {
-    return { notes: state.notes }
+    return { notes: this.state.notes }
 }
 
 const NoteList = connect(mapStateToProps) (ConnectedNoteList)

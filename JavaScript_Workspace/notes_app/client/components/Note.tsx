@@ -1,11 +1,7 @@
 import * as React from 'react'
-type note = {
-    title: string,
-    
-}
 
 type Props = {
-    content: note
+    content: any
 }
 type State = {}
 
