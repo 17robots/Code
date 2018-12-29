@@ -1,11 +1,12 @@
 import * as React from 'react'
 import NoteList from './NoteList'
+import { connect } from 'react-redux';
 
-type Props = {}
-type State = {}
+interface Props {}
+interface State {}
 
-export default class App extends React.Component<Props, State> {
-    constructor(props: any) {
+class App extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props)
     }
 
@@ -17,3 +18,5 @@ export default class App extends React.Component<Props, State> {
         )
     }
 }
+
+export default App

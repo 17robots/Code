@@ -2,8 +2,16 @@ import * as React from 'react'
 import { connect } from 'react-redux' 
 import Note from './Note'
 
-class ConnectedNoteList extends React.Component<{notes: []}, {}> {
-    constructor(props: any) {
+export interface Props {
+    notes: []
+}
+
+const mapStateToProps = (state: any) => {
+    return { notes: state.notes}
+}
+
+class NoteList extends React.PureComponent<Props, {}> {
+    constructor(props: Props) {
         super(props)
     }
 
@@ -18,11 +26,4 @@ class ConnectedNoteList extends React.Component<{notes: []}, {}> {
     }
 }
 
-const mapStateToProps = (state: any) => {
-    return { notes: this.state.notes }
-}
-
-const NoteList = connect(mapStateToProps) (ConnectedNoteList)
-
-
-export default NoteList
+export default connect(mapStateToProps)(NoteList)
