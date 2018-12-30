@@ -11,6 +11,7 @@ const reducer = (state = initial, action) => {
     } else if (action.type === Constants.CREATE_NOTE) {
         return Object.assign({}, state, { state: state.notes.concat(action.newNote)})
     }
+    return state
 }
 
 export default reducer

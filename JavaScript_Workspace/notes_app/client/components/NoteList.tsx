@@ -7,7 +7,7 @@ export interface Props {
 }
 
 const mapStateToProps = (state: any) => {
-    return { notes: state.notes}
+    return { notes: state.notes }
 }
 
 class NoteList extends React.PureComponent<Props, {}> {
