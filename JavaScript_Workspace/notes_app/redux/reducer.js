@@ -3,11 +3,20 @@ import * as Constants from './constants'
 
 let initial = {
   folders: savedData.folders,
-  tags: savedData.tags
+  tags: savedData.tags,
+  activeFolder: savedData.activeFolder,
+  activeNote: savedData.activeNote,
+  sidebarVisible: savedData.sidebarVisible,
+  newNoteVisble: savedData.newNoteVisble,
+  newTagVisible: savedData.newTagVisible,
+  newFolderVisible: savedData.newFolderVisible
 }
 
 const reducer = (state = initial, action) => {
-  return state
+  switch(action.type) {
+    default:
+      return state
+  }
 }
 
 export default reducer
