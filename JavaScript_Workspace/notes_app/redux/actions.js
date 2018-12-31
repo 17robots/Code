@@ -1,33 +1,63 @@
 import * as Constants from './constants'
 
 module.exports = {
-    toggleSidebar: () => {},
+    toggleSidebar: () => {
+        return { type: Constants.TOGGLE_SIDEBAR }
+    },
 
-    openNewNoteMenu: () => {},
+    openNewNoteMenu: () => {
+        return { type: Constants.OPEN_NEW_NOTE_MENU }
+    },
 
-    closeNewNoteMenu: () => {},
+    closeNewNoteMenu: () => {
+        return { type: Constants.CLOSE_NEW_NOTE_MENU }
+    },
 
-    openNewTagMenu: () => {},
+    openNewTagMenu: () => {
+        return { type: Constants.OPEN_NEW_TAG_MENU }
+    },
 
-    closeNewTagMenu: () => {},
+    closeNewTagMenu: () => {
+        return { type: Constants.CLOSE_NEW_TAG_MENU }
+    },
 
-    openNewFolderMenu: () => {},
+    openNewFolderMenu: () => {
+        return { type: Constants.OPEN_NEW_FOLDER_MENU }
+    },
 
-    closeNewFolderMenu: () => {},
+    closeNewFolderMenu: () => {
+        return { type: Constants.CLOSE_NEW_FOLDER_MENU }
+    },
 
-    createNewNote: () => {},
+    createNewNote: (note) => {
+        return { type: Constants.CREATE_NEW_NOTE, note }
+    },
 
-    createNewTag: () => {},
+    createNewTag: (tag) => {
+        return { type: Constants.CREATE_NEW_TAG, tag }
+    },
 
-    createNewFolder: () => {},
+    createNewFolder: (folder) => {
+        return { type: Constants.CREATE_NEW_FOLDER, folder }
+    },
 
-    deleteTag: () => {},
+    deleteTag: (tag) => {
+        return { type: Constants.DELETE_TAG, tag }
+    },
 
-    deleteFolder: () => {},
+    deleteFolder: (folder) => {
+        return { type: Constants.DELETE_FOLDER, folder }
+    },
 
-    deleteNote: () => {},
+    deleteNote: (note) => {
+        return { type: Constants.DELETE_NOTE, note }
+    },
 
-    switchActiveNote: () => {},
+    switchActiveNote: (note) => {
+        return { type: Constants.CHANGE_ACTIVE_NOTE, note }
+    },
 
-    switchActiveFolder: () => {},
+    switchActiveFolder: () => {
+        return { type: Constants.CHANGE_ACTIVE_FOLDER, folder }
+    },
 }
