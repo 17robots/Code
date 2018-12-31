@@ -1,0 +1,12 @@
+{
+  "settings": [
+    {
+      "noteFolders": [],
+      "type": "array"
+    },
+    {
+      "darkMode": false,
+      "type": "bool"
+    }
+  ]
+}

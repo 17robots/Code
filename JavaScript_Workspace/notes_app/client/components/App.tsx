@@ -1,40 +1,51 @@
 import * as React from 'react'
-import NoteList from './NoteList'
-import NoteEditor from './NoteEditor'
-import Sidebar from './Sidebar'
+import { connect } from 'react-redux'
 
-interface Props {}
+export type Note = {
+  name: string,
+  body: string,
+  tags: []
+}
+
+export type Folder = {
+  name: string,
+  location: string,
+  notes: []
+}
+
+export type Tag = {
+  name: string,
+  color: string
+}
+
+const mapStateToProps = (state: any) => {
+  return {
+    folders: state.folders,
+    tags: state.tags
+  }
+}
+
 interface State {
-    selectedNote: any,
-    sidebarVisible: boolean
+  currentFolder: Folder,
+  currentNote: Note,
+  sidebarVisible: boolean,
+
 }
 
-class App extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props)
-    }
-
-    changeSelectedNote() {
+class App extends React.Component<{}, State> {
+  constructor(props: any) {
+    super(props)
+    this.state = {
 
     }
+  }
 
-    toggleVisible() {
-        this.setState({ sidebarVisible: !this.state.sidebarVisible })
-    }
-
-    public render() {
-        return (
-            <div>
-                <div>
-                    <Sidebar visible={this.state.sidebarVisible} />
-                </div>
-                <div>
-                    <NoteList />
-                    <NoteEditor note={this.state.selectedNote} />
-                </div>
-            </div>
-        )
-    }
+  public render() {
+    return (
+      <div>
+      </div>
+    )
+  }
 }
 
-export default App
+export default connect(mapStateToProps)(App)
