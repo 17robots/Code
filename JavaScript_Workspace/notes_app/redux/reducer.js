@@ -13,7 +13,7 @@ let initial = {
 }
 
 const reducer = (state = initial, action) => {
-  switch(action.type) {
+  switch (action.type) {
     default:
       return state
   }
