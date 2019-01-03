@@ -1,16 +1,22 @@
 import savedData from './savedData.json';
 import * as Constants from './constants';
+import * as axios from 'axios'
 
 let initial = {
-  folders: savedData.folders,
-  tags: savedData.tags,
-  activeFolder: savedData.activeFolder,
-  activeNote: savedData.activeNote,
-  sidebarVisible: savedData.sidebarVisible,
-  newNoteVisble: savedData.newNoteVisble,
-  newTagVisible: savedData.newTagVisible,
-  newFolderVisible: savedData.newFolderVisible
+  folders: null,
+  tags: null,
+  activeFolder: null,
+  activeNote: null,
+  sidebarVisible: null,
+  newNoteVisble: null,
+  newTagVisible: null,
+  newFolderVisible: null
 }
+
+// grab the initial state
+fetch('/api/init').then(res => res.json).then((obj) => initial = obj)
+
+console.log(initial)
 
 const reducer = (state = initial, action) => {
   switch (action.type) {
