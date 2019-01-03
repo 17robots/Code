@@ -1,22 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-
-export interface Note {
-  name: string,
-  body: string,
-  tags: []
-}
-
-export interface Folder {
-  name: string,
-  location: string,
-  notes: Note[]
-}
-
-export interface Tag {
-  name: string,
-  color: string
-}
+import { Note, Folder, Tag } from './Types'
+import Sidebar from './Sidebar'
 
 const mapStateToProps = (state: any) => {
   return {
@@ -39,7 +24,8 @@ interface Props {
   sidebarVisible: boolean,
   newNoteVisible: boolean,
   newTagVisible: boolean,
-  newFolderVisible: boolean
+  newFolderVisible: boolean,
+  textView: boolean
 }
 
 class App extends React.Component<Props, {}> {
@@ -50,7 +36,9 @@ class App extends React.Component<Props, {}> {
   public render() {
     return (
       <div>
-        <h1>{this.props.sidebarVisible}</h1>
+        {this.props.sidebarVisible ? '' : <Sidebar />}
+        {this.props.textView ? <NoteList /> : <TagList />}
+        <Editor />
       </div>
     )
   }

@@ -1,6 +1,11 @@
 import * as Constants from './constants';
 
 module.exports = {
+  switchMode: () => {
+    return {
+      type: Constants.SWICTH_CURRENT_VIEW
+    }
+  },
   toggleSidebar: () => {
     return {
       type: Constants.TOGGLE_SIDEBAR

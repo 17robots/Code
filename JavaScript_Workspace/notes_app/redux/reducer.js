@@ -10,7 +10,8 @@ let initial = {
   sidebarVisible: null,
   newNoteVisble: null,
   newTagVisible: null,
-  newFolderVisible: null
+  newFolderVisible: null,
+  textView: null
 }
 
 // grab the initial state
@@ -48,6 +49,8 @@ const reducer = (state = initial, action) => {
       return Object.assign({}, state, {
         newTagVisible: false
       });
+    case Constants.SWICTH_CURRENT_VIEW:
+      return Object.assign({}, state, { textView: !state.textView});
     case Constants.CREATE_NEW_FOLDER:
 
     default:

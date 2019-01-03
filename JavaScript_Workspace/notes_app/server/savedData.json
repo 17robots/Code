@@ -6,5 +6,6 @@
   "sidebarVisible": false,
   "newNoteVisible": false,
   "newTagVisible": false,
-  "newFolderVisible": false
+  "newFolderVisible": false,
+  "textView": true
 }
