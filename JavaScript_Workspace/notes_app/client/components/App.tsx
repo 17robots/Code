@@ -21,101 +21,36 @@ export interface Tag {
 const mapStateToProps = (state: any) => {
   return {
     folders: state.folders,
-    tags: state.tags
+    tags: state.tags,
+    activeFolder: state.activeFolder,
+    activeNote: state.activeNote,
+    sidebarVisible: state.sidebarVisible,
+    newNoteVisible: state.newNoteVisible,
+    newTagVisible: state.newTagVisible,
+    newFolderVisible: state.newFolderVisible
   }
 }
 
 interface Props {
   folders: Folder[],
-  tags: Tag[]
-}
-
-interface State {
-  currentFolder: Folder,
-  currentNote: Note,
+  tags: Tag[],
+  activeFolder: Folder,
+  activeNote: Note,
   sidebarVisible: boolean,
   newNoteVisible: boolean,
   newTagVisible: boolean,
   newFolderVisible: boolean
 }
 
-class App extends React.Component<Props, State> {
+class App extends React.Component<Props, {}> {
   constructor(props: any) {
     super(props)
-    this.state = {
-      currentFolder: this.props.folders[0],
-      currentNote: this.props.folders[0].notes[0],
-      sidebarVisible: false,
-      newNoteVisible: false,
-      newTagVisible: false,
-      newFolderVisible: false
-    }
-  }
-
-  toggleSidebar() {
-    this.setState({ sidebarVisible: !this.state.sidebarVisible})
-  }
-
-  openNewNoteMenu() {
-    this.setState({ newNoteVisible: true })
-  }
-
-  closeNewNoteMenu() {
-    this.setState({ newNoteVisible: false })
-  }
-
-  openNewTagMenu() {
-    this.setState({ newTagVisible: true })
-  }
-
-  closeNewTagMenu() {
-    this.setState({ newTagVisible: false })
-  }
-
-  openNewFolderMenu() {
-    this.setState({ newFolderVisible: true })
-  }
-
-  closeNewFolderMenu() {
-    this.setState({ newFolderVisible: false })
-  }
-
-  createNewNote() {
-
-  }
-
-  createNewTag() {
-
-  }
-
-  createNewFolder() {
-
-  }
-
-  deleteTag() {
-
-  }
-
-  deleteFolder() {
-
-  }
-
-  deleteNote() {
-
-  }
-
-  switchActiveNote(note: Note) {
-    this.setState({ currentNote: note })
-  }
-
-  switchActiveFolder(folder: Folder) {
-    this.setState({ })
   }
 
   public render() {
     return (
       <div>
-        <h1>Hello World</h1>
+        <h1>{this.props.sidebarVisible}</h1>
       </div>
     )
   }
