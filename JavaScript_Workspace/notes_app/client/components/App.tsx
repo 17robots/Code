@@ -19,6 +19,12 @@ const mapStateToProps = (state: any) => {
   }
 }
 
+const mapDispatchToProps = (dispatch: any) => {
+  return ({
+    
+  })
+}
+
 interface Props {
   folders: Folder[],
   tags: Tag[],
