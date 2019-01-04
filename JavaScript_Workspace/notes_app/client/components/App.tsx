@@ -21,7 +21,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return ({
-    
+    switchMode: () => {dispatch(switchMode())},
+
   })
 }
 
@@ -59,4 +60,4 @@ class App extends React.Component<Props, {}> {
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
