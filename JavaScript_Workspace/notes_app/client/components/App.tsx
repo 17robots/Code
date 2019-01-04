@@ -2,6 +2,9 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Note, Folder, Tag } from './Types'
 import Sidebar from './Sidebar'
+import NoteList from './NoteList'
+import TagList from './TagList'
+import Editor from './Editor'
 
 const mapStateToProps = (state: any) => {
   return {
@@ -35,10 +38,16 @@ class App extends React.Component<Props, {}> {
 
   public render() {
     return (
-      <div>
-        {this.props.sidebarVisible ? '' : <Sidebar />}
-        {this.props.textView ? <NoteList /> : <TagList />}
-        <Editor />
+      <div className="container">
+        <div className="row">
+          {this.props.sidebarVisible ? <div></div> : <Sidebar className="col-md-3" />}
+          <div className="col-md-3">
+            {this.props.textView ? <NoteList /> : <TagList />}
+          </div>
+          <div className={this.props.sidebarVisible ? "col-md-6" : "col-md-9"}>
+            <Editor />
+          </div>
+        </div>
       </div>
     )
   }
