@@ -21,7 +21,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return ({
-    switchMode: () => {dispatch(switchMode())},
+    // switchMode: () => {dispatch(switchMode())},
 
   })
 }

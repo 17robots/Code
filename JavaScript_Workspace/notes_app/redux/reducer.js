@@ -1,4 +1,4 @@
-import savedData from './savedData.json';
+// import savedData from './savedData.json';
 import * as Constants from './constants';
 import * as axios from 'axios'
 
@@ -17,6 +17,7 @@ let initial = {
 // grab the initial state
 fetch('/api/init').then(res => res.json).then((obj) => initial = obj)
 
+console.log("initial")
 console.log(initial)
 
 const reducer = (state = initial, action) => {
