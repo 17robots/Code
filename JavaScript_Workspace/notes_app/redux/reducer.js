@@ -50,7 +50,9 @@ const reducer = (state = initial, action) => {
         newTagVisible: false
       });
     case Constants.SWICTH_CURRENT_VIEW:
-      return Object.assign({}, state, { textView: !state.textView});
+      return Object.assign({}, state, {
+        textView: !state.textView
+      });
     case Constants.CREATE_NEW_FOLDER:
 
     default:
