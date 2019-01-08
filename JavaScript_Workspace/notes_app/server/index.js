@@ -8,6 +8,15 @@ let API_PORT = 8080
 
 console.log(savedData)
 
+app.get('/test', (req, res, err) => {
+    if(err) console.log(err)
+    res.send('test')
+})
+
+app.get('/', (req, res) => {
+    res.setDefaultEncoding('loaded')
+})
+
 app.get('/init', (req, res) => {
     res.send("Hello World")
 })
