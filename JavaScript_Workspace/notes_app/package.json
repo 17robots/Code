@@ -9,7 +9,6 @@
     "dev": "concurrently \"npm run client\" \"npm run server\"",
     "build": "webpack --mode production"
   },
-  "proxy": "",
   "keywords": [],
   "author": "",
   "license": "ISC",
