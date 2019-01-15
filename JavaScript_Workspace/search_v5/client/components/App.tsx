@@ -1,5 +1,5 @@
-const React = require('react')
-const { connect } = require('react-redux')
+import * as React from 'react'
+import  connect from 'react-redux'
 
 import ResultList from './ResultList'
 import SearchBar from './SearchBar'
@@ -12,14 +12,19 @@ const mapStateToProps = state => {
     resultType: state.resultType
   }
 }
-class App extends React.Component {
+
+interface Props {
+
+}
+
+class App extends React.Component<Props, {}> {
   constructor(props) {
     super(props)
   }
   render() {
     return (
       <div >
-        {this.props.searched ? <ResultList /> : <SearchBar />}
+        { this.props.searched ? <ResultList /> : <SearchBar /> }
       </div>
     )
   }

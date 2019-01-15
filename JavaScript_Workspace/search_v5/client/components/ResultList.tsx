@@ -1,7 +1,14 @@
-const React = require('react')
+import * as React from 'react'
 
-export default class ResultList extends React.Component {
-    render() {
+interface Props {
+
+}
+
+export default class ResultList extends React.Component<Props, {}> {
+  constructor(props: Props) {
+    super(props)
+  }  
+  render() {
         return (
           <div>
             ResultList
