@@ -1,6 +1,12 @@
-const React = requre('react')
+import * as React from 'react'
 
-export default class SearchBar extends React.Component {
+interface Props {}
+
+export default class SearchBar extends React.Component<Props, {}> {
+    constructor(props: Props) {
+      super(props)
+    }
+    
     render() {
         return (
           <div>

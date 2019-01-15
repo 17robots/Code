@@ -1,10 +1,10 @@
 import * as React from 'react'
-import  connect from 'react-redux'
+import { connect } from 'react-redux'
 
 import ResultList from './ResultList'
 import SearchBar from './SearchBar'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: any) => {
   return {
     searched: state.searched,
     searchText: state.searchText,
@@ -14,17 +14,18 @@ const mapStateToProps = state => {
 }
 
 interface Props {
-
+  searched: boolean
 }
 
 class App extends React.Component<Props, {}> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
   }
   render() {
     return (
       <div >
-        { this.props.searched ? <ResultList /> : <SearchBar /> }
+        {/* { this.props.searched ? <ResultList /> : <SearchBar /> } */}
+        hello world
       </div>
     )
   }

@@ -1,5 +1,5 @@
 const express = require('express')
-const settings = require('settings.json')
+const settings = require('./settings.json')
 
 // go through all folders and add them to the different arrays
 
