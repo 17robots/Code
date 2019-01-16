@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import ResultList from './ResultList'
-import SearchBar from './SearchBar'
+import ResultList from './ResultList.tsx'
+import SearchBar from './SearchBar.tsx'
 
 const mapStateToProps = (state: any) => {
   return {
@@ -24,8 +24,8 @@ class App extends React.Component<Props, {}> {
   render() {
     return (
       <div >
-        {/* { this.props.searched ? <ResultList /> : <SearchBar /> } */}
-        hello world
+        { this.props.searched ? <ResultList /> : <SearchBar /> }
+        {/* hello world */}
       </div>
     )
   }

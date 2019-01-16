@@ -9,6 +9,8 @@ const app = express()
 
 const API_PORT = 8080
 
-
+app.get('/api/init', (req, res) => {
+    res.send({ body: 'Hello World' })
+})
 
 app.listen(API_PORT, () => console.log(`listening on port ${API_PORT}`))

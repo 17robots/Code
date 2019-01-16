@@ -4,7 +4,7 @@ interface Props {
 
 }
 
-export default class ResultList extends React.Component<Props, {}> {
+class ResultList extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props)
   }  
@@ -16,3 +16,5 @@ export default class ResultList extends React.Component<Props, {}> {
         )
     }
 }
+
+export default ResultList

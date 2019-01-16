@@ -2,7 +2,7 @@ import * as React from 'react'
 
 interface Props {}
 
-export default class SearchBar extends React.Component<Props, {}> {
+class SearchBar extends React.Component<Props, {}> {
     constructor(props: Props) {
       super(props)
     }
@@ -15,3 +15,5 @@ export default class SearchBar extends React.Component<Props, {}> {
         )
     }
 }
+
+export default SearchBar
