@@ -24,8 +24,7 @@ class App extends React.Component<Props, {}> {
   render() {
     return (
       <div >
-        { this.props.searched ? <ResultList /> : <SearchBar /> }
-        {/* hello world */}
+        {this.props.searched ? <ResultList /> : <SearchBar />}
       </div>
     )
   }
