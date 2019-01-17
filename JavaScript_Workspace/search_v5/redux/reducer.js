@@ -1,5 +1,8 @@
 import * as Constants from './constants'
 
+//push out and grab initial config setup
+
+
 let initial = {
     searched: false,
     searchText: '',
