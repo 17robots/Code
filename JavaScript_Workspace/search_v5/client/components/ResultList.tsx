@@ -9,6 +9,9 @@ class ResultList extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props)
   }
+  static defaultProps = {
+    results: []
+  }
   render() {
     return (
       <div>

@@ -21,10 +21,19 @@ class App extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props)
   }
+
+  search(text: string) {
+    fetch(`/api/search?search=${text}`).then(res => res.json()).then(res => console.log(res.body))
+  }
+  
+  static defaultProps = {
+    searched: false
+  }
+
   render() {
     return (
       <div >
-        {this.props.searched ? <ResultList /> : <SearchBar />}
+        {this.props.searched ? <ResultList /> : <SearchBar searchFunc={this.search.bind(this)} />}
       </div>
     )
   }
