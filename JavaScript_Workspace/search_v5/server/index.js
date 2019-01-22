@@ -8,9 +8,13 @@ const API_PORT = 8080
 
 function parseMessage(query) {
     let phrases = []
-    query.split("\"").forEach((item) => {
-        phrases.push(item);
-    })
+    if(query.includes('\"')) {
+        
+    } else {
+        query.split(' ').forEach((item) => {
+            phrases.push(item)
+        })
+    }
 
     return phrases
 }
