@@ -1,34 +1,17 @@
+#include <cstdlib>
+#include <cassert>
+
 #pragma once
-#ifndef CARD_HPP
-#define CARD_HPP
 
-private:
-enum Suit {
-    Clubs,
-    Diamonds,
-    Hearts,
-    Spades
-};
+struct Suit {
+    static constexpr int Hearts  = 1;
+    static constexpr int Clubs = 2;
+    static constexpr int Spades = 3;
+    static constexpr int Diamonds = 4;
 
-enum Rank {
-    A,
-    Two,
-    Three,
-    Four,
-    Five,
-    Six,
-    Seven,
-    Eight,
-    Nine,
-    Ten,
-    Jack,
-    Queen,
-    King
-};
+    Suit(int s) : suit(s) {
+        assert(s < 0 || s > 3);
+    }
 
-public:
-struct Card {
-    Suit suit;
-    Rank rank;
+    int suit;
 }
-
