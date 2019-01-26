@@ -1,60 +1,11 @@
-#include <iostream>
+
 #include "Card.hpp"
-#include <deque>
-#include <vector>
-#include <ctime>
-
-/* Steps 
-    1. Gather the cards
-    2. Shuffle the deck
-    3. Deal the deck
-    4. Draw top card from each deck
-    5. Compare
-    6. If not war, collect spoils to winners hand, but if war, repeat step 4 with top 3 cards (if 3 are available from each party)
-    7. If someome has pile of 0, other player wins
-
-                                                    <---  3 With top 3 cards
-                                                    |               ^
-                                                    |               |
-                                                    |              No
-                                                    |               ^
-                                                    |               |
-                                                    |           Player 1 Smaller -> yes -> Give player two all cards to bottom
-                                                    |                ^
-                                                    |                |
-                                                    |                No
-                                                    |                 ^
-                                                   \ /                |
-    Collect -> Shuffle -> Deal -> Draw Top Card From Decks -> Player 1 bigger? -> yes -> Give player one all cards to bottom
-*/
-
-// step 1. Gather Deck
-// step 2. Shuffle Deck
-// Step 3. Deal Deck
-// Step 4. Check deck lenghts, if someone has 0, other player wins
-// Step 5. Draw hand
-// Step 6. Compare
-// Step 7. If not war, gather cards and go to step4, if war, repeat step 5 with 3 cards (or however many the max cards are in other player's hand)
-
-/*
-        going to have 3 deques and 2 vectors
-        deque 1 - initial deque for the cards at the beginning of the game
-        deque 2 - deque for player 1
-        deque 2 - deque for player 2
-        vector 1 - place pile for player 1
-        vector 2 - place pile for player 2
-    */
-
-// possible methods
-// build - build the initial deck
-// shuffle - shuffle the deck
-// deal - deals to each player
-// draw - draw out cards into draw pile and compares the last one drawn
-// gather - move draw pile cards into winner's deck
 
 void shuffle(std::deque<Card> &deck)
 {
-  for (int i = 0; i < 52; ++i)
+  // perform random number of swaps between 26 and 52 with random cards
+  int numSwaps = rand() % 53 + 26;
+  for (int i = 0; i < numSwaps; ++i)
   {
     int firstCard = rand() % 52;
     int secondCard = rand() % 52;
@@ -99,18 +50,15 @@ void draw(std::deque<Card> &player1, std::deque<Card> &player2, std::vector<Card
     player2Pile.push_back(player2[player2.size() - 1]);
     player2.pop_back();
   }
-
-  std::cout << "Player 1 drew the " << player1Pile[player1Pile.size() - 1].rank << " of " << player1Pile[player1Pile.size() - 1].suit << '\n';
-  std::cout << "Player 2 drew the " << player2Pile[player2Pile.size() - 1].rank << " of " << player2Pile[player2Pile.size() - 1].suit << '\n';
 }
 
 void gather(std::deque<Card> &winner, std::vector<Card> &player1Place, std::vector<Card> &player2Place)
 {
-  for (int i = 0; i < player1Place.size() - 1; ++i)
+  for (int i = 0; i < player1Place.size(); ++i)
   {
     // add the cards to the bottom of the deck
-    winner.push_front(player1Place[i]);
-    winner.push_front(player2Place[i]);
+    winner.push_front(player1Place.at(i));
+    winner.push_front(player2Place.at(i));
   }
 
   // clear the cards from the place pile
@@ -161,47 +109,56 @@ int main()
   std::vector<Card> player1PlacePile;
   std::vector<Card> player2PlacePile;
 
-  // set up the game loop
-  while (player1.size() > 0 && player2.size() > 0)
+  // set up the game loop and counters
+  int totalRounds = 0, player1Wins = 0, player2Wins = 0, totalWars = 0;
+  while ((player1.size() > 0 && player2.size() > 0) && totalRounds < 99999)
   {
-    std::cout << "Player 1 Deck size: " << player1.size() << " cards.\n";
-    std::cout << "Player 2 Deck size: " << player2.size() << " cards.\n";
+    // std::cout << "Player 1 Deck size: " << player1.size() << " cards.\n";
+    // std::cout << "Player 2 Deck size: " << player2.size() << " cards.\n";
 
     draw(player1, player2, player1PlacePile, player2PlacePile, 1);
+    // std::cout << "Round: " << ++totalRounds << '\n';
+    ++totalRounds;
 
-    switch (compare(player1PlacePile[player1PlacePile.size() - 1].rank, player2PlacePile[player2PlacePile.size() - 1].rank))
+    switch (compare(player1PlacePile.at(player1PlacePile.size() - 1).rank, player2PlacePile.at(player2PlacePile.size() - 1).rank))
     {
     case 1:
-      std::cout << "Player 1 took this battle.\n";
       gather(player1, player1PlacePile, player2PlacePile);
+      ++player1Wins;
       break;
     case -1:
-      std::cout << "Player 2 took this battle.\n";
       gather(player2, player1PlacePile, player2PlacePile);
+      ++player2Wins;
       break;
     default:
-      std::cout << "WAR\n";
       int result;
       do
       {
+        ++totalWars;
         draw(player1, player2, player1PlacePile, player2PlacePile, 3);
-        result = compare(player1PlacePile[player1PlacePile.size() - 1].rank, player2PlacePile[player2PlacePile.size() - 1].rank);
+        result = compare(player1PlacePile.at(player1PlacePile.size() - 1).rank, player2PlacePile.at(player2PlacePile.size() - 1).rank);
       } while (result == 0);
 
       if (result == 1)
       {
-        std::cout << "Player 1 took this battle.\n";
         gather(player1, player1PlacePile, player2PlacePile);
+        ++player1Wins;
       }
       else
       {
-        std::cout << "Player 2 took this battle.\n";
         gather(player2, player1PlacePile, player2PlacePile);
+        ++player2Wins;
       }
     }
   }
 
-  std::cout << (player1.size() == 0) ? "Player 2 Won the war\n" : "Player 1 won the war\n";
+  std::cout << ((totalRounds == 99999) ? "Reached Max Number Of Rounds\n" : "");
+  std::cout << "Outcome of the war:\n";
+  std::cout << "Battle Played: " << totalRounds << '\n';
+  std::cout << "Battles won by Player 1: " << player1Wins << '\n';
+  std::cout << "Battles won by Player 2: " << player2Wins << '\n';
+  std::cout << "Total Wars: " << totalWars << '\n';
+  std::cout << ((totalRounds == 99999) ? ((player1Wins < player2Wins) ? "Player 2 wins by default.\n" : "Player 1 wins by default.\n") : ((player1.size() == 0) ? "Player 2 has won the war.\n" : "Player 1 has won the war.\n"));
 
   return 0;
 }
