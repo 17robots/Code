@@ -1,6 +1,8 @@
 
 #include "Card.hpp"
 
+const int MAX_ROUNDS = 50001;
+
 void shuffle(std::deque<Card> &deck)
 {
   // perform random number of swaps between 26 and 52 with random cards
@@ -100,6 +102,9 @@ int main()
   srand(time(NULL));
 
   shuffle(mainDeck);
+  // std::random_device r;
+  // std::mt19937 g(r());
+  // std::shuffle(mainDeck.begin(), mainDeck.end(), g);
 
   std::deque<Card> player1;
   std::deque<Card> player2;
@@ -111,7 +116,7 @@ int main()
 
   // set up the game loop and counters
   int totalRounds = 0, player1Wins = 0, player2Wins = 0, totalWars = 0;
-  while ((player1.size() > 0 && player2.size() > 0) && totalRounds < 99999)
+  while ((player1.size() > 0 && player2.size() > 0) && totalRounds < MAX_ROUNDS)
   {
     // std::cout << "Player 1 Deck size: " << player1.size() << " cards.\n";
     // std::cout << "Player 2 Deck size: " << player2.size() << " cards.\n";
@@ -152,13 +157,13 @@ int main()
     }
   }
 
-  std::cout << ((totalRounds == 99999) ? "Reached Max Number Of Rounds\n" : "");
+  std::cout << ((totalRounds == MAX_ROUNDS) ? "Reached Max Number Of Rounds\n" : "");
   std::cout << "Outcome of the war:\n";
   std::cout << "Battle Played: " << totalRounds << '\n';
   std::cout << "Battles won by Player 1: " << player1Wins << '\n';
   std::cout << "Battles won by Player 2: " << player2Wins << '\n';
   std::cout << "Total Wars: " << totalWars << '\n';
-  std::cout << ((totalRounds == 99999) ? ((player1Wins < player2Wins) ? "Player 2 wins by default.\n" : "Player 1 wins by default.\n") : ((player1.size() == 0) ? "Player 2 has won the war.\n" : "Player 1 has won the war.\n"));
+  std::cout << ((totalRounds == MAX_ROUNDS) ? ((player1Wins < player2Wins) ? "Player 2 wins by default.\n" : "Player 1 wins by default.\n") : ((player1.size() == 0) ? "Player 2 has won the war.\n" : "Player 1 has won the war.\n"));
 
   return 0;
 }
