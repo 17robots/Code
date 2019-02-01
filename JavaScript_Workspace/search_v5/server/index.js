@@ -7,14 +7,7 @@ const app = express()
 const API_PORT = 8080
 
 function parseMessage(query) {
-    let phrases = []
-    query.split('"').filter((string) => {
-        return string !== "" || string !== " "
-    }).forEach((item) => {
-        
-    })
-
-    return phrases
+    
 }
 
 function getIndicesOf(searchStr, str, caseSensitive) {
