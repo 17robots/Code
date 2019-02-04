@@ -130,7 +130,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=War
+CMAKE_PROJECT_NAME:STATIC=sample
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -182,16 +182,10 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
-Project_BINARY_DIR:STATIC=/mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project/build
+sample_BINARY_DIR:STATIC=/mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project/build
 
 //Value Computed by CMake
-Project_SOURCE_DIR:STATIC=/mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project
-
-//Value Computed by CMake
-War_BINARY_DIR:STATIC=/mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project/build
-
-//Value Computed by CMake
-War_SOURCE_DIR:STATIC=/mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project
+sample_SOURCE_DIR:STATIC=/mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project
 
 
 ########################

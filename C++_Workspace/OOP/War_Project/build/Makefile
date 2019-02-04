@@ -111,17 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named War
+# Target rules for targets named war
 
 # Build rule for target.
-War: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 War
-.PHONY : War
+war: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 war
+.PHONY : war
 
 # fast build rule for target.
-War/fast:
-	$(MAKE) -f CMakeFiles/War.dir/build.make CMakeFiles/War.dir/build
-.PHONY : War/fast
+war/fast:
+	$(MAKE) -f CMakeFiles/war.dir/build.make CMakeFiles/war.dir/build
+.PHONY : war/fast
+
+war.o: war.cpp.o
+
+.PHONY : war.o
+
+# target to build an object file
+war.cpp.o:
+	$(MAKE) -f CMakeFiles/war.dir/build.make CMakeFiles/war.dir/war.cpp.o
+.PHONY : war.cpp.o
+
+war.i: war.cpp.i
+
+.PHONY : war.i
+
+# target to preprocess a source file
+war.cpp.i:
+	$(MAKE) -f CMakeFiles/war.dir/build.make CMakeFiles/war.dir/war.cpp.i
+.PHONY : war.cpp.i
+
+war.s: war.cpp.s
+
+.PHONY : war.s
+
+# target to generate assembly for a file
+war.cpp.s:
+	$(MAKE) -f CMakeFiles/war.dir/build.make CMakeFiles/war.dir/war.cpp.s
+.PHONY : war.cpp.s
 
 # Help Target
 help:
@@ -130,8 +157,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... War"
+	@echo "... war"
 	@echo "... edit_cache"
+	@echo "... war.o"
+	@echo "... war.i"
+	@echo "... war.s"
 .PHONY : help
 
 
