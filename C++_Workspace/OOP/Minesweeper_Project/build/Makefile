@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project
+CMAKE_SOURCE_DIR = /mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/Minesweeper_Project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project/build
+CMAKE_BINARY_DIR = /mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/Minesweeper_Project/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project/build/CMakeFiles /mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/Minesweeper_Project/build/CMakeFiles /mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/Minesweeper_Project/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/Minesweeper_Project/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named war
+# Target rules for targets named minesweeper
 
 # Build rule for target.
-war: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 war
-.PHONY : war
+minesweeper: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 minesweeper
+.PHONY : minesweeper
 
 # fast build rule for target.
-war/fast:
-	$(MAKE) -f CMakeFiles/war.dir/build.make CMakeFiles/war.dir/build
-.PHONY : war/fast
+minesweeper/fast:
+	$(MAKE) -f CMakeFiles/minesweeper.dir/build.make CMakeFiles/minesweeper.dir/build
+.PHONY : minesweeper/fast
 
-war.o: war.cpp.o
+main.o: main.cpp.o
 
-.PHONY : war.o
+.PHONY : main.o
 
 # target to build an object file
-war.cpp.o:
-	$(MAKE) -f CMakeFiles/war.dir/build.make CMakeFiles/war.dir/war.cpp.o
-.PHONY : war.cpp.o
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/minesweeper.dir/build.make CMakeFiles/minesweeper.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-war.i: war.cpp.i
+main.i: main.cpp.i
 
-.PHONY : war.i
+.PHONY : main.i
 
 # target to preprocess a source file
-war.cpp.i:
-	$(MAKE) -f CMakeFiles/war.dir/build.make CMakeFiles/war.dir/war.cpp.i
-.PHONY : war.cpp.i
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/minesweeper.dir/build.make CMakeFiles/minesweeper.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-war.s: war.cpp.s
+main.s: main.cpp.s
 
-.PHONY : war.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-war.cpp.s:
-	$(MAKE) -f CMakeFiles/war.dir/build.make CMakeFiles/war.dir/war.cpp.s
-.PHONY : war.cpp.s
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/minesweeper.dir/build.make CMakeFiles/minesweeper.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -157,11 +157,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... war"
+	@echo "... minesweeper"
 	@echo "... edit_cache"
-	@echo "... war.o"
-	@echo "... war.i"
-	@echo "... war.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 
