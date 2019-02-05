@@ -13,7 +13,7 @@ enum Suit
   Spades
 };
 
-constexpr std::initializer_list<Suit> allSuits = {Clubs, Diamonds, Hearts, Spades}; // so that we can build the decks later
+std::initializer_list<Suit> allSuits = {Clubs, Diamonds, Hearts, Spades}; // so that we can build the decks later
 
 enum Rank
 {
@@ -32,7 +32,7 @@ enum Rank
   Ace
 };
 
-constexpr std::initializer_list<Rank> allRanks = {Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace}; // so that we can build the decks later
+std::initializer_list<Rank> allRanks = {Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace}; // so that we can build the decks later
 
 struct Card
 {
