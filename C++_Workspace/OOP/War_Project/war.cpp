@@ -97,15 +97,12 @@ int main()
     {
       mainDeck.push_back(Card(suit, rank));
     }
-  }
+  } 
 
-  srand(time(NULL));
-
-  shuffle(mainDeck);
-  // std::random_device r;
-  // std::mt19937 g(r());
-  // std::shuffle(mainDeck.begin(), mainDeck.end(), g);
-
+  std::random_device rng;
+  std::minstd_rand prng(rng());
+  std::shuffle(mainDeck.begin(), mainDeck.end(), prng);
+ 
   std::deque<Card> player1;
   std::deque<Card> player2;
 

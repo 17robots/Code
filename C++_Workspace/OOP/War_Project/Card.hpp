@@ -4,7 +4,8 @@
 #include <iostream>
 #include <random>
 #include <algorithm>
-
+#include <algorithm>
+#include <random>
 enum Suit
 {
   Clubs = 1,

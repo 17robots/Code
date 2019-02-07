@@ -1,3 +1,3 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.2)
 project(War)
-add_executable(War main.cpp)
+add_executable(War war.cpp)
