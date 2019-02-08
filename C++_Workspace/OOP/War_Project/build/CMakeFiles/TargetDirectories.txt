@@ -1,3 +1,0 @@
-/mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project/build/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project/build/CMakeFiles/war.dir
-/mnt/c/Users/mdray/Documents/Code/C++_Workspace/OOP/War_Project/build/CMakeFiles/edit_cache.dir
