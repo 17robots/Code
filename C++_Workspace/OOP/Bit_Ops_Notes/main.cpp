@@ -8,5 +8,9 @@ int main() {
 	std::cout << testInt << std::endl;
 	// rank = last 6 
 	// suit = first 2
+	// setting the bits for the constructor
+	char suit = 3, rank = 4;
+	int newtest = (suit << 6) | rank;
+	std::cout << newtest << std::endl;	
 	return 0;
 }
