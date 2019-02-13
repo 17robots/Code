@@ -5,14 +5,7 @@
 // ignore the first 2 bits
 //
 
-struct Suit {}
+#include <iostream>
 
-struct Rank {}
 
-class Card {
-    private:
-	Rank rank;
-	Suit suit;
-    public:
-	
-}
+};
