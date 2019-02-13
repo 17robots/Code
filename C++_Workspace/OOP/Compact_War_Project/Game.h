@@ -99,7 +99,7 @@ public:
     }
   }
 
-  void start()
+  void run()
   {
     if (mainDeck.empty())
     {
@@ -146,5 +146,25 @@ public:
       }
       }
     }
+  }
+  
+  void printResults() {
+    std::cout << ((totalRounds == MAX_ROUNDS) ? "Reached Max Number Of Rounds\n" : "");
+    std::cout << "Outcome of the war:\n";
+    std::cout << "Battle Played: " << totalRounds << '\n';
+    std::cout << "Battles won by Player 1: " << player1Wins << '\n';
+    std::cout << "Battles won by Player 2: " << player2Wins << '\n';
+    std::cout << "Total Wars: " << totalWars << '\n';
+    std::cout << ((totalRounds == MAX_ROUNDS) ? ((player1Wins < player2Wins) ? "Player 2 wins by default.\n" : "Player 1 wins by default.\n") : ((player1Deck.size() == 0) ? "Player 2 has won the war.\n" : "Player 1 has won the war.\n"));
+  }
+  
+  std::ostream& operator << (std::ostream& os, Game* game) {
+    os << ((totalRounds == MAX_ROUNDS) ? "Reached Max Number Of Rounds\n" : "");
+    os << "Outcome of the war:\n";
+    os << "Battle Played: " << totalRounds << '\n';
+    os << "Battles won by Player 1: " << player1Wins << '\n';
+    os << "Battles won by Player 2: " << player2Wins << '\n';
+    os << "Total Wars: " << totalWars << '\n';
+    os << ((totalRounds == MAX_ROUNDS) ? ((player1Wins < player2Wins) ? "Player 2 wins by default.\n" : "Player 1 wins by default.\n") : ((player1Deck.size() == 0) ? "Player 2 has won the war.\n" : "Player 1 has won the war.\n"));
   }
 }
