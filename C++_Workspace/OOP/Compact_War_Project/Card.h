@@ -1,14 +1,14 @@
 #include <iostream>
 
-Struct Suit {
+struct Suit {
 	int suit;
-	Suit(char card) : suit((test >> 4) & 0x3) {}
+	Suit(char card) : suit((card >> 4) & 0x3) {}
 };
 
-Struct Rank {
+struct Rank {
 	int rank;
 	Rank(char card) : rank(card & 0xf) {}
-}
+};
 
 class Card {
 	private:
@@ -29,9 +29,9 @@ class Card {
 			if(a.getRank() == b.getRank())
 				return false;
 		}
-		bool operator>(Card a, Card b) { return b < a; }
-		bool operator<=(Card a, Card b) { return !(b < a); }
-		bool operator>=(Card a, Card b) { return !(a < b); }
+		bool operator > (Card a, Card b) { return b < a; }
+		bool operator <= (Card a, Card b) { return !(b < a); }
+		bool operator >= (Card a, Card b) { return !(a < b); }
 		std::ostream& operator<<(std::ostream& os, Suit s) {
 			switch(s) {
 				case 0: return os << "Clubs";
@@ -40,7 +40,7 @@ class Card {
 				case 3: return os << "Spades";
 			}
 		}
-		std::ostream& operator<<(std::ostream& os, Rank r) {
+		std::ostream& operator << (std::ostream& os, Rank r) {
 			switch(r) {
 				case 0: return os << "2";
 				case 1: return os << "3";
@@ -57,5 +57,5 @@ class Card {
 				case 12: return os << "A";
 			}
 		}
-		std::ostream& opserator(std::ostream& os, Card c) { return os << c.getRank() << " of " << c.getSuit() << std::endl; }
+		std::ostream& operator << (std::ostream& os, Card c) { return os << c.getRank() << " of " << c.getSuit() << std::endl; }
 }	
