@@ -17,31 +17,31 @@ class Card {
 	public:
 		Card(char something) : suit(something), rank(something) {}
 		Card(Suit newSuit, Rank newRank) : suit(newSuit), rank(newRank) {}
-		Rank getRank() { return rank; }
-		Suit getRank() { return suit; }
-		bool operator==(Card a, Card b) { return a.getRank() == b.getRank() && a.getSuit() == b.getSuit(); }
-		bool operator!=(Card a, Card b) { return !(a == b); }
-		bool operator<(Card a, Card b) {
-			if(a.getRank() > b.getRank())
+		int getRank() { return rank.rank; }
+		int getSuit() { return suit.suit; }
+		bool operator == (Card& b) { this->getRank() == b.getRank() && this->getSuit() == b.getSuit(); }
+		bool operator != (Card& b) { return !(*(this) == b); }
+		bool operator <  (Card& b) {
+			if(this->getRank() > b.getRank())
 				return true;
-			if(b.getRank() > a.getRank())
+			if(b.getRank() > this->getRank())
 				return false;
-			if(a.getRank() == b.getRank())
+			if(this->getRank() == b.getRank())
 				return false;
 		}
-		bool operator > (Card a, Card b) { return b < a; }
-		bool operator <= (Card a, Card b) { return !(b < a); }
-		bool operator >= (Card a, Card b) { return !(a < b); }
-		std::ostream& operator<<(std::ostream& os, Suit s) {
-			switch(s) {
+		bool operator >  (Card& b) { return b < *(this); }
+		bool operator <= (Card& b) { return !(b < *(this)); }
+		bool operator >= (Card& b) { return !(*(this) < b); }
+		friend std::ostream& operator<<(std::ostream& os, const Suit& s) {
+			switch(s.suit) {
 				case 0: return os << "Clubs";
 				case 1: return os << "Diamonds";
 				case 2: return os << "Hearts";
 				case 3: return os << "Spades";
 			}
 		}
-		std::ostream& operator << (std::ostream& os, Rank r) {
-			switch(r) {
+		friend std::ostream& operator << (std::ostream& os, const Rank& r) {
+			switch(r.rank) {
 				case 0: return os << "2";
 				case 1: return os << "3";
 				case 2: return os << "4";
@@ -57,5 +57,5 @@ class Card {
 				case 12: return os << "A";
 			}
 		}
-		std::ostream& operator << (std::ostream& os, Card c) { return os << c.getRank() << " of " << c.getSuit() << std::endl; }
-}	
+		friend std::ostream& operator << (std::ostream& os, Card& c) { return os << c.getRank() << " of " << c.getSuit() << std::endl; }
+};
