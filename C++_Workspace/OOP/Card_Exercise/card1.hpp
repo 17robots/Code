@@ -1,16 +1,11 @@
-#include <string>
+#ifndef CARD1_HPP
+#define CARD1_HPP
 
-// this is the card class using the union
-
-enum Color {
-	Black,
-	Red
-};
-
-struct Suit {
-	Color color;
-	int suitValue;
-	Suit(Color newColor, int newSuitValue) : color(newColor), suitValue(newSuitValue) {}	
+enum Suit {
+	Clubs,
+	Diamonds,
+	Hearts,
+	Spades	
 };
 
 enum Rank {
@@ -27,24 +22,41 @@ enum Rank {
 	Queen,
 	King,
 	Ace,
-	Joker	
+	Joker
 };
 
-class StandardCard {
-	private:
-		Rank rank;
-		Suit suit;
-	public:
-		StandardCard();
-		StandardCard(Suit s, Rank r);	
+enum Color {
+	Black,
+	Red
 };
 
-class JokerCard {
+class Card {
 	private:
-		Color color;
-		Rank rank;
+		Suit s;
+		Rank r;
 	public:
-		JokerCard();
-		JokerCard(Color newColor);
-		Color getColor();
+		
 };
+
+class Joker {
+	private:
+		Color c;
+		Rank r;
+	public:
+		
+};
+
+class PlayingCard {
+	private:
+		Rank r;
+		Suit s,
+		Color c;
+		union {
+			Card as_Standard_Card;
+			Joker as_Joker_Card;
+		};	
+	public:
+		
+};
+
+#endif

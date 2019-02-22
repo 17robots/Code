@@ -7,46 +7,10 @@
 #include <sstream>
 
 std::list<int>::iterator gt(std::list<int>::iterator start, std::list<int>::iterator stop, int x) {
-    std::list<int>::iterator test = start;
-    return test;
-		// implement this later
-}
-
-void swap(int i,int j, std::vector<int>& a){
-    int temp = a[i];
-    a[i] = a[j];
-    a[j] = temp;
-}
-
-int partition(std::vector<int>& a, int i, int j) {
-	int pivot = a[j];    // pivot 
-    int lowerIndex = (i - 1);  // Index of smaller element 
-  
-    for (int k = i; k <= j - 1; ++k) { 
-        // If current element is smaller than or 
-        // equal to pivot 
-        if (a[k] <= pivot) 
-        { 
-            i++;    // increment index of smaller element 
-            swap(lowerIndex, k, a); 
-        } 
-    } 
-    swap(lowerIndex + 1, j, a); 
-    return (lowerIndex + 1); 
-}
-
-void sort(std::vector<int>& sortThis, int lower, int upper) {
-	if (lower < upper) 
-    { 
-        /* pi is partitioning index, sortThis[pi] is now 
-           at right place */
-        int pi = partition(sortThis, lower, upper); 
-  
-        // Separately sort elements before 
-        // partition and after partition 
-        sort(sortThis, lower, pi - 1); 
-        sort(sortThis, pi + 1, upper); 
-    } 
+	while(start != stop && *start < x) {
+		++start;
+	}
+	return start;
 }
 
 void printAdjList(std::vector<std::list<int>>& adjList) {
@@ -94,16 +58,14 @@ int main(int argc, char* argv[], char* envp[]) {
 	std::string line;
 	int counter = 0;
 	while(std::getline(graphFile, line)) {
-		std::vector<int> sortMe;
+		std::list<int> addMe;
 		std::stringstream stream(line);
 		while(stream) {
 			int n; // the number to be read
 			stream >> n;
-			sortMe.push_back(n);
-		}
-		sort(sortMe, 0, sortMe.size() - 1);
-		graphList.push_back(std::list<int>({ std::begin(sortMe), std::end(sortMe) })); // copy the sorted vector as a list into the graphList vector
-		++counter; // next index
+			addMe.insert(gt(addMe.begin(), addMe.end(), n), n);
+		}	
+		graphList.push_back(addMe);
 	}
 
 	std::cout << "List read. Printing Adjacency List:\n";
