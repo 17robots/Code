@@ -35,14 +35,17 @@ class Card {
 		Suit s;
 		Rank r;
 	public:
-		
+		Card(Suit s, Rank r);
+		operator <<(std::ostream& os, Card &card);
 };
 
 class Joker {
 	private:
 		Color c;
 		Rank r;
-	public:
+	private:
+		Joker(Color color, Rank rank);
+		std::ostream& operator <<(std::ostream& os, Joker &joker);
 		
 };
 
@@ -54,8 +57,22 @@ class PlayingCard {
 		union {
 			Card as_Standard_Card;
 			Joker as_Joker_Card;
-		};	
+		};
 	public:
+		PlayingCard();
+		PlayingCard(Color color);
+		PlayingCard(Suit suit, Rank rank);
+		bool isJoker();
+		bool isCard();
+		Card asCard();
+		Joker asJoker();
+		bool operator==(PlayingCard& card);
+		bool operator==(Card& card);
+		bool operator==(Joker& joker);
+		std::ostream& operator <<(std::ostream& os, PlayingCard &card);
+		Rank rank();
+		Suit suit();
+		Color color();
 		
 };
 
