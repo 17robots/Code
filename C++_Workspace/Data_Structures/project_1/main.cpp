@@ -22,14 +22,45 @@ void printAdjList(std::vector<std::list<int>>& adjList) {
 	}
 }
 
-bool connComponent(const std::list<int> & com1, const std::list<int> & com2) {
-  return true;
-	// implement this later
+bool contains(std::list<int> & list1, int y) {
+	for(auto x : list1) {
+		if(x == y) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool connComponent(const std::list<int>& com1, const std::list<int>& com2) {
+  if(com1.size() > com2.size()) {
+  	for(auto x : com2) {
+  		if(contains(com1, x)) {
+  			return true;
+  		}
+  	}
+  	return false;
+  } else {
+  	for(auto x : com1) {
+  		if(contains(com2, x)) {
+  			return true;
+  		}
+  	}
+  	return false;
+  }
 }
 
 bool merge(std::list<int> & list1, std::list<int> & list2) {
-  return true;
-	// implement this later
+	if(list1.size() > list2.size()) {
+		for(auto x : list2) {
+			list1.insert(gt(list1.begin(), list1.end(), x), x);
+		}
+		return true;
+	} else {
+		for(auto x : list1) {
+			list2.insert(gt(list2.begin(), list2.end(), x), x);
+		}
+		return false;
+	}
 }
 
 int main(int argc, char* argv[], char* envp[]) {
@@ -56,7 +87,6 @@ int main(int argc, char* argv[], char* envp[]) {
 
 	// now start reading and making the adjacency lists
 	std::string line;
-	int counter = 0;
 	while(std::getline(graphFile, line)) {
 		std::list<int> addMe;
 		std::stringstream stream(line);
@@ -71,9 +101,46 @@ int main(int argc, char* argv[], char* envp[]) {
 	std::cout << "List read. Printing Adjacency List:\n";
 
 	printAdjList(graphList);
-
-	// logic for menu loop interface for the merging of lists
 	
+	// logic for menu loop interface for the merging of lists
+	std::string responseString;
+	do {
+		std::cout << "Enter two list ids to potentially merge together or -1 to quit: ";
+		//if(responseString != "") { std::getline(std::cin, responseString); } // if the responseString has data, clear it out and ask again
+		std::getline(std::cin, responseString);
+		
+		if(responseString == "-1") { break; } // break the loop immediately
+		
+		// create the string stream to pull the ints from
+		std::stringstream stream(responseString);
+		
+		int list1, list2;
+		
+		// exception handling in case input is not as desired
+		stream >> list1 >> list2;
+		if(stream.fail()) {
+			std::cout << "Invalid parameters please try again" << std::endl;
+			responseString = "repeat"; // force the loop to repeat
+			continue;
+		}
+		
+		// check to see if the lists are mergable
+		if(connComponent(graphList[list1], graphList[list2])) {
+			std::cout << "These two can be merged. Merging...\n";
+			if(merge(graphList[list1], graphList[list2])) {
+				graphList.erase(graphList.begin() + list2);
+				responseString = "repeat";
+			} else {
+				graphList.erase(graphList.begin() + list1);
+				responseString = "repeat";
+			}
+		} else {
+			std::cout << "These two lists could not be merged: no common index between the two.\n";
+			responseString = "repeat";
+			continue;
+		}
+		
+	} while(responseString != "-1");
 
 	// final printout logic
 	

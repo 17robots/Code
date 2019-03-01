@@ -1,3 +1,0 @@
-/home/mdray/Documents/Code/C++_Workspace/OOP/Minesweeper_Project/build/CMakeFiles/rebuild_cache.dir
-/home/mdray/Documents/Code/C++_Workspace/OOP/Minesweeper_Project/build/CMakeFiles/minesweeper.dir
-/home/mdray/Documents/Code/C++_Workspace/OOP/Minesweeper_Project/build/CMakeFiles/edit_cache.dir

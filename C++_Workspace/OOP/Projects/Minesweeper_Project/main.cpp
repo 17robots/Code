@@ -9,14 +9,15 @@ main()
 
   RenderWindow app(VideoMode(400, 400), "Minesweeper!");
 
-  int w = 32;
+  int w = 32; // width of the square in pixels
   int grid[12][12];
-  int sgrid[12][12]; // for showing
+  int sgrid[12][12]; // for showing - the sprite grid
 
   Texture t;
   t.loadFromFile("images/tiles.jpg");
   Sprite s(t);
 
+  // laying the mines
   for (int i = 1; i <= 10; i++)
     for (int j = 1; j <= 10; j++) {
       sgrid[i][j] = 10;
@@ -25,7 +26,8 @@ main()
       else
         grid[i][j] = 0;
     }
-
+    
+  // laying out the numbers for the mines
   for (int i = 1; i <= 10; i++)
     for (int j = 1; j <= 10; j++) {
       int n = 0;
@@ -49,11 +51,14 @@ main()
         n++;
       grid[i][j] = n;
     }
-
+  
+  // actual game loop
   while (app.isOpen()) {
     Vector2i pos = Mouse::getPosition(app);
+    
+    // which square they are on
     int x = pos.x / w;
-    int y = pos.y / w;
+    int y = pos.y / w; 
 
     Event e;
     while (app.pollEvent(e)) {
