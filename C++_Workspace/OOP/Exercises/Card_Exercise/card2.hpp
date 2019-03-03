@@ -5,7 +5,8 @@ enum Suit {
     Clubs,
     Diamonds,
     Hearts,
-    Spades
+    Spades,
+    Joker
 };
 
 enum Rank {
