@@ -10,10 +10,9 @@ void employees() {
 }
 
 int main() {
-	
+	employee(); // grab the file for data and read it in
 	clock_t start, stop;
-	start = clock();
-	
+	start = clock();	
 	stop = clock();
 	
 	std::cout << "clock ticks: " << double(stop-start) << '\n';
