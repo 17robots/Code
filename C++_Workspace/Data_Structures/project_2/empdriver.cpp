@@ -2,7 +2,7 @@
 #include <ctime>
 
 void employee() {
-
+	
 }
 
 void employees() {
