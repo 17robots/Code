@@ -12,5 +12,3 @@ void Employee::print(std::ostream &out = std::cout)
     out << identifier << " " << lastname << " " << salary << ": ";
 }
 
-
-
