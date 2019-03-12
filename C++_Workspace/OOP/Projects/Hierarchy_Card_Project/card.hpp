@@ -16,7 +16,7 @@ enum Rank {
 	Queen,
 	King,
 	Ace,
-	Joker
+	Joke
 };
 
 enum Color {
@@ -40,44 +40,69 @@ class Card {
 		Kind getKind() { return kind; }
 		bool isJoker() { return this->getKind() == JokerCard; }
 		bool isStandard() { return !(this->isJoker()); }
+		friend std::ostream& operator<<(std::ostream& os, Card& c);
 };
 
-class Club : Card {
+class Club : public Card {
+	private:
+		Rank rank;
+		Color color;
+		Kind kind;
 	public:
 		Club();
 		Club(Rank r);
-		std::ostream& operator<<(std::ostream& os);
+		friend std::ostream& operator<<(std::ostream& os, Club& c);
+
 };
 
-class Diamond : Card {
+class Diamond : public Card {
+	private:
+		Color color;
+		Kind kind;
+		Rank rank;
 	public:
 		Diamond();
 		Diamond(Rank r);
-		std::ostream& operator<<(std::ostream& os);
+		friend std::ostream& operator<<(std::ostream& os, Diamond& c);
+
 };
 
-class Heart : Card {
+class Heart : public Card {
+	private:
+		Rank rank;
+		Kind kind;
+		Color color;
 	public:
 		Heart();
 		Heart(Rank r);
-		std::ostream& operator<<(std::ostream& os);
+		friend std::ostream& operator<<(std::ostream& os, Heart& c);
+
 };
 
-class Spade : Card {
+class Spade : public Card {
+	private:
+		Kind kind;
+		Rank rank;
+		Color color;
 	public:
 		Spade();
 		Spade(Rank r);
-		std::ostream& operator<<(std::ostream& os);
+		friend std::ostream& operator<<(std::ostream& os, Spade& c);
+
 };
 
-class Joker : Card {
+class Joker : public Card {
+	private:
+		Color color;
+		Rank rank;
+		Kind kind;
 	public:
 		Joker();
 		Joker(Color c);
-		std::ostream& operator<<(std::ostream& os);
+		friend std::ostream& operator<<(std::ostream& os, Joker& c);
 };
 
-struct  Deck : std::deque<Card*> {
+struct Deck : public std::deque<Card*> {
 		using std::deque<Card*>::deque;
 };
 

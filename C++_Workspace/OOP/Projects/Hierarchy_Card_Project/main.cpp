@@ -7,10 +7,6 @@ int main() {
 		new Heart(Ace),
 		new Spade(Ace),
 	};
-	
-	for(auto x : d) {
-		std::cout << x << '\n';
-		std::cout << "Card type: " << (x->isJoker() ? "Joker\n" : "Standard\n");
-	}
+	std::cout << *(d[0]) << std::endl;
 	return 0;
 }
