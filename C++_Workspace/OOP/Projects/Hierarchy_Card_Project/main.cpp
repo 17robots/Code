@@ -1,4 +1,4 @@
-#include "card.hpp"
+#include "card2.hpp"
 
 int main() {
     Deck d {
@@ -6,10 +6,11 @@ int main() {
         new Diamond(Ace),
         new Heart(Ace),
         new Spade(Ace),
-        new Joker(Red),
+        new Joker(Red)
     };
     
-    std::cout << d << '\n';
-    
+    for(auto const& x : d) {
+        std::cout << *x << std::endl;
+    }
     return 0;
 }

@@ -4,6 +4,12 @@
 #include <sstream>
 #include <fstream>
 
+/*
+Filename: empdriver.cpp
+Author: Matthew Dray
+Purpose: Run the program and control input and output for the program
+*/
+
 void employee(std::vector<Employee>& emplist) {
 	std::cout << "============ Creating Maps ============\n\n";
 	clock_t start, stop;

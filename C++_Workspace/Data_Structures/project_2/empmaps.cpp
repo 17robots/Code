@@ -3,6 +3,12 @@
 #include <fstream>
 #include <sstream>
 
+/*
+Filename: empmaps.cpp
+Author: Matthew Dray
+Purpose: Implementation file for empmaps.h
+*/
+
 std::vector<Employee> employees() {
 	std::cout << "====== EMPLOYEE MAPPING PROGRAM ======\n";
 	std::string filename;
@@ -11,12 +17,9 @@ std::vector<Employee> employees() {
 	std::ifstream empFile;
 	empFile.open(filename);
 	
-	while(!empFile) { // while file does not exist
-		std::cout << "Error when trying to open file: file does not exist or invalid name.\n";
-		std::cout << "Please enter a different file name: ";
-		std::cin >> filename;
-		empFile.close(); // close the old file
-		empFile.open(filename); // try to open the new one
+	if(!empFile) {
+		std::cerr << "Error Opening File: Filename " << filename << " not found" << std::endl;
+		abort();
 	}
 	
 	// begin reading in the file
@@ -41,12 +44,8 @@ std::map<int,std::vector<Employee>> mapEmpDept(std::vector<Employee>& emp) {
 	std::map<int,std::vector<Employee>> returnedMap;
 	// go through every employee
 	for (auto const& x : emp) {
-		if(returnedMap.find(x.id()/100) == returnedMap.end()) { // if the department does not exist
-			returnedMap[x.id()/100] = std::vector<Employee>(); // create the department
-			returnedMap[x.id()/100].push_back(x); // add the employee to that department
-		} else { // the department does exist
-			returnedMap[x.id()/100].push_back(x);
-		}
+		int dept = x.id()/100;
+		returnedMap[dept].push_back(x); // add the employee to that department
 	}
 	return returnedMap;
 }
@@ -56,12 +55,7 @@ std::map<int,std::vector<Employee>> mapSalRange(std::vector<Employee>& emp) {
 	// go through every employee
 	for(auto const& x : emp) {
 		int range = (x.sal()/10000) * 10000;
-		if(returnedMap.find(range) == returnedMap.end()) {
-			returnedMap[range] = std::vector<Employee>();
-			returnedMap[range].push_back(x);
-		} else {
-			returnedMap[range].push_back(x);	
-		}
+		returnedMap[range].push_back(x);
 	}
 	return returnedMap;
 }
@@ -77,12 +71,8 @@ std::unordered_map<int,std::vector<Employee>> umapEmpDept(std::vector<Employee>&
 	std::unordered_map<int,std::vector<Employee>> returnedMap;
 	// go through every employee
 	for (auto const& x : emp) {
-		if(returnedMap.find(x.id()/100) == returnedMap.end()) { // if the department does not exist
-			returnedMap[x.id()/100] = std::vector<Employee>(); // create the department
-			returnedMap[x.id()/100].push_back(x); // add the employee to that department
-		} else { // the department does exist
-			returnedMap[x.id()/100].push_back(x);
-		}
+		int dept = x.id()/100;
+		returnedMap[dept].push_back(x); // add the employee to that department
 	}
 	return returnedMap;
 }
@@ -92,12 +82,7 @@ std::unordered_map<int,std::vector<Employee>> umapSalRange(std::vector<Employee>
 	// go through every employee
 	for(auto const& x : emp) {
 		int range = (x.sal()/10000) * 10000;
-		if(returnedMap.find(range) == returnedMap.end()) {
-			returnedMap[range] = std::vector<Employee>();
-			returnedMap[range].push_back(x);
-		} else {
-			returnedMap[range].push_back(x);
-		}	
+		returnedMap[range].push_back(x);
 	}
 	return returnedMap;
 }

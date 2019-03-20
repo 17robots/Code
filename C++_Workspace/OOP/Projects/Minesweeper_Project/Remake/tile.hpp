@@ -1,16 +1,12 @@
-#ifndef TILE_HPP
-#define TILE_HPP
+#pragma once
 
 class Tile {
     private:
-    sf::Sprite s;
     int spriteValue;
     
     public:
     Tile();
     Tile(int spriteValue);
-    setTile();
-    redrawSprite();
+    setTile(int newTile);
+    int getSpriteValue() { return spriteValue; }
 };
-
-#endif

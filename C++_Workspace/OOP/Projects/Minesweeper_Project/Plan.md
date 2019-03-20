@@ -10,20 +10,20 @@ It looks like there are a couple of stages to the program
 - Game Loop
 
 ## Create The Grid
-- [ ] Grid Class
 - [ ] Tile Class
+- [ ] Grid Class - Contains Tile Class
 
 ## Lay The Mines
-- [ ] Change value to update Tile Texture
-- [ ] Update texture
+- [ ] Change value to update Tile Texture (Use tile.setTile)
+- [ ] Update texture (Use tile.redrawSprite())
 
 ## Calculate The Numbers
-- [ ] Interface for generating numbers
-- [ ] Interface between board states
+- [ ] Interface for generating numbers (Use grid.calculateNumbers)
+- [ ] Interface between board states (Use setTile and redrawSprite in the game loop)
 
 ## Game Loop
 - [ ] Game Class (runs the program to clean up main)
-- [ ] Update all textures
+- [ ] Update all textures (setTile and redrawSprites)
 
 ## Files
 - [x] **main.cpp:** Driver for the game
