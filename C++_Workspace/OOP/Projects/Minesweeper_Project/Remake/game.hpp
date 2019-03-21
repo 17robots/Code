@@ -3,7 +3,7 @@
 
 class Game {
     private:
-    sf::RenderWindow window;
+    sf::RenderWindow* window;
     Grid grid;
     int w; // width of the tiles
     public:
@@ -11,6 +11,6 @@ class Game {
     Game(int blockWidth, Grid grid);
     Grid getGrid() { return grid; }
     int getWidth() { return w; }
-    RenderWindow getWindow() { return window; }
-    run();
-}
+    sf::RenderWindow& getWindow() { return *window; }
+    void run();
+};

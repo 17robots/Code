@@ -14,9 +14,9 @@ class Grid {
     public:
     Grid();
     Grid(std::string imgLoc);
-    int** getShown() { return shownTiles; }
-    int** getTiles() { return tiles; }
-    Sf::Sprite getSprite() { return s; }
-    mineLay();
-    generateNumbers();
+    Tile (*getShown())[12] { return shownTiles; }
+    Tile (*getTiles())[12] { return tiles; }
+    sf::Sprite getSprite() { return s; }
+    void mineLay();
+    void generateNumbers();
 };

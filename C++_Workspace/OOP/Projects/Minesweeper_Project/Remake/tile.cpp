@@ -8,7 +8,7 @@ Tile::Tile(int spriteValue) {
     
 }
 
-Tile::setTile() {
+void Tile::setTile() {
     
 }
 

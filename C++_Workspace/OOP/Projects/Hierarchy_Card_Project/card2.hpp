@@ -122,3 +122,4 @@ std::string getNameFromEnum(const Color& c) {
     case Black: return "Black";
   }
 }
+

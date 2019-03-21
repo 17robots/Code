@@ -1,10 +1,12 @@
 #include "game.hpp"
 
-Game::Game() {
-    
+Game::Game() : w(32), grid(Grid("")) {
+    window = new sf::RenderWindow(sf::VideoMode(400, 400), "Blank Window");    
 }
 
-Game::Game(int blockWidth, Grid grid) : w(blockWidth), grid(grid) {
+Game::Game(int blockWidth, Grid& grid) : w(blockWidth), grid(grid) {
+    window = new sf::RenderWindow(sf::VideoMode(400,400), "Minesweeper");
+    sf::RenderWindow newWindow(sf::VideoMode(400, 400), "Minesweeper!");
     this->getGrid().mineLay();
     this->getGrid().generateNumbers();
 }

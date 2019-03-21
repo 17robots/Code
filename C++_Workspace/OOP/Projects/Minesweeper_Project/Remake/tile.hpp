@@ -7,6 +7,6 @@ class Tile {
     public:
     Tile();
     Tile(int spriteValue);
-    setTile(int newTile);
+    void setTile(int newTile);
     int getSpriteValue() { return spriteValue; }
 };

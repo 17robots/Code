@@ -7,7 +7,7 @@ int main() {
     srand(time(0));
     
     Grid gameGrid("images/tiles.jpg");
-    Game game(32, grid);
+    Game game(32, gameGrid);
     game.run();
     
     return 0;
