@@ -8,10 +8,10 @@ Grid::Grid(std::string imgLoc) {
     
 }
 
-Grid::mineLay() {
+void Grid::mineLay() {
     
 }
 
-Grid::generateNumbers() {
+void Grid::generateNumbers() {
     
 }

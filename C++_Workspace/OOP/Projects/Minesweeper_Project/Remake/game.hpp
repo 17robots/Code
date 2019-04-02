@@ -11,6 +11,6 @@ class Game {
     Game(int blockWidth, Grid grid);
     Grid getGrid() { return grid; }
     int getWidth() { return w; }
-    sf::RenderWindow& getWindow() { return *window; }
+    sf::RenderWindow* getWindow() { return window; }
     void run();
 };
