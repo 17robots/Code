@@ -13,7 +13,7 @@ Game::Game(int blockWidth, Grid grid) : w(blockWidth), grid(grid) {
 
 void Game::run() {
     // the grid will be created when the game is initialized (or be included in
-    // the constructor, so we can just) jump into laying the mines, creating the
+    // the constructor), so we can just jump into laying the mines, creating the
     // numbers and running the game loop, unless we wanted to do that all in the
     // constructor of the game, which we can do
     // for now just write the code here and then do it later
