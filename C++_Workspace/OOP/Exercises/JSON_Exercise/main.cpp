@@ -13,6 +13,6 @@ main(int argc, char* argv[])
 
     json::Value* val = json::parse(s);
 
-    // std::cout << size(val) << ' ' << height(val) << '\n';
-    std::cout << *val << '\n';
+    std::cout << size(val) << ' ' << height(val) << '\n';
+    // std::cout << *val << '\n';
 }
