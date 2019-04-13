@@ -1,7 +1,9 @@
 #pragma once
+#include <utility>
+#include <vector>
 
 template <typename Comparable>
-void heapSort(vector<Comparable> &a) {
+void heapSort(std::vector<Comparable> &a) {
     for(int i = a.size() / 2 - 1; i >= 0; --i) {
         percDown(a, i, a.size());
     }
@@ -16,7 +18,7 @@ inline int leftChild(int i) {
 }
 
 template <typename Comparable>
-void percDown(vector<Comparable> &a, int i, int n) {
+void percDown(std::vector<Comparable> &a, int i, int n) {
     int child;
     Comparable tmp;
     
