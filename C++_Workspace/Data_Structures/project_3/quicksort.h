@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+#include <utility>
 
 template <typename Comparable>
 const Comparable& median3(std::vector<Compartable> &a, int left, int right) {
@@ -20,7 +22,7 @@ const Comparable& median3(std::vector<Compartable> &a, int left, int right) {
     return a[right - 1];
 
 template <typename Comparable>
-void quickSort(vector<Comparable> &a, int left, int right) {
+void quickSort(std::vector<Comparable> &a, int left, int right) {
     // removed the if statement condition from before and changed to the one below
     if(a.size() >= 1) {
         const Comparable& pivot = median3(a, left, right);
@@ -44,6 +46,6 @@ void quickSort(vector<Comparable> &a, int left, int right) {
 }
 
 template<typename Comparable>
-void quickSort(vector <Comparable> &a) {
+void quickSort(std::vector <Comparable> &a) {
     quickSort(a, 0, a.size() - 1);
 }
