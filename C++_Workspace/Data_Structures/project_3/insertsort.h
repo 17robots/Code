@@ -1,6 +1,9 @@
 #pragma once
+#include <vector>
+#include <utility>
+
 template <typename Comparable>
-void insertionSort(vector<Comparable> &a) {
+void insertionSort(std::vector<Comparable> &a) {
     for(int p = 1; p < a.size(); ++p) {
         Comparable tmp = std::move(a[p]);
         
