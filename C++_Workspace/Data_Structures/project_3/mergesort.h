@@ -44,3 +44,4 @@ void mergeSort(std::vector<Comparable> &a) {
 	std::vector<Comparable> tmpArray(a.size());
 	mergeSort(a, tmpArray, 0, a.size() - 1);
 }
+ 
