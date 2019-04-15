@@ -2,12 +2,14 @@
 #include "quicksort.h"
 #include "heapsort.h"
 #include "insertsort.h"
+#include "mergesort.h"
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <ctime>
 
 int main() {
+    clock_t start, stop;
     std::cout << "Sorting Program\n";
     std::cout << "Please enter the name of a file: ";
     std::string filename; 
@@ -32,11 +34,11 @@ int main() {
 
     std::cout << "File vector loaded. Please enter a number of elements to generate: ";
     
-    int elememts;
+    int elements;
     
-    std::cin >> elememnts;
+    std::cin >> elements;
     
-    while(cin.fail()) {
+    while(std::cin.fail()) {
         std::cout << "Please enter a number: ";
         std::cin >> elements;
     }
@@ -44,7 +46,7 @@ int main() {
     // create 3 vectors
     std::vector<int> ascending;
     std::vector<int> descending;
-    std::vectot<int> random;
+    std::vector<int> random;
     
     int seed = rand() % 100 + 1;
 
@@ -54,191 +56,178 @@ int main() {
         descending.push_back(seed * seed - (i + i));
     }
 
-    std::cout << "Vectors loaded. Proceeding with sorts:\n";
+    std::cout << "Vectors loaded. Proceeding with sorts:\n\n";
 
     // insertion Sort
-
     std::cout << "====== Insertion Sort ======\n";
-    
-    std::cout << "Ascending vector before insertion sort: "
-    for(int x : ascending) {
+    std::cout << "File vector before insertion sort: ";
+    for(int x : numbers) {
         std::cout << x << " ";
     }
     std::cout << "\n";
-    std::vector<int> insertCopy = ascending;
+    
+    std::vector<int> insertCopy = numbers;
     insertionSort(insertCopy);
     
-    std::cout << "Ascending vector after insertion sort: ";
+    std::cout << "File vector after insertion sort: ";
     for(int x : insertCopy) {
         std::cout << x << " ";
     }
-    std::cout << "\n";
+    std::cout << "\n\n";
 
-    std::cout << "Descending vector before insertion sort: "
-    for(int x : descending) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    std::cout << "Sorting Ascending Vector\n";
+    insertCopy = ascending;
+    start = clock();
+    insertionSort(insertCopy);
+    stop = clock();
+    std::cout << "Sort Runtime: " << double(stop - start) / 1000.0 << std::endl;
+    std::cout << "\n\n";
+
+    std::cout << "Sorting Descending Vector\n";
     insertCopy = descending;
+    start = clock();
     insertionSort(insertCopy);
-    
-    std::cout << "Descending vector after insertion sort: ";
-    for(int x : insertCopy) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    stop = clock();
+    std::cout << "Sort Runtime: " << double(stop - start) / 1000.0 << std::endl;
+    std::cout << "\n\n";
 
-    std::cout << "Random vector before insertion sort: "
-    for(int x : random) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    std::cout << "Sorting Random Vector\n";
     insertCopy = random;
+    start = clock();
     insertionSort(insertCopy);
-    
-    std::cout << "Random vector after insertion sort: ";
-    for(int x : insertCopy) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    stop = clock();
+    std::cout << "Sort Runtime: " << double(stop - start) / 1000.0 << std::endl;
+    std::cout << "====================";
+    std::cout << "\n\n";
 
     // merge sort
-
     std::cout << "====== Merge Sort ======\n";
-    
-    std::cout << "Ascending vector before merge sort: "
-    for(int x : ascending) {
+    std::cout << "File vector before merge sort: ";
+    for(int x : numbers) {
         std::cout << x << " ";
     }
     std::cout << "\n";
+    
+    insertCopy = numbers;
+    mergeSort(insertCopy);
+    
+    std::cout << "File vector after merge sort: ";
+    for(int x : insertCopy) {
+        std::cout << x << " ";
+    }
+    std::cout << "\n\n";
+
+    std::cout << "Sorting Ascending Vector\n";
     insertCopy = ascending;
+    start = clock();
     mergeSort(insertCopy);
-    
-    std::cout << "Ascending vector after merge sort: ";
-    for(int x : insertCopy) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    stop = clock();
+    std::cout << "Sort Runtime: " << double(stop - start) / 1000.0<< std::endl;
+    std::cout << "\n\n";
 
-    std::cout << "Descending vector before merge sort: "
-    for(int x : descending) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
-    std::vector<int> insertCopy = descending;
+    std::cout << "Sorting Descending Vector\n";
+    insertCopy = descending;
+    start = clock();
     mergeSort(insertCopy);
-    
-    std::cout << "Descending vector after merge sort: ";
-    for(int x : insertCopy) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    stop = clock();
+    std::cout << "Sort Runtime: " << double(stop - start) / 1000.0 << std::endl;
+    std::cout << "\n\n";
 
-    std::cout << "Random vector before merge sort: "
-    for(int x : random) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    std::cout << "Sorting Random Vector\n";
     insertCopy = random;
+    start = clock();
     mergeSort(insertCopy);
-    
-    std::cout << "Random vector after merge sort: ";
-    for(int x : insertCopy) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    stop = clock();
+    std::cout << "Sort Runtime: " << double(stop - start) / 1000.0 << std::endl;
+    std::cout << "===================";
+    std::cout << "\n\n";
 
     // heap sort
-
     std::cout << "====== Heap Sort ======\n";
     
-    std::cout << "Ascending vector before heap sort: "
-    for(int x : ascending) {
+    std::cout << "File vector before heap sort: ";
+    for(int x : numbers) {
         std::cout << x << " ";
     }
     std::cout << "\n";
+
+    insertCopy = numbers;
+    heapSort(insertCopy);
+    
+    std::cout << "File vector after heap sort: ";
+    for(int x : insertCopy) {
+        std::cout << x << " ";
+    }
+    std::cout << "\n\n";
+
+    std::cout << "Sorting Ascending Vector\n";
     insertCopy = ascending;
+    start = clock();
     heapSort(insertCopy);
-    
-    std::cout << "Ascending vector after heap sort: ";
-    for(int x : insertCopy) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    stop = clock();
+    std::cout << "Sort Runtime: " << double(stop - start) / 1000.0 << std::endl;
+    std::cout << "\n\n";
 
-    std::cout << "Descending vector before heap sort: "
-    for(int x : descending) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
-    std::vector<int> insertCopy = descending;
+    std::cout << "Sorting Descending Vector\n";
+    insertCopy = descending;
+    start = clock();
     heapSort(insertCopy);
-    
-    std::cout << "Descending vector after heap sort: ";
-    for(int x : insertCopy) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    stop = clock();
+    std::cout << "Sort Runtime: " << double(stop - start) / 1000.0 << std::endl;
+    std::cout << "\n\n";
 
-    std::cout << "Random vector before heap sort: "
-    for(int x : random) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    std::cout << "Sorting Random Vector\n";
     insertCopy = random;
+    start = clock();
     heapSort(insertCopy);
-    
-    std::cout << "Random vector after heap sort: ";
-    for(int x : insertCopy) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    stop = clock();
+    std::cout << "Sort Runtime: " << double(stop - start) / 1000.0 << std::endl;
+    std::cout << "====================";
+    std::cout << "\n\n";
 
     // quick sort
 
     std::cout << "====== Quick Sort ======\n";
     
-    std::cout << "Ascending vector before quick sort: "
-    for(int x : ascending) {
+    std::cout << "File vector before quick sort: ";
+    for(int x : numbers) {
         std::cout << x << " ";
     }
     std::cout << "\n";
+    
+    insertCopy = numbers;
+    quickSort(insertCopy);
+    
+    std::cout << "File vector after quick sort: ";
+    for(int x : insertCopy) {
+        std::cout << x << " ";
+    }
+    std::cout << "\n\n";
+
+    std::cout << "Sorting Ascending Vector\n";
     insertCopy = ascending;
+    start = clock();
     quickSort(insertCopy);
-    
-    std::cout << "Ascending vector after quick sort: ";
-    for(int x : insertCopy) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    stop = clock();
+    std::cout << "Sort Runtime: " << double(stop - start) / 1000.0 << std::endl;
+    std::cout << "\n\n";
 
-    std::cout << "Descending vector before quick sort: "
-    for(int x : descending) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
-    std::vector<int> insertCopy = descending;
+    std::cout << "Sorting Descending Vector\n";
+    insertCopy = descending;
+    start = clock();
     quickSort(insertCopy);
-    
-    std::cout << "Descending vector after quick sort: ";
-    for(int x : insertCopy) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    stop = clock();
+    std::cout << "Sort Runtime: " << double(stop - start) / 1000.0 << std::endl;
+    std::cout << "\n\n";
 
-    std::cout << "Random vector before quick sort: "
-    for(int x : random) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    std::cout << "Sorting Random Vector\n";
     insertCopy = random;
+    start = clock();
     quickSort(insertCopy);
-    
-    std::cout << "Random vector after quick sort: ";
-    for(int x : insertCopy) {
-        std::cout << x << " ";
-    }
-    std::cout << "\n";
+    stop = clock();
+    std::cout << "Sort Runtime: " << double(stop - start) / 1000.0 << std::endl;
+    std::cout << "====================";
+    std::cout << "\n\n";
 
     return 0;
 }

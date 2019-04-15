@@ -2,17 +2,6 @@
 #include <utility>
 #include <vector>
 
-template <typename Comparable>
-void heapSort(std::vector<Comparable> &a) {
-    for(int i = a.size() / 2 - 1; i >= 0; --i) {
-        percDown(a, i, a.size());
-    }
-    for(int j = a.size() - 1; j > 0; --j) {
-        std::swap(a[0], a[j]);
-        percDown(a, 0, j);
-    }
-}
-
 inline int leftChild(int i) {
     return 2 * i + 1;
 }
@@ -34,4 +23,15 @@ void percDown(std::vector<Comparable> &a, int i, int n) {
         }
     }
     a[i] = std::move(tmp);
-    
+}
+
+template <typename Comparable>
+void heapSort(std::vector<Comparable> &a) {
+    for(int i = a.size() / 2 - 1; i >= 0; --i) {
+        percDown(a, i, a.size());
+    }
+    for(int j = a.size() - 1; j > 0; --j) {
+        std::swap(a[0], a[j]);
+        percDown(a, 0, j);
+    }
+}
