@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <functional>
+#include <cassert>
 
 struct book {
     std::string title;
@@ -18,22 +19,7 @@ std::ostream& operator<<(std::ostream& os, book const& b) {
     return os;
 }
 
-bool operator<(book const& a, book const& b) {
-    if(a.author < b.author)
-        return true;
-    if(b.author < a.author)
-        return false;
-    if(a.year < b.year)
-        return true;
-    if(b.year < a.year)
-        return false;
-    if(a.title < b.title)
-        return true;
-    if(b.title < a.title)
-        return false;
-}
-
-using comparison = std::function<bool(book const&, book const&)>();
+using comparison = std::function<bool(book const&, book const&)>;
 
 
 // first class function - passing function as parameter to another function
@@ -61,22 +47,21 @@ using comparison = std::function<bool(book const&, book const&)>();
 void insertion_sort(book* first, book* last, comparison comp) {
     while(first != last) {
         book* iter = std::min_element(first, last, comp);
-        std::iter_swap(first, iter);
+        std::iter_swap(first++, iter);
     }
-}
-
-bool less(book const& a, book const& b) {
-    return a < b;
-}
-
-bool greater(book const& a, book const& b) {
-    return !(a < b);
 }
 
 void print(std::vector<book> const& v) {
-    for(book b : v) {
+    for(book b : v)
         std::cout << b << " ";
-    }
+}
+
+book* my_min_element(book* first, book* last, comparison& op) {
+    assert(first != last);
+    book* min = first++;
+    for(; first!=last; ++first)
+        if(op(*first, *last))
+            min = first;
 }
 
 int main() {
@@ -84,13 +69,20 @@ int main() {
         {"The Great Gatsby", "Fitzgerald", "1935"},
         {"The Lord of the rings", "Tolkein", "1965"},
         {"1984", "Orwell", "1948"},
-        {"Dune", "Herbert", "1962"} 
+        {"Dune", "Herbert", "1962"}
     };
-    comparison func;
-    print(sortMe);
-    insertion_sort(sortMe.data(), sortMe.data() + sortMe.size(), comparison(func));
-    print(sortMe);
-    insertion_sort(sortMe.data(), sortMe.data() + sortMe.size(),comparisonFunc);
+
+    book* first = sortMe.data();
+    book* last = first + sortMe.size();
+    
+    bool asc = false;
+    insertion_sort(sortMe.data(), sortMe.data() + sortMe.size(), [asc](book const& a, book const& b) {
+        if(asc)
+            return a.year < b.year;
+        else
+            return b.year < a.year;
+    });
+
     print(sortMe);
     return 0;
 }

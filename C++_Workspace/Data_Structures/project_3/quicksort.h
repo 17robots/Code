@@ -33,7 +33,7 @@ void quickSort(std::vector<Comparable> &a, int left, int right) {
 				break;
 		}
 		
-		std::swap(a[i], a[right] - 1);
+		std::swap(a[i], a[right - 1]);
 		
 		quickSort(a, left, i - 1);
 		quickSort(a, i + 1, right);
