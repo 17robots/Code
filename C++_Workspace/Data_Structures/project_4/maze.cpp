@@ -29,9 +29,9 @@ void maze::printMaze() {
     // top row
     for(int j = 0; j < col; ++j) {
         if(theMaze.at(j).getTop()) {
-            std::cout << "_ ";
+            std::cout << " _ ";
         } else {
-            std::cout << "  ";
+            std::cout << "   ";
         }
     }
     std::cout << '\n';
