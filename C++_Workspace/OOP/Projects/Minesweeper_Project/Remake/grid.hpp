@@ -17,8 +17,8 @@ class Grid {
     public:
     Grid();
     Grid(std::string imgLoc);
-    Tile (*getShown())[12] { return shownTiles; }
-    Tile (*getTiles())[12] { return tiles; }
+    Tile getShown(int i, int j) { return shownTiles[i][j]; }
+    Tile getTiles(int i, int j) { return tiles[i][j]; }
     int getRemainingBombs() { return remainingBombs; }
     std::string getHintStatus() { return hintStatus; }
     sf::Sprite getSprite() { return s; }

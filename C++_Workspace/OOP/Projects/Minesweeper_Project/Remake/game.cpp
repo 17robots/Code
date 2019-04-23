@@ -1,14 +1,8 @@
 #include "game.hpp"
 
-Game::Game() : w(32), grid(Grid("")) {
-    window = new sf::RenderWindow(sf::VideoMode(400, 400), "Blank Window");    
-}
-
-Game::Game(int blockWidth, Grid grid) : w(blockWidth), grid(grid) {
+Game::Game(int blockWidth, Grid &grid) : w(blockWidth), grid(grid) {
     window = new sf::RenderWindow(sf::VideoMode(400,400), "Minesweeper");
-    sf::RenderWindow newWindow(sf::VideoMode(400, 400), "Minesweeper!");
-    this->getGrid().mineLay();
-    this->getGrid().generateNumbers();
+    // sf::RenderWindow newWindow(sf::VideoMode(400, 400), "Minesweeper!");
 }
 
 void Game::run() {
@@ -19,37 +13,41 @@ void Game::run() {
     // for now just write the code here and then do it later
     
     // game loop
-    Grid grid = this->getGrid();
-    sf::RenderWindow* window = this->getWindow();
+    this->getGrid().mineLay();
+    this->getGrid().generateNumbers();
+
     int width = this->getWidth();
     
-    while(window->isOpen()) {
-        sf::Vector2i pos = sf::Mouse::getPosition(*window);
+    while(this->getWindow()->isOpen()) {
+        sf::Vector2i pos = sf::Mouse::getPosition(*this->getWindow());
 
         int x = pos.x / width;
         int y = pos.y / width;
         
         sf::Event e;
-        while(window->pollEvent(e)) {
+        while(this->getWindow()->pollEvent(e)) {
             if(e.type == sf::Event::MouseButtonPressed) {
                 if(e.mouseButton.button == sf::Mouse::Left)
-                    grid.getShown()[x][y] = grid.getTiles()[x][y];
+                    this->getGrid().getShown(x,y) = this->getGrid().getTiles(x,y);
                 else if(e.mouseButton.button == sf::Mouse::Right)
-                    grid.getShown()[x][y].setTile(11);
+                    this->getGrid().getShown(x,y).setTile(11);
             }
         }
         
-        window->clear(sf::Color::White);
+        this->getWindow()->clear(sf::Color::White);
         for(int i = 1; i <= 10; ++i) {
             for(int j = 1; j <= 10; j++) {
-                if(grid.getShown()[x][y].getSpriteValue() == 9) {
-                    grid.getShown()[x][y].setTile(grid.getTiles()[x][y].getSpriteValue());
-                }
-                grid.getSprite().setTextureRect(sf::IntRect(grid.getShown()[i][j].getSpriteValue() * width, 0, width, width));
-                grid.getSprite().setPosition(i * width, j * width);
-                window->draw(this->getGrid().getSprite());
+                if(this->getGrid().getShown(x,y).getSpriteValue() == 9)
+                    this->getGrid().getShown(x,y).setTile(this->getGrid().getTiles(x,y).getSpriteValue());
+                
+                std::cout << "i: " << i << " j: " << j << '\n';
+                std::cout << this->getGrid().getShown(i,j).getSpriteValue() << '\n';
+                this->getGrid().getSprite().setTextureRect(sf::IntRect(this->getGrid().getShown(i,j).getSpriteValue() * width, 0, width, width));
+                this->getGrid().getSprite().setPosition(i * width, j * width);
+                
+                this->getWindow()->draw(this->getGrid().getSprite());
             }
         }
-        window->display();
+        this->getWindow()->display();
     }
 }

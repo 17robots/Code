@@ -1,15 +1,9 @@
 #include "grid.hpp"
+#include <iostream>
 
 Grid::Grid() = default;
 
 Grid::Grid(std::string imgLoc) {
-    for(int i = 1; i <= 10; ++i) {
-        for(int j = 1; j <= 10; ++j) {
-            tiles[i][j] = Tile();
-            shownTiles[i][j] = Tile();
-        }
-    }
-
     t.loadFromFile(imgLoc);
     s = sf::Sprite(t);
 }
@@ -17,11 +11,12 @@ Grid::Grid(std::string imgLoc) {
 void Grid::mineLay() {
     for(int i = 1; i <= 10; ++i) {
         for(int j = 1; j <= 10; ++j) {
-            shownTiles[i][j].setTile(10);
+            shownTiles[i][j] = Tile(10);
+            std::cout << shownTiles[i][j].getSpriteValue() << '\n';
             if(rand() % 5 == 0) {
-                tiles[i][j].setTile(9);
+                tiles[i][j] = Tile(9);
             } else {
-                tiles[i][j].setTile(0);
+                tiles[i][j] = Tile(0);
             }
         }
     }

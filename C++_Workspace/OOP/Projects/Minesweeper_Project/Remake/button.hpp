@@ -8,6 +8,5 @@ class Button {
     public:
         Button();
         Button(int x, int y, int width, int height, std::string btnText);
-        
-
+        bool isClicked(int x, int y);
 };
