@@ -43,7 +43,11 @@ void DisjSets::unionSets( int root1, int root2 )
  */
 int DisjSets::find( int x )
 {
-   
+   if(s[x] < 0) {
+       return x;
+   } else {
+       return s[x] = find(s[x]);
+   }
 }
 
 /* TO DO: Write this code.  
@@ -51,5 +55,5 @@ int DisjSets::find( int x )
 */
 bool DisjSets::isConnected(int n1, int n2)
 {
- 
+    
 }
