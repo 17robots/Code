@@ -47,7 +47,7 @@ int DisjSets::find( int x )
 }
 
 /* TO DO: Write this code.  
- * Return true if the two nieghbors are in the same set.
+ * Return true if the two neighbors are in the same set.
 */
 bool DisjSets::isConnected(int n1, int n2)
 {
