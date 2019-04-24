@@ -28,7 +28,32 @@ int main() {
         std::cin >> cols;
     }
     
-    maze(rows, cols).printMaze();
+    DisjSets disj(rows * cols);
+    maze mainMaze(rows, cols);
+    
+    mainMaze.printMaze();
+    
+    while(!disj.isConnected(0, rows * cols - 1)) {
+        std::cout << "Enter 1 num: ";
+        int x;
+        std::cin >> x;
+        std::cout << "Enter 2 num: ";
+        int y;
+        std::cin >> y;
+        if(mainMaze.neighbors(x,y)) {
+            mainMaze.smashWall(x,y);
+            mainMaze.smashWall(y,x);
+            mainMaze.printMaze();
+            disj.unionSets(disj.find(x), disj.find(y));
+        } else {
+            std::cout << "They are not neighbors\n";
+        }
+    }
+    
+    std::cout << "Maze Built!\n";
+    std::cout << "Final Maze:\n";
+    
+    mainMaze.printMaze();
     
     
     

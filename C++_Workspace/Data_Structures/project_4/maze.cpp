@@ -16,37 +16,38 @@ maze::maze(int r, int c) {
 // tested
 bool maze::neighbors(int cell, int neigh) const {
     if(cell < col) { // if it's in the top row
+    std::cout << "cell: " << cell << '\n';
         if(cell == col - 1) { // if it's the right most one
-            // std::cout << "right most top\n";
+            std::cout << "right most top\n";
             return neigh == cell + col || neigh == cell - 1;
         } else if(cell == 0) { // if it's the leftmost one
-            // std::cout << "left most top\n";
+            std::cout << "left most top\n";
             return neigh == cell + col || neigh == cell + 1;
         } else { // any others on the top row
-            // std::cout << "in top row\n";
+            std::cout << "in top row\n";
             return neigh == cell + col || neigh == cell - 1 || neigh == cell + 1;
         }
     } else { // not in the top row
-        if(cell >= theMaze.size() - cell - 1) { // if it's on the bottom
-            if(cell == row * col - 2) { // if its the right most one
-                // std::cout << "right most top\n";
+        if(cell >= theMaze.size() - col) { // if it's on the bottom
+            if(cell == row * col - 1) { // if its the right most one
+                std::cout << "right most top\n";
                 return neigh == cell - col || neigh == cell - 1;
             } else if(cell % col == 0) { // if it's the left most one
-                // std::cout << "left most bot\n";
+                std::cout << "left most bot\n";
                 return neigh == cell - col || neigh == cell + 1;
             } else {
-                // std::cout << "in bot row\n";
+                std::cout << "in bot row\n";
                 return neigh == cell - col || neigh == cell + 1 || neigh == cell - 1;
             }
         } else {
             if(cell % col == 0) { // if the cell is on the left edge
-                // std::cout << "left edge\n";
+                std::cout << "left edge\n";
                 return neigh == cell - col || neigh == cell + col || neigh == cell + 1;
             } else if(cell % col == col - 1) { // if the cell is on the right edge
-                // std::cout << "right edge\n";
+                std::cout << "right edge\n";
                 return neigh == cell - col || neigh == cell + col || neigh == cell - 1;
             } else {
-                // std::cout << "random one\n";
+                std::cout << "random one\n";
                 return neigh == cell - col || neigh == cell + col || neigh == cell - 1 || neigh == cell  + 1;
             }
         }
@@ -59,15 +60,15 @@ bool maze::neighbors(int cell, int neigh) const {
 void maze::smashWall (int cell, int neigh) {
     if(neigh > cell) { // either below or to the right of cell
         if(neigh - cell == col) { // if neigh is below cell
-            theMaze.at(cell - 1).setBot(false);
+            theMaze.at(cell).setBot(false);
         } else { // directly to the right of cell
-            theMaze.at(cell - 1).setRight(false);
+            theMaze.at(cell).setRight(false);
         }
     } else { // above or to the left
         if(cell - neigh == col) { // above cell
-            theMaze.at(cell - 1).setTop(false);
+            theMaze.at(cell).setTop(false);
         } else { // to the left of cell
-            theMaze.at(cell - 1).setLeft(false);
+            theMaze.at(cell).setLeft(false);
         }
     }
 }

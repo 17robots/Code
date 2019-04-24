@@ -55,5 +55,5 @@ int DisjSets::find( int x )
 */
 bool DisjSets::isConnected(int n1, int n2)
 {
-    
+    return find(n1) == find(n2); // return if the roots are the same
 }
