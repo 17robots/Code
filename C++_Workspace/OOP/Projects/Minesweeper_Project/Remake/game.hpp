@@ -6,12 +6,12 @@
 class Game {
     private:
     sf::RenderWindow* window;
-    Grid &grid;
+    Grid* grid;
     int w; // width of the tiles
     public:
     Game();
-    Game(int blockWidth, Grid &grid);
-    Grid getGrid() { return grid; }
+    Game(int blockWidth, Grid* grid);
+    Grid* getGrid() { return grid; }
     int getWidth() { return w; }
     sf::RenderWindow* getWindow() { return window; }
     void run();

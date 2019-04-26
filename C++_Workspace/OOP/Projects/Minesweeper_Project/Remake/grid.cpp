@@ -5,16 +5,18 @@ Grid::Grid() = default;
 
 Grid::Grid(std::string imgLoc) {
     t.loadFromFile(imgLoc);
-    s = sf::Sprite(t);
+    s = new sf::Sprite;
+    s->setTexture(t);
+    remainingBombs = 0;
 }
 
 void Grid::mineLay() {
     for(int i = 1; i <= 10; ++i) {
         for(int j = 1; j <= 10; ++j) {
             shownTiles[i][j] = Tile(10);
-            std::cout << shownTiles[i][j].getSpriteValue() << '\n';
             if(rand() % 5 == 0) {
                 tiles[i][j] = Tile(9);
+                ++remainingBombs;
             } else {
                 tiles[i][j] = Tile(0);
             }
