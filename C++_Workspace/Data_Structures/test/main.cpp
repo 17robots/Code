@@ -1,13 +1,20 @@
+//DAD  ADE BAB  EAB   AAB  BAD  CAB  DAB  ABC  DAA
+
+#include <vector>
+#include <string>
 #include <iostream>
+#include <algorithm>
 
-struct Test {
-	Test(int x) : number(x) {} 
-	int number;
-};
+const int BUCKETS = 256;
 
+void countSort(std::vector<std::string> &arr, int stringLen) {
+	int N = arr.size();
+	std::vector<std::string> buckets(BUCKETS + 1);
+	std::vector<std::string> *in = &arr;
+	std::vector<std::string> *out = &bucket;
+}
 
 int main() {
-	std::cout << "Enter a number: ";
-	Test test(static_cast<int>(std::cin));
+	std::vector<std::string> words = { "DAD", "ADE", "BAB", "EAB", "AAB", "BAD", "CAB", "DAB", "ABC", "DAA" };
 	return 0;
 }
